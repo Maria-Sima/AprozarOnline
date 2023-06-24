@@ -16,9 +16,10 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         AuthenticationResponse response = authenticationService.login(request);
+
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, response.token())
                 .body(response);

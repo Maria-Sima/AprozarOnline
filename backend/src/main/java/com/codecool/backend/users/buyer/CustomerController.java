@@ -1,9 +1,12 @@
 package com.codecool.backend.users.buyer;
-import com.codecool.backend.users.UpdateRequest;
-import com.codecool.backend.users.repository.AppUserDTO;
+
+import com.codecool.backend.products.orders.OrderDTO;
+import com.codecool.backend.products.orders.OrderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -19,24 +22,16 @@ public class CustomerController {
 
     }
 
-
-    @GetMapping("/{customerId}")
-    public ResponseEntity<AppUserDTO> getCustomerById(@PathVariable Long customerId) {
-        AppUserDTO customer = customerService.getUser(customerId);
-        return ResponseEntity.ok(customer);
+    @GetMapping("/{userId}/orders")
+    public ResponseEntity<List<OrderDTO>> getShoppingCartByUserId(@PathVariable Long userId){
+      List<OrderDTO> orders= customerService.getOrdersForThisCustomer(userId);
+        return ResponseEntity.ok(orders);
     }
-    @DeleteMapping("/{customerId}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable Long customerId) {
-        customerService.deleteCustomerById(customerId);
+
+    @PostMapping("/{userId}/makeOrder")
+    public ResponseEntity<OrderDTO> addProductToCart(@PathVariable Long userId, @RequestBody OrderRequest orderRequest){
+        customerService.makeOrder(orderRequest,userId);
         return ResponseEntity.noContent().build();
     }
-
-    @PutMapping("/{customerId}")
-    public void updateUser(@PathVariable Long customerId,@RequestBody UpdateRequest updateRequest){
-        customerService.updateCustomer(customerId,updateRequest);
-    }
-
-
-
 
 }

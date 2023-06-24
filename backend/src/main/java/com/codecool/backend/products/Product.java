@@ -1,7 +1,7 @@
 package com.codecool.backend.products;
 
 import com.codecool.backend.products.Types.ProductType;
-import com.codecool.backend.products.shoppingcart.CartItem;
+import com.codecool.backend.products.orders.CartItem;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,6 +23,7 @@ public class Product {
     private CartItem cartItem;
     private  String name;
     private Long userId;
-    private String profileImageId;
+    private String productImageId;
+    private String productDescription;
 
 }
