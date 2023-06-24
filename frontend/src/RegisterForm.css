@@ -1,108 +1,108 @@
-:root {
-  --accent-color: #ffffff;
-  --secondary-color: #fafafa;
-  --main-color: #ecf8e1;
-}
-body{
-  display: flex;
-  justify-content: center;
-}
+/*:root {*/
+/*  --accent-color: #ffffff;*/
+/*  --secondary-color: #fafafa;*/
+/*  --main-color: #ecf8e1;*/
+/*}*/
+/*body{*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*}*/
 
-#container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 200vh;
-  background-image: url("your-image-url.jpg"); /* Replace "your-image-url.jpg" with the actual image URL */
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin: 20px 50px;
-  padding: 30px;
-  width: 350px;
-  height: 500px;
-  box-shadow: 0px 5px 15px 2px #101010;
-  border-radius: 10px;
-}
+/*#container {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  height: 200vh;*/
+/*  background-image: url("your-image-url.jpg"); !* Replace "your-image-url.jpg" with the actual image URL *!*/
+/*  background-size: cover;*/
+/*  background-repeat: no-repeat;*/
+/*  margin: 20px 50px;*/
+/*  padding: 30px;*/
+/*  width: 350px;*/
+/*  height: 500px;*/
+/*  box-shadow: 0px 5px 15px 2px #101010;*/
+/*  border-radius: 10px;*/
+/*}*/
 
 
 
-.register-header {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #3c3718;
-}
+/*.register-header {*/
+/*  font-size: 24px;*/
+/*  font-weight: bold;*/
+/*  margin-bottom: 20px;*/
+/*  color: #3c3718;*/
+/*}*/
 
-.error {
-  color: rgb(254, 0, 21);
-  margin-bottom: 10px;
-  font-size: 12px;
-}
-.center-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
+/*.error {*/
+/*  color: rgb(254, 0, 21);*/
+/*  margin-bottom: 10px;*/
+/*  font-size: 12px;*/
+/*}*/
+/*.center-form {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  text-align: center;*/
+/*}*/
 
-.select-container {
-  width: 100%;
-}
-.login-input:focus {
-  border: 2px solid var(--accent-color);
-}
+/*.select-container {*/
+/*  width: 100%;*/
+/*}*/
+/*.login-input:focus {*/
+/*  border: 2px solid var(--accent-color);*/
+/*}*/
 
-.login-button {
-  padding: 0 15px;
-  width: -webkit-fill-available;
-  margin: 15px;
-  height: 35px;
-  border-radius: 20px;
-  font-weight: bold;
-  background: var(--accent-color);
-  margin: 40px 15px 20px 15px;
-  color: var(--secondary-color);
-  transition: all 500ms ease-out;
-  animation: lights 4000ms infinite ease-in;
-  border: 0;
-}
+/*.login-button {*/
+/*  padding: 0 15px;*/
+/*  width: -webkit-fill-available;*/
+/*  margin: 15px;*/
+/*  height: 35px;*/
+/*  border-radius: 20px;*/
+/*  font-weight: bold;*/
+/*  background: var(--accent-color);*/
+/*  margin: 40px 15px 20px 15px;*/
+/*  color: var(--secondary-color);*/
+/*  transition: all 500ms ease-out;*/
+/*  animation: lights 4000ms infinite ease-in;*/
+/*  border: 0;*/
+/*}*/
 
-.login-button:hover {
-  border: 1px solid var(--secondary-color);
-  box-shadow: 0px 0px 10px 2px var(--secondary-color);
-  animation: none;
-}
+/*.login-button:hover {*/
+/*  border: 1px solid var(--secondary-color);*/
+/*  box-shadow: 0px 0px 10px 2px var(--secondary-color);*/
+/*  animation: none;*/
+/*}*/
 
-fieldset {
-  border: none;
-}
+/*fieldset {*/
+/*  border: none;*/
+/*}*/
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  padding: 0 15px;
-  width: 200px;
-  margin-bottom: 10px;
-  height: 30px;
-  border-radius: 20px;
-  font-weight: bold;
-  background: #ffffff;
-  border: 1px solid #000000;
-  outline: none;
-  color: #0c0c0c;
-}
+/*input[type="text"],*/
+/*input[type="email"],*/
+/*input[type="password"] {*/
+/*  padding: 0 15px;*/
+/*  width: 200px;*/
+/*  margin-bottom: 10px;*/
+/*  height: 30px;*/
+/*  border-radius: 20px;*/
+/*  font-weight: bold;*/
+/*  background: #ffffff;*/
+/*  border: 1px solid #000000;*/
+/*  outline: none;*/
+/*  color: #0c0c0c;*/
+/*}*/
 
-select {
-  padding: 0 15px;
-  width: 200px;
-  margin-bottom: 10px;
-  height: 35px;
-  border-radius: 30px;
-  font-weight: bold;
-  background: #ffffff;
-  border: 2px solid #000000;
-  outline: none;
-  color: #0c0d0c;
-}
+/*select {*/
+/*  padding: 0 15px;*/
+/*  width: 200px;*/
+/*  margin-bottom: 10px;*/
+/*  height: 35px;*/
+/*  border-radius: 30px;*/
+/*  font-weight: bold;*/
+/*  background: #ffffff;*/
+/*  border: 2px solid #000000;*/
+/*  outline: none;*/
+/*  color: #0c0d0c;*/
+/*}*/
