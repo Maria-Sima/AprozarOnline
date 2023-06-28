@@ -1,5 +1,6 @@
-package com.codecool.backend.payments;
+package com.codecool.backend.products.orders.payments.paypal;
 
+import com.codecool.backend.products.orders.payments.paypal.PaymentMaker;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;

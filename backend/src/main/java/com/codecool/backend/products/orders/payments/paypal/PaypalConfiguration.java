@@ -1,15 +1,16 @@
-package com.codecool.backend.payments;
+package com.codecool.backend.products.orders.payments.paypal;
 
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Data
 @Configuration
 public class PaypalConfiguration {
     @Value("${paypal.client.id}")
@@ -18,6 +19,7 @@ public class PaypalConfiguration {
     private String clientSecret;
     @Value("${paypal.mode}")
     private String mode;
+    private String baseUrl;
 
     @Bean
     public Map<String, String> paypalSdkConfig() {
@@ -25,7 +27,7 @@ public class PaypalConfiguration {
         configMap.put("mode", mode);
         return configMap;
     }
-
+//
     @Bean
     public OAuthTokenCredential oAuthTokenCredential() {
         return new OAuthTokenCredential(clientId, clientSecret, paypalSdkConfig());

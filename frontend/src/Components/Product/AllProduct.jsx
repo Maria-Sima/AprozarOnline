@@ -1,19 +1,19 @@
-
 import ProductCard from './ProductCard.jsx'
-import {mainURL} from "../../Providers/Api/Routes.js"
+import {routes} from "../../Providers/Api/Routes.jsx"
 import './AllProduct.scss'
 import {useFetch} from "../../Providers/Api/useFetch.js";
+
 const AllProduct = () => {
-    const products = useFetch("GET",mainURL.urlBase,{})
-    console.log(mainURL)
-    const {data,isLoading,serverError}=products;
-    console.log(data);
+    const products =  useFetch("GET",routes.products,{})
+
+    const {apiData,isLoading,serverError}= products;
+    console.log(apiData);
     return (
         <div className='allproducts'>
             <h1>All Products</h1>
             <div className='products'>
                 {
-                    data?.map((item,index) => {
+                    apiData?.map((item,index) => {
                         console.log(item)
                         return (
                             <ProductCard data={item} key={index}/>

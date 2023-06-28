@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import img1 from '../../assets/pictures/fruits.png'
 import './ProductCard.scss'
 
 const ProductCard = ({ data }) => {
@@ -11,8 +12,11 @@ const ProductCard = ({ data }) => {
   const addtocart = () => {
     let cart = JSON.parse(localStorage.getItem('cart'))
     let productdata = data
+
+
+
     if (cart) {
-      // alert('1 item is already added to cart')
+
       let itemincart = cart.find(item => item.productdata.ProductId === productdata.ProductId)
       if (itemincart) {
         cart = cart.map(item => {
@@ -45,7 +49,7 @@ const ProductCard = ({ data }) => {
         quantity: count
       }]
 
-      // console.log(cart)
+
       localStorage.setItem('cart', JSON.stringify(cart))
     }
 
@@ -53,24 +57,26 @@ const ProductCard = ({ data }) => {
 
 
   }
+  let {price,name,productDescription,id,productImageId,productType,userId}=data;
+  console.log(price)
   return (
     <div className='product'>
       <div className='s1'>
-        <img src={data.ProductImage[0].image} alt={'no img'} />
+        <img src={img1} alt={'no img'} />
       </div>
       <div className='s2'>
         <h3>
-          $ {
-            data.ProductPrice - (data.ProductPrice * data.ProductDiscount / 100)
-          }
-          <span>${data.ProductPrice}</span>
+           {
+            price - (price * 12 / 100)
+          } lei
+          <span>{price} lei</span>
         </h3>
         <p>{
-          data.ProductName
+          name
         }</p>
       </div>
       <div className='s3'>
-        <p>{data.counttype}</p>
+        <p>{productType}</p>
       </div>
       {
         show ?
@@ -101,7 +107,7 @@ const ProductCard = ({ data }) => {
           :
           <div className='addbtn'>
             <Link
-              to={`/product/${data.id}`}
+              to={`/product/${id}`}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"
               >

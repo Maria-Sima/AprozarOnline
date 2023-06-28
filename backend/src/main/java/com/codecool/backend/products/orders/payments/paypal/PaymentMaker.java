@@ -1,4 +1,4 @@
-package com.codecool.backend.payments;
+package com.codecool.backend.products.orders.payments.paypal;
 
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;

@@ -1,8 +1,7 @@
-import React from 'react'
 import img1 from '../../assets/pictures/fruits.png'
-import img2 from '../../assets/pictures/fruits.png'
-import img3 from '../../assets/pictures/fruits.png'
-import img4 from '../../assets/pictures/fruits.png'
+import img2 from '../../assets/pictures/legumecos.png'
+import img3 from '../../assets/pictures/dairy.png'
+import img4 from '../../assets/pictures/carne.png'
 import './CategorySidebar.scss'
 
 const CategorySidebar = () => {
@@ -10,43 +9,24 @@ const CategorySidebar = () => {
         {
             id: 1,
             categoryimage: img1,
-            categoryname: 'Category 1'
+            categoryname: 'Fructe'
         },
         {
             id: 2,
             categoryimage: img2,
-            categoryname: 'Category 2'
+            categoryname: 'Legume'
         },
         {
             id: 3,
             categoryimage: img3,
-            categoryname: 'Category 3'
+            categoryname: 'Lactate'
         },
         {
             id: 4,
             categoryimage: img4,
-            categoryname: 'Category 4'
+            categoryname: 'Carne'
         },
-        {
-            id: 5,
-            categoryimage: img1,
-            categoryname: 'Category 5'
-        },
-        {
-            id: 6,
-            categoryimage: img2,
-            categoryname: 'Category 6'
-        },
-        {
-            id: 7,
-            categoryimage: img3,
-            categoryname: 'Category 7'
-        },
-        {
-            id: 8,
-            categoryimage: img4,
-            categoryname: 'Category 8'
-        }
+
     ]
     return (
         <div className='categorysidebar'>

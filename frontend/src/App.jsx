@@ -3,7 +3,7 @@ import Home from "./Pages/HomePage/Home.jsx";
 import './App.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ProductPage from "./Pages/Product/ProductPage.jsx";
+import ProductDetails from "./Pages/Product/ProductDetails.jsx";
 import About from "./Pages/Extra/About.jsx";
 import Contact from "./Pages/Extra/Contact.jsx";
 import Login from "./Pages/Auth/Login.jsx";
@@ -20,15 +20,16 @@ const App = () => {
     return (
 
         <BrowserRouter>
-            {/*<Navbar />*/}
+            <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/product/:prodid"
                        element={
-                           <ProductPage/>
+                           <ProductDetails/>
                        }
                 />
+                <Route path="/products" element={<div>not yet</div>}/>
                 <Route path="/about" element={<About/>} />
                 <Route path="/contact" element={<Contact/>} />
                 <Route path="/login" element={<Login/>} />
@@ -39,9 +40,12 @@ const App = () => {
                 <Route path="/FAQ" element={<FAQ/>} />
                 <Route path="/termsandconditions" element={<Termsandconditions/>} />
 
-                <Route path="*" element={<div>
-                    <h1>404 NOT FOUND</h1>
-                </div>} />
+
+                <Route path="*" component={() => (
+                    <div>
+                        <h1>404 NOT FOUND</h1>
+                    </div>
+                )} />
             </Routes>
 
         </BrowserRouter>

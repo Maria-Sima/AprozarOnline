@@ -93,7 +93,7 @@
 //   ///
 //
 //   const backgroundImageUrl =
-//     "https://youmatter.world/app/uploads/sites/2/2019/02/organic-farming-definition-examples-.jpg";
+//     "https://youmatter.world/app/uploads/sites/2/2019/02/organic-farming-defiSELLERnition-examples-.jpg";
 //   const mainDivStyle = {
 //     maxWidth: "800px",
 //     margin: "0 auto",

@@ -21,45 +21,33 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.29</version>
-        </dependency>
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
             <version>0.11.5</version>
         </dependency>
         <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
+            <version>0.11.1</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>1.0.2</version>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>
-            <version>2.5.0.RELEASE</version>
+            <version>2.5.2.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
             <version>0.11.5</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>0.11.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
@@ -83,11 +71,6 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-inline</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -131,6 +114,11 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>s3</artifactId>
+            <version>2.20.26</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
             <scope>test</scope>
@@ -139,11 +127,7 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
         </dependency>
-        <dependency>
-            <groupId>software.amazon.awssdk</groupId>
-            <artifactId>s3</artifactId>
-            <version>2.20.26</version>
-        </dependency>
+
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -156,6 +140,21 @@
             <artifactId>rest-api-sdk</artifactId>
             <version>1.14.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.stripe</groupId>
+            <artifactId>stripe-java</artifactId>
+            <version>22.20.0</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-validation</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>-->
+<!--            <version>2.1.0</version>-->
+<!--        </dependency>-->
+
     </dependencies>
 
     <build>

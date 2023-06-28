@@ -9,13 +9,14 @@ export const useFetch = (method, url, body) => {
     useEffect(() => {
         setIsLoading(true);
         const fetchData = async () => {
+            const headers = body === undefined ? {} : {"Content-type":"application/json"};
             try {
-                const resp = await axios({
-                    method: method,
-                    url: url,
-                    data: body
+                const resp = await axios(url,{
+                    headers,
+                    body:JSON.stringify(body === undefined ? {} : body),
+                    method
                 });
-                console.log(resp)
+
                 const data = await resp?.data;
                 console.log(data)
                 setApiData(data);

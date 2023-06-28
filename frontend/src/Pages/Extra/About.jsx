@@ -1,8 +1,12 @@
-import React, {useEffect} from 'react'
+import {useEffect} from 'react'
 import SingleBanner from '../../Components/Banners/SingleBanner.jsx'
 import Footer1 from '../../Components/Footer/Footer1.jsx'
 import Footer2 from '../../Components/Footer/Footer2.jsx'
 import Navbar from '../../Components/Navbar/Navbar.jsx'
+import banner from '../../assets/pictures/veges.jpg'
+import img1 from '../../assets/pictures/platou_trad.webp'
+import img2 from '../../assets/pictures/producatoriLocali.jpg'
+import img3 from '../../assets/pictures/fruits.webp'
 import './Extrapages.scss'
 
 const About = () => {
@@ -14,12 +18,11 @@ const About = () => {
         <Navbar reloadnavbar={false}/>
         <SingleBanner
             heading="About Us"
-            bannerimage='https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
+            bannerimage={banner}
         />
         <div className='pgleft pgcommon'>
             <img
-                src='https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
-                alt='noimg'/>
+                src={img2} alt='noimg'/>
 
             <div>
                 <h1>Our Story</h1>
@@ -31,8 +34,7 @@ const About = () => {
         </div>
         <div className='pgright pgcommon'>
             <img
-                src='https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
-                alt='noimg'/>
+                src={img1} alt='noimg'/>
 
             <div>
                 <h1>Who are we</h1>
@@ -46,11 +48,11 @@ const About = () => {
         </div>
         <div className='pgleft pgcommon'>
             <img
-                src='https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
-                alt='noimg'/>
+
+src={img3}                alt='noimg'/>
 
             <div>
-                <h1>Our Story</h1>
+                <h1>Our Goal</h1>
                 <p>We prioritize working directly
                     with local farmers and producers who share our values. By sourcing
                     our products locally, we support the community and reduce our

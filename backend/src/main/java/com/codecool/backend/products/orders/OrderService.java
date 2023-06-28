@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Service
 public class OrderService implements OrderDAO {
     private final OrderRepository orderRepository;
@@ -29,6 +31,12 @@ public class OrderService implements OrderDAO {
                         new ResourceNotFoundException("user with id [%s] hasn't placed any orders ".formatted(id)))
                 .stream().map(orderDTOMapper)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Order findByPaypalId(Long paypalId) {
+        return orderRepository.findByPaypalOrderId(paypalId).orElseThrow(() ->
+                new ResourceNotFoundException("user with id [%s] hasn't placed any orders ".formatted(id)));
     }
 
 

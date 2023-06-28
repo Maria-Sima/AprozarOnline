@@ -1,9 +1,9 @@
 // import { useEffect, useState } from "react";
-// import "./ProductPage.css";
+// import "./ProductDetails.css";
 //
 // import Card from "react-bootstrap/Card";
 //
-// function ProductPage() {
+// function ProductDetails() {
 //   const [products, setProducts] = useState([]);
 //   const [isLoading, setIsLoading] = useState(true);
 //   const [selectedQuantities, setSelectedQuantities] = useState({});
@@ -141,4 +141,4 @@
 //   );
 // }
 //
-// export default ProductPage;
+// export default ProductDetails;
