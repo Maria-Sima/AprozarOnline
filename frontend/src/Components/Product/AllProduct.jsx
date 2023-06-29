@@ -1,10 +1,10 @@
 import ProductCard from './ProductCard.jsx'
 import {routes} from "../../Providers/Api/Routes.jsx"
 import './AllProduct.scss'
-import {useFetch} from "../../Providers/Api/useFetch.js";
+import {useAxiosGet} from "../../Providers/Api/useFetch.js";
 
 const AllProduct = () => {
-    const products =  useFetch("GET",routes.products,{})
+    const products =  useAxiosGet(routes.products)
 
     const {apiData,isLoading,serverError}= products;
     console.log(apiData);

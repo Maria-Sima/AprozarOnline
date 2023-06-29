@@ -160,7 +160,23 @@
 //       console.error("Error:", error);
 //     }
 //
-//     // Reset the form
+//     // Reset the form  const handleSubmit = async (e) => {
+//     e.preventDefault();
+//
+//     // Password validation
+//     if (input.password !== input.confirmPassword) {
+//       setPasswordError("Passwords do not match");
+//       return;
+//     }
+//
+//     // Create the payload object
+//     const payload = {
+//       firstName: formData.firstName,
+//       lastName: formData.lastName,
+//       email: formData.email,
+//       password: formData.password,
+//       role: formData.role,
+//     };
 //     setInput({
 //       password: "", // Reset password field
 //       confirmPassword: "", // Reset confirm password field

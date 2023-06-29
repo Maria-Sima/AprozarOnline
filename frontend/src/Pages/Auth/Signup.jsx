@@ -5,28 +5,25 @@ import img from "../../assets/pictures/moreVeges.jpg";
 import './AuthPage.scss'
 import {AiFillEyeInvisible,AiFillEye} from "react-icons/ai";
 import {DevTool} from "@hookform/devtools";
-import {useFetch} from "../../Providers/Api/useFetch.js";
+import {useAxiosPost} from "../../Providers/Api/useFetch.js";
 import {routes} from "../../Providers/Api/Routes.jsx";
 
 const Signup = () => {
     const {register,handleSubmit,control,formState:{errors},watch}=useForm({
         mode:'onChange'
     });
-const [data,setData]=useState(null);
+const registerUser=useAxiosPost();
 
-    const { response, loading, error } = useFetch("POST",routes.register,data);
-
-
-
-
-
-
+const signUp=(data)=>{
+    registerUser(routes.register,data);
+    console.log(routes.register)
+}
     return (
         <div className='authpage'>
             <div className='authcont'>
                 <img src={img} alt='signup' />
 
-                <form className='authform' onSubmit={handleSubmit( formdata=>setData(formdata))} noValidate>
+                <form className='authform' onSubmit={handleSubmit(signUp)} noValidate>
                     <h1>Signup</h1>
                     <div className='form-group-row'>
                         <div className='formgroup'>

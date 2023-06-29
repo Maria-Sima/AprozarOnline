@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-export const useFetch = (method, url, body) => {
+export const useAxiosGet = ( url) => {
     const [isLoading, setIsLoading] = useState(false);
     const [apiData, setApiData] = useState(null);
     const [serverError, setServerError] = useState(null);
@@ -9,16 +9,12 @@ export const useFetch = (method, url, body) => {
     useEffect(() => {
         setIsLoading(true);
         const fetchData = async () => {
-            const headers = body === undefined ? {} : {"Content-type":"application/json"};
-            try {
-                const resp = await axios(url,{
-                    headers,
-                    body:JSON.stringify(body === undefined ? {} : body),
-                    method
-                });
 
-                const data = await resp?.data;
-                console.log(data)
+            try {
+                const resp = await axios.get(url);
+
+                const data = resp?.data;
+                console.log(data);
                 setApiData(data);
                 setIsLoading(false);
             } catch (error) {
@@ -32,4 +28,29 @@ export const useFetch = (method, url, body) => {
 
     return { isLoading, apiData, serverError };
 };
+export const useAxiosPost=(url,data)=> {
+    const [request, setRequest] = useState({
+        data: null,
+        url: null,
 
+    });
+
+    useEffect(() => {
+        const postData = () => {
+            axios
+                .post(request.url, request.data)
+                // .then(res => request.callback(res.data))
+                .catch(err => console.error(err));
+        };
+
+        if (request.data && request.url) {
+            postData();
+        } else {
+            console.log('Invalid arguments provided to post method');
+        }
+    }, [request]);
+    const post = (url, data) => {
+        setRequest({url, data});
+    }
+    return post;
+}
