@@ -8,20 +8,22 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@Entity
+
 @NoArgsConstructor
 @Builder
+@Entity
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "order", orphanRemoval = true)
-    private List<com.codecool.backend.products.orders.CartItem> cartItems;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
+    private List<CartItem> cartItems;
+
     private Double total;
     private String address;
     private Long userId;
-    private com.codecool.backend.products.orders.PaymentMethod paymentMethod;
+    private PaymentMethod paymentMethod;
     private String currency;
     private String description;
     private String intent;
