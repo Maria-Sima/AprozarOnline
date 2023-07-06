@@ -1,7 +1,6 @@
 package com.codecool.backend.users.service;
 
 import com.codecool.backend.fileStorage.ImageService;
-import com.codecool.backend.fileStorage.aws.S3Buckets;
 import com.codecool.backend.users.RegistrationRequest;
 import com.codecool.backend.users.UpdateRequest;
 import com.codecool.backend.users.repository.*;
@@ -24,15 +23,14 @@ public class AppUserService {
     private final AppUserDTOMapper userDTOMapper;
     private final PasswordEncoder passwordEncoder;
     private final ImageService imageService;
-    private final S3Buckets s3Buckets;
+
 
     @Autowired
-    public AppUserService(@Qualifier("jpa") AppUserDao appUserDao, AppUserDTOMapper userDTOMapper, PasswordEncoder passwordEncoder, ImageService imageService, S3Buckets s3Buckets ){
+    public AppUserService(@Qualifier("jpa") AppUserDao appUserDao, AppUserDTOMapper userDTOMapper, PasswordEncoder passwordEncoder, ImageService imageService ){
         this.appUserDao = appUserDao;
         this.userDTOMapper = userDTOMapper;
         this.passwordEncoder = passwordEncoder;
         this.imageService = imageService;
-        this.s3Buckets = s3Buckets;
     }
 
     public List<AppUserDTO> getAllCustomers() {
@@ -120,7 +118,13 @@ public class AppUserService {
 
     public void uploadProfileImage(Long userId, MultipartFile file){
         try {
-            imageService.upload(file);
+            AppUser appUser = appUserDao.getCustomerById(userId)
+                    .orElseThrow(() -> new ResourceNotFoundException(
+                            String.format("Customer with id [%s] not found", userId)
+                    ));
+           String url= imageService.upload(file);
+            appUser.setProfileImage(url);
+            appUserDao.addAppUser(appUser);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

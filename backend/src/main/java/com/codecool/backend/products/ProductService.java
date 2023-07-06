@@ -2,13 +2,11 @@ package com.codecool.backend.products;
 
 import com.codecool.backend.fileStorage.Image;
 import com.codecool.backend.fileStorage.ImageService;
-import com.codecool.backend.fileStorage.aws.S3Buckets;
 import com.codecool.backend.products.Types.ProductType;
 import lombok.AllArgsConstructor;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import software.amazon.awssdk.utils.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -51,7 +49,12 @@ public class ProductService {
     public void uploadProductImage(Long productId, MultipartFile file) {
 
         try {
-        Image image=imageService.upload(file);
+            Product product=productDAO.findProductById(productId).orElseThrow(() -> new ResourceNotFoundException(
+                    "product with id [%s] not found".formatted(productId)
+            ));
+        String photoUrl =imageService.upload(file);
+        product.setProductUrl(photoUrl);
+        productDAO.addProduct(product);
         } catch (IOException e) {
             throw new RuntimeException("failed to upload profile image", e);
         }
@@ -59,10 +62,10 @@ public class ProductService {
 
     }
 
-    public List<byte[]> getProductImage(Long productId) {
-
-return imageService.listByUser(productId);
-    }
+//    public List<byte[]> getProductImage(Long productId) {
+//
+//return imageService.listByUser(productId);
+//    }
 
     public ProductDTO getProductById(Long productId) {
         return productDAO.findProductById(productId).map(productDTOMapper).orElseThrow(() -> new ResourceNotFoundException(
