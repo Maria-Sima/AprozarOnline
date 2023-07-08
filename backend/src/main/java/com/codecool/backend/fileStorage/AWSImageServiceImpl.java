@@ -1,6 +1,7 @@
 package com.codecool.backend.fileStorage;
 
-import jakarta.persistence.EntityNotFoundException;
+import com.codecool.backend.exception.NullRequestException;
+import com.codecool.backend.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,15 +23,15 @@ import java.util.UUID;
 
 @Slf4j
 @Service
-public class ImageServiceImpl implements ImageService {
+public class AWSImageServiceImpl implements ImageService {
     private final S3Client s3Client;
-    private static final Logger logger = LoggerFactory.getLogger(ImageServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(AWSImageServiceImpl.class);
     private final ImageRepository imageRepository;
     @Value("${aws.bucket.name}")
     private String bucketName;
 
     @Autowired
-    public ImageServiceImpl(S3Client s3Client, ImageRepository imageRepository) {
+    public AWSImageServiceImpl(S3Client s3Client, ImageRepository imageRepository) {
         this.s3Client = s3Client;
         this.imageRepository = imageRepository;
     }
@@ -40,7 +41,7 @@ public class ImageServiceImpl implements ImageService {
         try {
             logger.info("Uploading a PDF to S3 - {}", file.getOriginalFilename());
             if (file.isEmpty())
-                throw new IllegalStateException("Cannot upload empty file");
+                throw new NullRequestException("Cannot upload empty file");
 
 
             String path = String.format("%s/%s", bucketName, UUID.randomUUID());
@@ -78,15 +79,13 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public byte[] download(Long id) throws
-            IOException {
+    public byte[] download(Long id){
         try {
-            Image image = imageRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+            Image image = imageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Can't retrieve file id [%s]".formatted(id)));
             logger.info("Retrieving file from S3 for key: {}/{}", bucketName, image.getFileName());
             ResponseBytes<GetObjectResponse> s3Object = s3Client.getObject(
                     GetObjectRequest.builder().bucket(bucketName).key(image.getFileName()).build(), ResponseTransformer.toBytes());
-             byte[] bytes = s3Object.asByteArray();
-            return bytes;
+            return s3Object.asByteArray();
         }catch (SdkClientException ase) {
             logger.error("Caught an AmazonServiceException, which " + "means your request made it "
                     + "to Amazon S3, but was rejected with an error response" + " for some reason: " + ase);
@@ -98,21 +97,5 @@ public class ImageServiceImpl implements ImageService {
             throw ace;
         }
     }
-
-//    @Override
-//    public List<byte[]> listByUser(Long id) {
-//        List<Image> imageList = imageRepository.findAllByUserId(id);
-//        List<byte[]> downloadedImages = imageList.stream()
-//                .map(image -> {
-//                    try {
-//                        return download(image.getId());
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                })
-//                .collect(Collectors.toList());
-//
-//        return downloadedImages;
-//    }
 
 }

@@ -17,6 +17,6 @@ public class CartItem {
     private Integer quantity = 1;
     @ManyToOne()
     @JoinColumn()
-    private Order order;
+    private OrderRequest order;
 
 }
