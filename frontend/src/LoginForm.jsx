@@ -49,8 +49,11 @@ export default function LoginForm() {
    
  
       // Save the token in local storage or state, and use it for subsequent requests
-       
-      localStorage.setItem("token", token);
+       //save role after login
+     
+       localStorage.setItem("Role", responseJson.appUserDTO.role);
+       localStorage.setItem("token", token);
+       localStorage.setItem("userId", responseJson.appUserDTO.id);
        window.location.replace("/");
       
        //

@@ -33,9 +33,10 @@ function App() {
           <Route path="/products" element={<Sellers />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/shop" element={<ProductPage />} />
+          <Route path="/add" element={<AddProductForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/seller-profile" element={<AddProductForm />} />
+         
           <Route path="/shoppingCart" element={<ShoppingCart />} />
           <Route path="/payment-form" element={<PaymentForm />} />
         </Routes>
