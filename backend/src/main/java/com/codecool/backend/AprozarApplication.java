@@ -67,6 +67,7 @@ public class AprozarApplication implements CommandLineRunner {
                 .quantity(25)
                 .build();
         productList.add(orange);
+        productService.addProduct(orange);
 
         Product chicken = Product.builder()
                 .name("Chicken")
@@ -74,6 +75,8 @@ public class AprozarApplication implements CommandLineRunner {
                 .price(8.50)
                 .build();
         productList.add(chicken);
+        productService.addProduct(chicken);
+
 
         Product cheese = Product.builder()
                 .name("Cheese")
@@ -82,6 +85,8 @@ public class AprozarApplication implements CommandLineRunner {
                 .quantity(15)
                 .build();
         productList.add(cheese);
+        productService.addProduct(cheese);
+
 
 
 
@@ -95,6 +100,8 @@ public class AprozarApplication implements CommandLineRunner {
                 .quantity(10)
                 .build();
         productList.add(milk);
+        productService.addProduct(milk);
+
 
 
 
