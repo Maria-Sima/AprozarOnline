@@ -22,11 +22,14 @@ export default function Sellers() {
         {sellers.map((seller, index) => (
           <div className="card-container" key={index}>
             <Link to={`/shop?sellerId=${seller.id}`}>
-              <h1 className="card-title" style={{textAlign:"center"}}>{seller.email}</h1>
+              <h1 className="card-title" style={{ textAlign: "center" }}>
+                {seller.email}
+              </h1>
               <div
                 className="card"
                 style={{
-                  backgroundImage: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNlihWgkFyaOQoH9xr4W4kQdx2WRZjX7bq8Q&usqp=CAU")`,
+                  backgroundImage: `url("https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80")`,
+                  backgroundSize: "80%",
                 }}
               >
                 <div className="effect-box">
