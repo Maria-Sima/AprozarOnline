@@ -42,6 +42,7 @@ public class AprozarApplication implements CommandLineRunner {
                 .price(5.00)
                 .build();
         productList.add(bread);
+        productService.addProduct(bread);
 
         Product milk = Product.builder()
                 .name("Milk")
@@ -49,7 +50,7 @@ public class AprozarApplication implements CommandLineRunner {
                 .price(3.50)
                 .quantity(10)
                 .build();
-        productList.add(milk);
+        productService.addProduct(milk);
 
         Product apple = Product.builder()
                 .name("Apple")
@@ -57,7 +58,7 @@ public class AprozarApplication implements CommandLineRunner {
                 .price(1.25)
                 .quantity(15)
                 .build();
-        productList.add(apple);
+        productService.addProduct(apple);
 
 
         RegistrationRequest newUserRequest = new RegistrationRequest("admin", "admin", "simam9520@gmail.com", "123","SELLER");

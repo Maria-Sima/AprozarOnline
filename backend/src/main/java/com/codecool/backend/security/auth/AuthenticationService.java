@@ -21,7 +21,7 @@ public class AuthenticationService {
     private final JWTService jwtService;
     private final AppUserDTOMapper appUserDTOMapper;
     private final AppUserService userService;
-    private EmailService emailService;
+    private final EmailService emailService;
 
     public AuthenticationService(AuthenticationManager authenticationManager, JWTService jwtService, AppUserDTOMapper appUserDTOMapper, @Qualifier("appUser") AppUserService userService,EmailService emailService) {
         this.authenticationManager = authenticationManager;
@@ -60,13 +60,18 @@ public class AuthenticationService {
 
     public void logout(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            String jwt = authHeader.substring(7);
-            String subject = jwtService.getSubject(jwt);
-            if (subject != null) {
-                SecurityContextHolder.getContext().setAuthentication(null);
-            }
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return;
+        }
+
+        String jwt = authHeader.substring(7);
+        String subject = jwtService.getSubject(jwt);
+
+        if (subject != null) {
+            SecurityContextHolder.getContext().setAuthentication(null);
+        }
         }
     }
 
-}
+
