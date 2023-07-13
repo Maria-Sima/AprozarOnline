@@ -168,7 +168,6 @@ function ProductPage() {
             <br />
             <div
               style={{
-             
                 padding: "20px",
                 display: "flex",
                 borderRadius: "10px",
@@ -176,7 +175,7 @@ function ProductPage() {
                 flexDirection: "column",
                 alignItems: "center",
                 border: "1px solid black",
-                backgroundColor:"#9066D9"
+                backgroundColor: "#9066D9",
               }}
             >
               <h2
@@ -252,7 +251,7 @@ function ProductPage() {
               {filteredProducts.map((product) => (
                 <div className="meal" key={product.id}>
                   <img
-                    src="https://cdn.romania-insider.com/sites/default/files/styles/article_large_image/public/2020-06/vegetables_in_a_bag_-_photo_julia_sudnitskaya_-_dreamstime.com_.jpg"
+                    src={product.photoUrl}
                     className="meal-img"
                     alt={product.name}
                   />

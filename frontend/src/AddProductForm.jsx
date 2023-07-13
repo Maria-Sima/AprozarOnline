@@ -10,7 +10,8 @@ const AddProductForm = () => {
   const [price, setPrice] = useState("");
   const [type, setType] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [photos, setPhotos] = useState(null);
+  const [photos, setPhotos] = useState("");
+  const [productId, setProductId] = useState(""); 
   const userID = localStorage.getItem("userId");
 
   const handleNameChange = (e) => {
@@ -32,47 +33,15 @@ const AddProductForm = () => {
   const handleDescriptionChange = (e) => {
     setProductDescription(e.target.value);
   };
-
+  const handleId = () => {
+    setProductId(userID);
+  };
   const handlePhotosChange = (e) => {
-    const files = e.target.files[0];
+    const files = e.target.files;
     setPhotos(files);
   };
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
-
-   // Create a new FormData object to send the form data as multipart/form-data
-   const formData = new FormData();
-   formData.append("name", name);
-   formData.append("quantity", quantity);
-   formData.append("price", price);
-   formData.append("type", type);
-   formData.append("productDescription", productDescription);
-   formData.append("userId", userID);
-
-   if (photos) {
-     formData.append("photos", photos);
-   }
-
-   try {
-     // Make a POST request to the backend endpoint
-     const response = await axios.post(
-       "http://localhost:8080/seller/addProduct",
-       formData
-     );
-     console.log(response.data);
-
-     // Reset the form
-     setName("");
-     setQuantity("");
-     setPrice("");
-     setType("");
-     setProductDescription("");
-     setPhotos(null); // Reset the photos state to null
-   } catch (error) {
-     console.error(error);
-   }
- };
+ 
 
   return (
     <div
@@ -98,7 +67,12 @@ const AddProductForm = () => {
       >
         Add Product Form
       </h4>
-      <Form onSubmit={handleSubmit} style={{ fontSize: "18px" }}>
+      <Form
+        encType="multipart/form-data"
+        action="http://localhost:8080/seller/addProduct"
+        method="post"
+        style={{ fontSize: "18px" }}
+      >
         <Form.Group>
           <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
             Product Name:
@@ -107,6 +81,7 @@ const AddProductForm = () => {
             type="text"
             placeholder="Enter product name"
             value={name}
+            name="name"
             onChange={handleNameChange}
           />
         </Form.Group>
@@ -116,6 +91,20 @@ const AddProductForm = () => {
           </Form.Label>
           <Form.Control
             type="number"
+            name="quantity"
+            placeholder="Enter quantity"
+            value={quantity}
+            onChange={handleQuantityChange}
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
+            Quantity:
+          </Form.Label>
+          <Form.Control
+            type="number"
+            name="quantity"
             placeholder="Enter quantity"
             value={quantity}
             onChange={handleQuantityChange}
@@ -123,13 +112,14 @@ const AddProductForm = () => {
         </Form.Group>
         <Form.Group>
           <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
-            Price:
+           
           </Form.Label>
           <Form.Control
-            type="number"
-            placeholder="Enter price"
-            value={price}
-            onChange={handlePriceChange}
+            name="userId"
+            type="text"
+            
+            value={userID}
+           
           />
         </Form.Group>
         <Form.Group>
@@ -138,6 +128,7 @@ const AddProductForm = () => {
           </Form.Label>
           <Form.Control
             type="text"
+            name="category"
             placeholder="Enter category"
             value={type}
             onChange={handleTypeChange}
@@ -149,6 +140,7 @@ const AddProductForm = () => {
           </Form.Label>
           <Form.Control
             as="textarea"
+            name="description"
             rows={3}
             placeholder="Enter product description"
             value={productDescription}
@@ -159,8 +151,13 @@ const AddProductForm = () => {
           <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
             Product Photos:
           </Form.Label>
-          <Form.Control type="file"  onChange={handlePhotosChange} />
+          <Form.Control
+            type="file"
+            name="photos"
+            onChange={handlePhotosChange}
+          />
         </Form.Group>
+
         <div
           style={{
             display: "flex",
@@ -168,7 +165,11 @@ const AddProductForm = () => {
             width: "100%",
           }}
         >
-          <Button variant="primary" type="submit" style={{ fontSize: "20px",backgroundColor:"red" }}>
+          <Button
+            variant="primary"
+            type="submit"
+            style={{ fontSize: "20px", backgroundColor: "red" }}
+          >
             Add Product
           </Button>
         </div>
