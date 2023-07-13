@@ -117,7 +117,7 @@ function ProductPage() {
             />
             <div
               style={{
-                backgroundColor: "#D5DC37",
+                border: "1px solid black",
                 borderRadius: "10px",
               }}
             >
@@ -133,7 +133,7 @@ function ProductPage() {
                   textAlign: "center",
                 }}
               >
-               {sellerEmail}
+                {sellerEmail}
               </h2>
 
               <p
@@ -168,15 +168,15 @@ function ProductPage() {
             <br />
             <div
               style={{
-                border: "1px solid black",
-
+             
                 padding: "20px",
                 display: "flex",
                 borderRadius: "10px",
 
                 flexDirection: "column",
                 alignItems: "center",
-                backgroundColor: "#D5DC37",
+                border: "1px solid black",
+                backgroundColor:"#9066D9"
               }}
             >
               <h2

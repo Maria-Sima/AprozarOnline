@@ -10,8 +10,8 @@ const AddProductForm = () => {
   const [price, setPrice] = useState("");
   const [type, setType] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [photos, setPhotos] = useState([]);
-   const userID = localStorage.getItem("userId");
+  const [photos, setPhotos] = useState(null);
+  const userID = localStorage.getItem("userId");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -34,55 +34,75 @@ const AddProductForm = () => {
   };
 
   const handlePhotosChange = (e) => {
-    const files = Array.from(e.target.files);
+    const files = e.target.files[0];
     setPhotos(files);
   };
 
+ const handleSubmit = async (e) => {
+   e.preventDefault();
 
- 
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+   // Create a new FormData object to send the form data as multipart/form-data
+   const formData = new FormData();
+   formData.append("name", name);
+   formData.append("quantity", quantity);
+   formData.append("price", price);
+   formData.append("type", type);
+   formData.append("productDescription", productDescription);
+   formData.append("userId", userID);
 
-    // Create a new FormData object to send the form data as multipart/form-data
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("quantity", quantity);
-    formData.append("price", price);
-    formData.append("type", type);
-    formData.append("productDescription", productDescription);
-    formData.append("userId", userID);
-    photos.forEach((photo, index) => {
-      formData.append(`photos[${index}]`, photo);
-    });
+   if (photos) {
+     formData.append("photos", photos);
+   }
 
-    try {
-      // Make a POST request to the backend endpoint
-      const response = await axios.post(
-        "http://localhost:8080/seller/addProduct",
-        formData,
-     
-      );
-      console.log(response.data);
+   try {
+     // Make a POST request to the backend endpoint
+     const response = await axios.post(
+       "http://localhost:8080/seller/addProduct",
+       formData
+     );
+     console.log(response.data);
 
-      // Reset the form
-      setName("");
-      setQuantity("");
-      setPrice("");
-      setType("");
-      setProductDescription("");
-      setPhotos([]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+     // Reset the form
+     setName("");
+     setQuantity("");
+     setPrice("");
+     setType("");
+     setProductDescription("");
+     setPhotos(null); // Reset the photos state to null
+   } catch (error) {
+     console.error(error);
+   }
+ };
 
   return (
-    <div style={{ display: "block", width: 500, padding: 30,backgroundColor:"purple",marginTop:"60px" }}>
-      <h4 style={{color:"black",fontSize:"20px"}}>Add Product</h4>
-      <Form onSubmit={handleSubmit}>
+    <div
+      style={{
+        display: "block",
+        width: 500,
+        padding: 0,
+        backgroundColor: "white",
+        marginTop: "60px",
+        backgroundImage: `url(
+          "https://media.istockphoto.com/id/1159947998/photo/apples-on-red-scales.jpg?s=612x612&w=0&k=20&c=dpwBgxy1JOe0mkezhZsps_ES8r4tubgVywZEI_3PUy8="
+        )`,
+      }}
+    >
+      <h4
+        style={{
+          color: "white",
+          fontSize: "30px",
+          textAlign: "center",
+          fontFamily: "Arial, sans-serif",
+          padding: "10px 0",
+        }}
+      >
+        Add Product Form
+      </h4>
+      <Form onSubmit={handleSubmit} style={{ fontSize: "18px" }}>
         <Form.Group>
-          <Form.Label>Product Name:</Form.Label>
+          <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
+            Product Name:
+          </Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter product name"
@@ -91,7 +111,9 @@ const AddProductForm = () => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Quantity:</Form.Label>
+          <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
+            Quantity:
+          </Form.Label>
           <Form.Control
             type="number"
             placeholder="Enter quantity"
@@ -100,7 +122,9 @@ const AddProductForm = () => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Price:</Form.Label>
+          <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
+            Price:
+          </Form.Label>
           <Form.Control
             type="number"
             placeholder="Enter price"
@@ -109,7 +133,9 @@ const AddProductForm = () => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Category:</Form.Label>
+          <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
+            Category:
+          </Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter category"
@@ -118,7 +144,9 @@ const AddProductForm = () => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Description:</Form.Label>
+          <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
+            Description:
+          </Form.Label>
           <Form.Control
             as="textarea"
             rows={3}
@@ -128,12 +156,22 @@ const AddProductForm = () => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Product Photos:</Form.Label>
-          <Form.Control type="file" multiple onChange={handlePhotosChange} />
+          <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
+            Product Photos:
+          </Form.Label>
+          <Form.Control type="file"  onChange={handlePhotosChange} />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Add Product
-        </Button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <Button variant="primary" type="submit" style={{ fontSize: "20px",backgroundColor:"red" }}>
+            Add Product
+          </Button>
+        </div>
       </Form>
     </div>
   );

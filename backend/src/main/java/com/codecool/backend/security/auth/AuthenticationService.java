@@ -2,7 +2,6 @@ package com.codecool.backend.security.auth;
 
 
 
-
 import com.codecool.backend.notifications.EmailService;
 import com.codecool.backend.security.jwt.JWTService;
 import com.codecool.backend.users.repository.AppUser;
@@ -72,7 +71,7 @@ public class AuthenticationService {
 
         // Generate verification link
         String verificationLink =
-                 "http://localhost:8080/api/auth/user?token=" + token;
+                "http://localhost:8080/api/auth/user?token=" + token;
 
 
         emailService.send(email, verificationLink);
@@ -96,7 +95,7 @@ public class AuthenticationService {
 
         Optional<AppUser> optionalUser = userRepository.findAppUserByEmail(email);
 
-        if (((Optional<?>) optionalUser).isPresent()) {
+        if (optionalUser.isPresent()) {
             AppUser user = optionalUser.get();
             user.setVerified(true);
             userRepository.save(user);

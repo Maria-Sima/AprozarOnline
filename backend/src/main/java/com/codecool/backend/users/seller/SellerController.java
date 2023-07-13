@@ -8,6 +8,7 @@ import com.codecool.backend.users.service.UserController;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -52,11 +53,11 @@ public class SellerController extends UserController {
         return ResponseEntity.noContent().build();
     }
 
-//    @PostMapping("/{productId}/productImage")
-//public ResponseEntity<Void> uploadImage(@PathVariable Long productId, @RequestBody MultipartFile file){
-//        service.uploadProductImage(productId,file);
-//        return ResponseEntity.noContent().build();
-//    }
+    @PostMapping("/{productId}/productImage")
+public ResponseEntity<Void> uploadImage(@PathVariable Long productId, @RequestParam("image") MultipartFile file){
+        service.uploadProductImage(productId,file);
+        return ResponseEntity.noContent().build();
+    }
 
 
 

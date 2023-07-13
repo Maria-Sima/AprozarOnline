@@ -5,7 +5,6 @@ import com.codecool.backend.products.Product;
 import com.codecool.backend.products.ProductDTO;
 import com.codecool.backend.products.ProductForm;
 import com.codecool.backend.products.ProductService;
-import com.codecool.backend.fileStorage.aws.S3Buckets;
 import com.codecool.backend.products.Types.ProductType;
 import com.codecool.backend.users.repository.AppUserDTO;
 import com.codecool.backend.users.repository.AppUserDTOMapper;
@@ -25,8 +24,9 @@ import java.util.stream.Collectors;
 public class SellerService extends AppUserService {
     private final ProductService productService;
 
-    public SellerService(@Qualifier("jpa") AppUserDao appUserDao, AppUserDTOMapper userDTOMapper, PasswordEncoder passwordEncoder, ImageService imageService, S3Buckets s3Buckets, ProductService productService) {
-        super(appUserDao, userDTOMapper, passwordEncoder, imageService, s3Buckets);
+
+    public SellerService(@Qualifier("jpa") AppUserDao appUserDao, AppUserDTOMapper userDTOMapper, PasswordEncoder passwordEncoder, ImageService imageService,  ProductService productService) {
+        super(appUserDao, userDTOMapper, passwordEncoder, imageService);
         this.productService = productService;
     }
 
@@ -40,8 +40,9 @@ public class SellerService extends AppUserService {
                 .quantity(productForm.quantity())
                 .price(productForm.price())
                 .userId(userId).build();
+        System.out.println(productForm);
+        productService.addProduct(product,productForm.photos());
 
-        productService.addProduct(product);
     }
 
     public void deleteProduct(Long productID) {

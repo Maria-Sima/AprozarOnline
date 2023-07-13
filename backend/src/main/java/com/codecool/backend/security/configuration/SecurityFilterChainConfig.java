@@ -24,7 +24,6 @@ public class SecurityFilterChainConfig {
 
     private final AuthenticationProvider authenticationProvider;
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
-//   private final AuthenticationEntryPoint authenticationEntryPoint;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -35,23 +34,25 @@ public class SecurityFilterChainConfig {
                     auth.requestMatchers(
                                     HttpMethod.GET,
                                     "/api/products",
-                                    "/seller/myproducts","/api/user/seller",
-                                    "/images","/product/{productId}"
+                                    "/images"
                             )
-                            .permitAll().anyRequest().authenticated();
+                            .permitAll();
                     auth.requestMatchers(
                                     HttpMethod.POST,
-                                    "/api/auth/register","/seller/addProduct",
-                                    "/api/auth/login",
-                                    "/images","/api/auth/logout"
+                                    "/api/auth/register",
+                                    "/api/auth/login","seller/addProduct",
+                                    "/images"
                             )
                             .permitAll();
                     auth.anyRequest().permitAll();
                 })
-                .oauth2Login(Customizer.withDefaults()).formLogin(Customizer.withDefaults())
+//                .oauth2Login(Customizer.withDefaults())
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(Customizer.withDefaults())
                 .build();
     }
+
+
 }
