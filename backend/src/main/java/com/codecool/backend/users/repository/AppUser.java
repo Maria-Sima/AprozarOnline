@@ -45,6 +45,9 @@ public class AppUser implements UserDetails {
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
+    private String profileImage;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

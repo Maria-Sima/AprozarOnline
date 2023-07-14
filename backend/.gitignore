@@ -11,7 +11,7 @@
 /logs/
 
 # Application properties
-src/main/resources/
+src/main/resources/application.properties
 
 # Maven Wrapper
 .mvn/wrapper/

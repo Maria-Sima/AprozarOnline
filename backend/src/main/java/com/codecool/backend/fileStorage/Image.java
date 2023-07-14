@@ -15,20 +15,22 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "FILE_NAME")
     private String fileName;
 
     @Column(name = "FILE_PATH")
     private String filePath;
+    private String contentType;
+    private long contentSize;
+    private String url;
 
-    @Column(name = "VERSION")
-    private String version;
-
-    public Image(String fileName, String filePath, String version) {
+    public Image(String fileName, String filePath, String contentType, long contentSize, String url) {
         this.fileName = fileName;
         this.filePath = filePath;
-        this.version = version;
+        this.contentType = contentType;
+        this.contentSize = contentSize;
+        this.url = url;
     }
 }

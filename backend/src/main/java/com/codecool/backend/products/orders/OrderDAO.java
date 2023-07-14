@@ -3,11 +3,11 @@ package com.codecool.backend.products.orders;
 import java.util.List;
 
 public interface OrderDAO {
-    List<OrderDTO> getAllOrdersByUser(Long userId);
+    List<com.codecool.backend.products.orders.OrderDTO> getAllOrdersByUser(Long userId);
 
-    Order findByPaypalId(Long paypalId);
+    OrderRequest findByPaypalId(Long paypalId);
 
-    OrderDTO addOrder(Order order);
+    com.codecool.backend.products.orders.OrderDTO addOrder(OrderRequest order);
 
     OrderDTO findOrderById(Long orderID);
 }

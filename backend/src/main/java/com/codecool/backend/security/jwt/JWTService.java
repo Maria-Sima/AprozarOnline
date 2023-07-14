@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -13,8 +14,9 @@ import java.util.Date;
 import static java.time.temporal.ChronoUnit.DAYS;
 @Service
 public class JWTService {
-    private static final String SECRET_KEY =
-            "SECRET_007_SECRET_007_SECRET_007_SECRET_007_SECRET_007_SECRET_007_SECRET_007_SECRET_007_SECRET_007_SECRET_007_SECRET_007_SECRET_007_SECRET";
+    @Value("${security.jwt.token.secret-key}")
+    private String secretKey;
+
 
 
 
@@ -50,7 +52,7 @@ public class JWTService {
     }
 
     private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+        return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
     public boolean isTokenValid(String jwt, String username) {

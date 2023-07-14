@@ -1,9 +1,9 @@
 package com.codecool.backend.products.orders;
 
+import com.codecool.backend.exception.ResourceNotFoundException;
 import com.codecool.backend.products.Product;
 import com.codecool.backend.products.ProductDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +13,8 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 public class OrderService implements OrderDAO {
-    private final OrderRepository orderRepository;
-    private final OrderDTOMapper orderDTOMapper;
+    private final com.codecool.backend.products.orders.OrderRepository orderRepository;
+    private final com.codecool.backend.products.orders.OrderDTOMapper orderDTOMapper;
     private final ProductDAO productDAO;
 
     @Autowired
@@ -25,7 +25,7 @@ public class OrderService implements OrderDAO {
     }
 
     @Override
-    public List<OrderDTO> getAllOrdersByUser(Long id) {
+    public List<com.codecool.backend.products.orders.OrderDTO> getAllOrdersByUser(Long id) {
         return orderRepository.findAllByUserId(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("user with id [%s] hasn't placed any orders ".formatted(id)))
@@ -34,13 +34,13 @@ public class OrderService implements OrderDAO {
     }
 
     @Override
-    public Order findByPaypalId(Long paypalId) {
+    public OrderRequest findByPaypalId(Long paypalId) {
         return orderRepository.findByPaypalOrderId(paypalId).orElseThrow(() ->
                 new ResourceNotFoundException("user with id [%s] hasn't placed any orders ".formatted(id)));
     }
 
 
-    private void TakeProductsOutOfStock(List<CartItem> items) {
+    private void TakeProductsOutOfStock(List<com.codecool.backend.products.orders.CartItem> items) {
         for (CartItem item :
                 items) {
             Product product = productDAO.findProductById(item.getProduct().getId())
@@ -56,7 +56,7 @@ public class OrderService implements OrderDAO {
     }
 
     @Override
-    public OrderDTO addOrder(Order order) {
+    public OrderDTO addOrder(OrderRequest order) {
         orderRepository.save(order);
         TakeProductsOutOfStock(order.getCartItems());
         return orderDTOMapper.apply(order);

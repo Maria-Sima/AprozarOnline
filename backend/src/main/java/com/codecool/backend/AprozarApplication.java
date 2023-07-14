@@ -1,10 +1,10 @@
 package com.codecool.backend;
 
 
+import com.codecool.backend.fileStorage.ImageService;
 import com.codecool.backend.products.Product;
 import com.codecool.backend.products.ProductService;
 import com.codecool.backend.products.Types.ProductType;
-
 import com.codecool.backend.security.auth.AuthenticationService;
 import com.codecool.backend.security.auth.LoginRequest;
 import com.codecool.backend.users.RegistrationRequest;
@@ -23,7 +23,8 @@ public class AprozarApplication implements CommandLineRunner {
     private AuthenticationService authenthicationService;
     @Autowired
     private ProductService productService;
-
+    @Autowired
+    private ImageService imageService;
 
 
     public static void main(String[] args) {
@@ -41,6 +42,7 @@ public class AprozarApplication implements CommandLineRunner {
                 .price(5.00)
                 .build();
         productList.add(bread);
+        productService.addProduct(bread);
 
         Product milk = Product.builder()
                 .name("Milk")
@@ -48,7 +50,7 @@ public class AprozarApplication implements CommandLineRunner {
                 .price(3.50)
                 .quantity(10)
                 .build();
-        productList.add(milk);
+        productService.addProduct(milk);
 
         Product apple = Product.builder()
                 .name("Apple")
@@ -56,14 +58,12 @@ public class AprozarApplication implements CommandLineRunner {
                 .price(1.25)
                 .quantity(15)
                 .build();
-        productList.add(apple);
+        productService.addProduct(apple);
 
 
-        RegistrationRequest newUserRequest = new RegistrationRequest("admin", "admin", "simam9520@gmail.com", "123","SELLER");
-        authenthicationService.registerCustomer(newUserRequest);
-        System.out.println(authenthicationService.login(new LoginRequest("simam9520@gmail.com", "123")));
-        productService.addProducts(productList);
-
+//        RegistrationRequest newUserRequest = new RegistrationRequest("admin", "admin", "simam9520@gmail.com", "123","SELLER");
+//        authenthicationService.registerCustomer(newUserRequest);
+//        System.out.println(authenthicationService.login(new LoginRequest("simam9520@gmail.com", "123")));
 
     }
 
