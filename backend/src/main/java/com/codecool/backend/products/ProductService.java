@@ -1,7 +1,7 @@
 package com.codecool.backend.products;
 
 import com.codecool.backend.fileStorage.S3Buckets;
-import com.codecool.backend.fileStorage.S3Service;
+import com.codecool.backend.fileStorage.ImageService;
 import lombok.AllArgsConstructor;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ProductService {
 
-    private final S3Service s3Service;
+    private final ImageService s3Service;
     private final S3Buckets s3Buckets;
     private ProductDAO productDAO;
     private ProductDTOMapper productDTOMapper;
@@ -52,43 +52,43 @@ public class ProductService {
         }
     }
 
-    public void uploadProductImage(Long productId, MultipartFile file) {
-        var product = productDAO.findProductById(productId)
-                .map(productDTOMapper)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "product with id [%s] not found".formatted(productId)
-                ));
-        String productImageId = UUID.randomUUID().toString();
-        try {
-            s3Service.putObject(s3Buckets.getProduct(), "profile-images/%s/%s".formatted(productId, productImageId),
-                    file.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException("failed to upload profile image", e);
-        }
-        productDAO.updateProductImageId(productImageId, productId);
+//    public void uploadProductImage(Long productId, MultipartFile file) {
+//        var product = productDAO.findProductById(productId)
+//                .map(productDTOMapper)
+//                .orElseThrow(() -> new ResourceNotFoundException(
+//                        "product with id [%s] not found".formatted(productId)
+//                ));
+//        String productImageId = UUID.randomUUID().toString();
+//        try {
+//            s3Service.putObject(s3Buckets.getProduct(), "profile-images/%s/%s".formatted(productId, productImageId),
+//                    file.getBytes());
+//        } catch (IOException e) {
+//            throw new RuntimeException("failed to upload profile image", e);
+//        }
+//        productDAO.updateProductImageId(productImageId, productId);
 
-    }
+    //}
 
-    public byte[] getProductImage(Long productId) {
-        ProductDTO product = productDAO.findProductById(productId)
-                .map(productDTOMapper)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "product with id [%s] not found".formatted(productId)
-                ));
-
-
-        if (StringUtils.isBlank(product.profileImageId())) {
-            throw new ResourceNotFoundException(
-                    "customer with id [%s] profile image not found".formatted(productId));
-        }
-
-        byte[] productImage = s3Service.getObject(
-                s3Buckets.getProduct(),
-                "product-images/%s/%s".formatted(productId, product.profileImageId())
-
-        );
-        return productImage;
-    }
+//    public byte[] getProductImage(Long productId) {
+//        ProductDTO product = productDAO.findProductById(productId)
+//                .map(productDTOMapper)
+//                .orElseThrow(() -> new ResourceNotFoundException(
+//                        "product with id [%s] not found".formatted(productId)
+//                ));
+//
+//
+//        if (StringUtils.isBlank(product.profileImageId())) {
+//            throw new ResourceNotFoundException(
+//                    "customer with id [%s] profile image not found".formatted(productId));
+//        }
+//
+//        byte[] productImage = s3Service.getObject(
+//                s3Buckets.getProduct(),
+//                "product-images/%s/%s".formatted(productId, product.profileImageId())
+//
+//        );
+//        return productImage;
+//    }
 
     public ProductDTO getProductById(Long productId) {
         return productDAO.findProductById(productId).map(productDTOMapper).orElseThrow(() -> new ResourceNotFoundException(

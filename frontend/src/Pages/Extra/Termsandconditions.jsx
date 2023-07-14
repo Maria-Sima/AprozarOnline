@@ -12,7 +12,7 @@ const Termsandconditions = () => {
   }, [])
   return (
     <div className='extrapage'>
-      <Navbar />
+
       <SingleBanner
         bannerimage='https://images.unsplash.com/photo-1448697138198-9aa6d0d84bf4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
         heading="Terms & Conditions"

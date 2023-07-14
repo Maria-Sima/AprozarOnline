@@ -15,7 +15,7 @@ const About = () => {
         window.scrollTo(0, 0)
     }, [])
     return (<div className='extrapage'>
-        <Navbar reloadnavbar={false}/>
+
         <SingleBanner
             heading="About Us"
             bannerimage={banner}

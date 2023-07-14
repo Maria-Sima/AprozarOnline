@@ -2,9 +2,6 @@ package com.codecool.backend.products.orders.payments.paypal;
 
 import com.codecool.backend.products.orders.OrderDTO;
 import com.codecool.backend.products.orders.OrderResponseDTO;
-import com.codecool.backend.products.orders.payments.paypal.AccessTokenResponseDTO;
-import com.codecool.backend.products.orders.payments.paypal.PayPalEndpoints;
-import com.codecool.backend.products.orders.payments.paypal.PaypalConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

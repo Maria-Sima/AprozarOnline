@@ -146,7 +146,7 @@ public StripeChargeDTO charge(StripeChargeDTO chargeRequest) {
 
         try {
 
-            paymentMethod = com.stripe.model.PaymentMethod.retrieve(paymentMethod.getId());
+            paymentMethod = PaymentMethod.retrieve(paymentMethod.getId());
 
             Map<String, Object> params = new HashMap<>();
             params.put("customer", customer.getId());

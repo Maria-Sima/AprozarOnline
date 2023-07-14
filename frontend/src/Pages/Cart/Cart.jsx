@@ -82,7 +82,7 @@ const Cart = () => {
   const [ordersuccesscont, setordersuccesscont] = useRecoilState(orderSuccessfulProvider)
   return (
     <div>
-      <Navbar reloadnavbar={reloadnavbar} />
+
       {
         ordersuccesscont && <OrderSuccessful orderid={selectedorderid} message={`Order Placed Successfully, Order ID: ${selectedorderid}`}  redirecto='userorders'/>
       }
