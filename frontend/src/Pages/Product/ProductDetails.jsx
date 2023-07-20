@@ -6,26 +6,21 @@ import Footer1 from '../../Components/Footer/Footer1.jsx';
 import Footer2 from '../../Components/Footer/Footer2.jsx';
 import ProductsSlider from '../../Components/Product/ProductsSlider.jsx';
 import './ProductDetails.scss';
+import {useAxiosGet} from "../../Api/Axios/useFetch.js";
+import {routes} from "../../Api/Axios/Routes.jsx";
 
 const ProductDetails = () => {
     const [productdata, setproductdata] = useState({});
     const [count, setcount] = useState(1);
     const [imageset, setimageset] = useState([]);
     const [activeimg, setactiveimg] = useState({});
-    const [showreview, setshowreview] = useState(false);
-    const [rating, setrating] = useState(0);
     const [reloadnavbar, setreloadnavbar] = useState(false);
 
     const { productId } = useParams();
 
-    const getproductdatabyid = async () => {
-        // Fetch product data by ID and update the state
-    };
+   const productData= useAxiosGet(routes.productUtil+productId)
 
-    useEffect(() => {
-        getproductdatabyid();
-        window.scroll(0, 0);
-    }, []);
+
 
     const addtocart = () => {
         let cart = JSON.parse(localStorage.getItem('cart'));
@@ -100,27 +95,6 @@ const ProductDetails = () => {
                 <div className='c12'>
                     <div className='productinfo'>
                         <h1>{productdata && productdata.name}</h1>
-                        <div className='rating'>
-                    <span className='stars'>
-                        {[1, 2, 3, 4, 5].map((star, index) => (
-                            <svg
-                                key={index}
-                                xmlns='http://www.w3.org/2000/svg'
-                                fill={rating >= star ? '#FFC107' : 'none'}
-                                viewBox='0 0 24 24'
-                                stroke='currentColor'
-                                strokeWidth={2}
-                                strokeLinecap='round'
-                                strokeLinejoin='round'
-                                className='w-4 h-4 star'
-                                onClick={() => setrating(star)}
-                            >
-                                <path d='M12 17l-5 4 1.5-6L2 9l6.5-.5L12 3l3.5 5.5L22 9l-6.5.5L12 17z' />
-                            </svg>
-                        ))}
-                    </span>
-                            <span className='ratingtext'>{rating > 0 ? rating : 'No'} reviews</span>
-                        </div>
                         <p className='description'>{productdata && productdata.description}</p>
                         <div className='price'>
                             <span className='currency'>$</span>

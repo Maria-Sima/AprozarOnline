@@ -25,8 +25,20 @@ public class ProductService {
         return productDAO.getAllProducts().stream().map(productDTOMapper).collect(Collectors.toList());
     }
 
-    public void addProduct(Product product) {
-        productDAO.addProduct(product);
+    public void addProduct(Product product,MultipartFile file) {
+
+
+            try {
+                String url = imageService.upload(file);
+                product.setProductUrl(url);
+                productDAO.addProduct(product);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+
+
+
     }
 
     public void deleteProduct(Long productId) {

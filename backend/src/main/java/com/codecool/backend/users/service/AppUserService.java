@@ -46,27 +46,28 @@ public class AppUserService {
     }
 
 
-    public AppUser addUser(RegistrationRequest registrationRequest){
-        String email=registrationRequest.email();
-        if(appUserDao.isAppUserWithEmail(email)){
-            throw new DuplicateRequestException(
-                    "email already taken"
-            );
-        }
+    public AppUser addUser(RegistrationRequest registrationRequest) {
+            String email = registrationRequest.email();
+            if (appUserDao.isAppUserWithEmail(email)) {
+                throw new DuplicateRequestException(
+                        "email already taken"
+                );
+            }
+            System.out.println(registrationRequest);
+            AppUser appUser = AppUser.builder()
+                    .firstName(registrationRequest.firstName())
+                    .lastName(registrationRequest.lastName())
+                    .email(registrationRequest.email())
+                    .password(passwordEncoder.encode(registrationRequest.password()))
+                    .appUserRole(AppUserRole.valueOf(registrationRequest.role()))
+                    .build();
+            appUserDao.addAppUser(appUser);
 
-        AppUser appUser=AppUser.builder()
-                .firstName(registrationRequest.firstName())
-                .lastName(registrationRequest.lastName())
-                .email(registrationRequest.email())
-                .password(passwordEncoder.encode(registrationRequest.password()))
-                .appUserRole(AppUserRole.valueOf(registrationRequest.role()))
-                .build();
-        appUserDao.addAppUser(appUser);
 
+            return appUser;
 
-
-        return appUser;
     }
+
 
     public void deleteCustomerById(Long userId){
         checkIUserExistsOrNot(userId);

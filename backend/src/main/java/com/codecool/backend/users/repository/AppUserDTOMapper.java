@@ -15,9 +15,9 @@ public class AppUserDTOMapper implements Function<AppUser, AppUserDTO> {
                 appUser.getFirstName(),
                 appUser.getLastName(),
                 appUser.getEmail(),
-                appUser.getPassword(),
                 appUser.getAppUserRole(),
-                appUser.getProfileImage()
+                appUser.getProfileImage(),
+                appUser.getAddress()
                 );
     }
 }

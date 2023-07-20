@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './YourOrders.scss'
 import OrderSuccessful from '../Order/OrderSuccessful.jsx'
 import { useRecoilState } from 'recoil'
-import { orderSuccessfulProvider } from '../../Providers/OrderSuccessfulProvider.jsx'
+import { orderSuccessfulProvider } from '../../Api/OrderSuccessfulProvider.jsx'
 
 const YourOrders = () => {
 

@@ -10,21 +10,25 @@ import img2 from '../../assets/pictures/fruits.png'
 import img3 from '../../assets/pictures/fruits.png'
 
 import ProductsSlider from '../../Components/Product/ProductsSlider.jsx'
+import SellerCard from "../../Components/Seller/SellerCard.jsx";
+import {useAxiosGet} from "../../Api/Axios/useFetch.js";
+import {routes} from "../../Api/Axios/Routes.jsx";
+import AllSeller from "../../Components/Seller/AllSeller.jsx";
 
 
 const Home = () => {
 
-  // const products = [
-  //
-  //   }
-// ]
+const  data=useAxiosGet(routes.stores);
+    const {apiData,isLoading,serverError}=data;
+    console.log(apiData)
   return (
     <div>
 
       <BannerSlider />
       <HomeCategories />
+        <AllSeller/>
 
-<Product_Sidebar />
+{/*<Product_Sidebar />*/}
       {/*<div className='slidercont'>*/}
       {/*  <ProductsSlider products={products} categoryname='Related Products' />*/}
       {/*</div>*/}

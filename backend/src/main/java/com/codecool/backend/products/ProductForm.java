@@ -13,10 +13,7 @@ public record ProductForm(
 
         ProductType type,
 
-        String productDescription,
-
-        List<MultipartFile> photos
-
+        String productDescription
 ) {
 
 }

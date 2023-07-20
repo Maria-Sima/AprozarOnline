@@ -14,6 +14,7 @@ import FAQ from "./Pages/Extra/FAQ.jsx";
 import Termsandconditions from "./Pages/Extra/Termsandconditions.jsx";
 import UserProfile from "./Pages/User/UserProfile.jsx";
 import Navbar from "./Components/Navbar/Navbar.jsx";
+import AddProduct from "./Pages/Product/AddProduct.jsx";
 
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
                 <Route path='/user/:activepage' element={<UserProfile/>} />
                 <Route path="/FAQ" element={<FAQ/>} />
                 <Route path="/termsandconditions" element={<Termsandconditions/>} />
+                <Route path="/addProduct" element={<AddProduct/>} />
 
 
                 <Route path="*" component={() => (

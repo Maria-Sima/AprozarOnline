@@ -22,14 +22,14 @@ $authFormMargin: 10px 0px;
 //$authFormBtnHoverBgColor: $white;
 //$authFormBtnHoverColor: $col1;
 
-.authpage {
+.addProduct {
   width: $fullSize;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.authcont {
+.productCont {
   display: flex;
   align-items: center;
   gap: $pix20;
@@ -48,7 +48,7 @@ $authFormMargin: 10px 0px;
   }
 }
 
-.authform {
+.productform {
   display: flex;
   flex-direction: column;
   width: $halfSize;
@@ -163,7 +163,7 @@ $authFormMargin: 10px 0px;
 }
 
 @media (max-width: 1100px) {
-  .authcont {
+  .productCont {
     flex-direction: column;
     width: $authContWidth;
     margin: $authContMargin 0;
@@ -177,7 +177,7 @@ $authFormMargin: 10px 0px;
     }
   }
 
-  .authform {
+  .productform {
     width: $authContWidth;
   }
 }

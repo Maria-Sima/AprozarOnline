@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/auth")
+@RequestMapping("/auth")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request) {
         AuthenticationResponse response = authenticationService.login(request);
 
         return ResponseEntity.ok()
@@ -27,10 +27,11 @@ public class AuthenticationController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegistrationRequest request){
-        AuthenticationResponse response = authenticationService.registerCustomer(request);
-        return ResponseEntity.ok()
-                .body(response);
+    public ResponseEntity<?> register(@RequestBody  RegistrationRequest request){
+        System.out.println("!!!!!"+request);
+        authenticationService.registerCustomer(request);
+        return ResponseEntity
+                .noContent().build();
     }
 
     @PostMapping("/logout")

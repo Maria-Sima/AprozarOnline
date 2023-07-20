@@ -14,6 +14,7 @@ import com.codecool.backend.users.service.AppUserService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -32,14 +33,14 @@ public class SellerService extends AppUserService {
         return productService.getAllProductsBySeller(sellerId);
     }
 
-    public void addProduct(ProductForm productForm, Long userId) {
+    public void addProduct(ProductForm productForm,Long userId,MultipartFile photo) {
         var product = Product.builder().productType(productForm.type())
                 .name(productForm.name())
                 .quantity(productForm.quantity())
                 .price(productForm.price())
                 .userId(userId).build();
 
-        productService.addProduct(product);
+        productService.addProduct(product,photo);
     }
 
     public void deleteProduct(Long productID) {

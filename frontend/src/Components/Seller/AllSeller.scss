@@ -1,0 +1,35 @@
+.allstores {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 78%;
+  margin: 0 auto; /* Center the container */
+}
+
+.allstores h1 {
+  font-size: 30px;
+  text-align: center;
+}
+
+.allstores .stores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 950px) {
+  .allstores {
+    width: 60%;
+  }
+}
+
+@media (max-width: 650px) {
+  .allstores {
+    width: 100%;
+  }
+
+  .allstores h1 {
+    font-size: 24px; /* Adjust font size for smaller screens */
+  }
+}

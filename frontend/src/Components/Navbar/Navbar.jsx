@@ -1,11 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import './Navbar.scss'
 import logo from '../../assets/pictures/aprozarVirtual.svg'
 import Dropdown from 'react-bootstrap/Dropdown'
-import { Link } from 'react-router-dom'
-const Navbar = ({ reloadnavbar }) => {
-    const [cartquantity, setcartquantity] = useState(0)
+import {Link} from 'react-router-dom'
+import {getAuthToken, removeAuthToken, useAxiosPost} from "../../Api/Axios/useFetch.js";
 
+const Navbar = () => {
+
+    const [cartquantity, setcartquantity] = useState(0)
+    const [isLoggedIn, setIsLoggedIn] = useState(!!getAuthToken());
+    const {post, response} = useAxiosPost();
+    console.log(isLoggedIn)
+
+    const handleLogout = () => {
+        post('auth/logout', {}); // Send the POST request to /logout endpoint with an empty object as data
+    };
+
+    useEffect(() => {
+        if (response !== null) {
+            removeAuthToken();
+            setIsLoggedIn(!!getAuthToken());
+
+            console.log('Logged out successfully');
+        }
+    }, [response,isLoggedIn]);
 
     const getcarttotalitems = () => {
         let cart = JSON.parse(localStorage.getItem('cart'))
@@ -15,29 +33,29 @@ const Navbar = ({ reloadnavbar }) => {
                 total += item.quantity
             })
             setcartquantity(total)
-        }
-        else {
+        } else {
             setcartquantity(0)
         }
     }
 
     useEffect(() => {
         getcarttotalitems()
-    }, [reloadnavbar])
+    }, [])
 
 
     const [shows3, setshows3] = useState(false)
-    return (
-        <nav>
+    return (<nav>
             <div className='s1'>
-                <img src={logo} alt='logo' className='logo' />
+                <img src={logo} alt='logo' className='logo'/>
 
                 <div className='searchbar'>
-                    <input typ="text" placeholder="Search for products and categries" className='search' />
+                    <input type="text" placeholder="Search for products and categries" className='search'/>
 
                     <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                             stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
                         </svg>
 
                     </button>
@@ -48,26 +66,34 @@ const Navbar = ({ reloadnavbar }) => {
 
                         <span className='qty'>{cartquantity}</span>
                         <Link to='/cart'
-                            className='stylenone'
+                              className='stylenone'
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                                 stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                      d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
                             </svg>
                         </Link>
 
                     </div>
                     <Dropdown>
                         <Dropdown.Toggle variant="" id="dropdown-basic">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                                 stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
                             </svg>
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item href="/login">Login</Dropdown.Item>
-                            <Dropdown.Item href="/signup">Signup</Dropdown.Item>
-                            <Dropdown.Item href="/user/accountsettings">Profile</Dropdown.Item>
-                            <Dropdown.Item href="#">Logout</Dropdown.Item>
+
+                            {isLoggedIn ? (<>
+                                    <Dropdown.Item href="/user/accountsettings">Profile</Dropdown.Item>
+                                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                                </>) : (<>
+                                    <Dropdown.Item href="/login">Login</Dropdown.Item>
+                                    <Dropdown.Item href="/signup">Signup</Dropdown.Item>
+                                </>)}
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
@@ -78,11 +104,11 @@ const Navbar = ({ reloadnavbar }) => {
                 </Link>
                 <Dropdown>
                     <Dropdown.Toggle variant="" id="dropdown-basic">
-                        Categories
+                        Product
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">Fresh Vegetables</Dropdown.Item>
+                        <Dropdown.Item href="/addProduct">AddProduct</Dropdown.Item>
                         <Dropdown.Item href="#/action-2">Fresh Fruits</Dropdown.Item>
                         <Dropdown.Item href="#/action-3">House Cleaning</Dropdown.Item>
                     </Dropdown.Menu>
@@ -91,7 +117,7 @@ const Navbar = ({ reloadnavbar }) => {
                     About Us
                 </Link>
                 <Link to='/contact'>
-                  Contact Us
+                    Contact Us
                 </Link>
                 <Dropdown>
                     <Dropdown.Toggle variant="" id="dropdown-basic">
@@ -108,117 +134,120 @@ const Navbar = ({ reloadnavbar }) => {
                 </Dropdown>
             </div>
 
-            {
-                shows3 ?
-                    <div className='s3'>
-                        <div className='s31'>
-                            <img src={logo} alt='logo' className='logo' />
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6" onClick={() => setshows3(!shows3)}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </div>
+            {shows3 ? <div className='s3'>
+                <div className='s31'>
+                    <img src={logo} alt='logo' className='logo'/>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                         stroke="currentColor" className="w-6 h-6" onClick={() => setshows3(!shows3)}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </div>
 
-                        <div className='searchbar'>
-                            <input typ="text" placeholder="Search for products and categries" className='search' />
+                <div className='searchbar'>
+                    <input type="text" placeholder="Search for products and categries" className='search'/>
 
-                            <button>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                                </svg>
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                             stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                        </svg>
 
-                            </button>
-                        </div>
+                    </button>
+                </div>
 
-                        <ul className='s32'>
-                            <li>
-                                <Link to='/'
-                                    className='stylenone'
-                                >
-                                    Home
-                                </Link>
-                            </li>
+                <ul className='s32'>
+                    <li>
+                        <Link to='/'
+                              className='stylenone'
+                        >
+                            Home
+                        </Link>
+                    </li>
 
-                            <li><Dropdown>
-                                <Dropdown.Toggle variant="" id="dropdown-basic">
-                                    Categories
-                                </Dropdown.Toggle>
+                    <li><Dropdown>
+                        <Dropdown.Toggle variant="" id="dropdown-basic">
+                            Categories
+                        </Dropdown.Toggle>
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Fresh Vegetables</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Fresh Fruits</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">House Cleaning</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown></li>
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">Fresh Vegetables</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">Fresh Fruits</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">House Cleaning</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown></li>
 
-                            <li> <Link to='/about' className='stylenone'>
-                                <a>About Us</a>
-                            </Link></li>
+                    <li><Link to='/about' className='stylenone'>
+                        <a>About Us</a>
+                    </Link></li>
 
-                            <li> <Link to='/contact' className='stylenone'>
-                                <a>Contact Us</a>
-                            </Link></li>
+                    <li><Link to='/contact' className='stylenone'>
+                        <a>Contact Us</a>
+                    </Link></li>
 
-                            <li>
-                                <div className='cart'>
+                    <li>
+                        <div className='cart'>
 
-                                    <span className='qty'>{cartquantity}</span>
-                                    <Link to='/cart'
-                                        className='stylenone'
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                        </svg>
-                                    </Link>
-
-                                </div>
-                                <Dropdown>
-                                    <Dropdown.Toggle variant="" id="dropdown-basic">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                                        </svg>
-                                    </Dropdown.Toggle>
-
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item href="/login">Login</Dropdown.Item>
-                                        <Dropdown.Item href="/signup">Signup</Dropdown.Item>
-                                        <Dropdown.Item href="/user/accountsettings">Profile</Dropdown.Item>
-                                        <Dropdown.Item href="#">Logout</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </li>
-
-                            <li>
-                                <Dropdown>
-                                    <Dropdown.Toggle variant="" id="dropdown-basic">
-                                        More
-                                    </Dropdown.Toggle>
-
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item href="/FAQ">FAQ</Dropdown.Item>
-                                        <Dropdown.Item href="/privacypolicy">Privacy Policy</Dropdown.Item>
-                                        <Dropdown.Item href="/termsandconditions">
-                                            Terms & Conditions
-                                        </Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </li>
-                        </ul>
-                    </div>
-                    :
-                    <div className='s3'>
-                        <div className='s31'>
-                            <img src={logo} alt='logo' className='logo' />
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"
-                                onClick={() => setshows3(!shows3)}
+                            <span className='qty'>{cartquantity}</span>
+                            <Link to='/cart'
+                                  className='stylenone'
                             >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                          d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+                                </svg>
+                            </Link>
 
                         </div>
-                    </div>
-            }
-        </nav>
-    )
+                        <Dropdown>
+                            <Dropdown.Toggle variant="" id="dropdown-basic">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                          d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+                                </svg>
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item href="/login">Login</Dropdown.Item>
+                                <Dropdown.Item href="/signup">Signup</Dropdown.Item>
+                                <Dropdown.Item href="/user/accountsettings">Profile</Dropdown.Item>
+                                <Dropdown.Item href="#">Logout</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </li>
+
+                    <li>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="" id="dropdown-basic">
+                                More
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item href="/FAQ">FAQ</Dropdown.Item>
+                                <Dropdown.Item href="/privacypolicy">Privacy Policy</Dropdown.Item>
+                                <Dropdown.Item href="/termsandconditions">
+                                    Terms & Conditions
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </li>
+                </ul>
+            </div> : <div className='s3'>
+                <div className='s31'>
+                    <img src={logo} alt='logo' className='logo'/>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                         stroke="currentColor" className="w-6 h-6"
+                         onClick={() => setshows3(!shows3)}
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round"
+                              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                    </svg>
+
+                </div>
+            </div>}
+        </nav>)
 }
 
 export default Navbar

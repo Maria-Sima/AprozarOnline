@@ -10,7 +10,7 @@ import './ShippingContainer.scss'
 import './PaymentContainer.scss'
 import './OrderSucessfull.scss'
 import { useRecoilState } from 'recoil'
-import { orderSuccessfulProvider } from '../../Providers/OrderSuccessfulProvider.jsx'
+import { orderSuccessfulProvider } from '../../Api/OrderSuccessfulProvider.jsx'
 import OrderSuccessful from '../../Components/Order/OrderSuccessful.jsx'
 const Cart = () => {
   const [cartdata, setcartdata] = React.useState([])

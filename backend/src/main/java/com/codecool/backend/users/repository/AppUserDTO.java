@@ -5,9 +5,9 @@ public record AppUserDTO(
         String firstName,
         String lastName,
         String email,
-        String password,
         AppUserRole role,
-        String imageUrl
+        String imageUrl,
+        String address
 
 ) {
 }

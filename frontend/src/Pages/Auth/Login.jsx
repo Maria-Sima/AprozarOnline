@@ -1,49 +1,29 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Navbar from '../../Components/Navbar/Navbar.jsx'
 import './AuthPage.scss'
+import {getAuthToken, setAuthToken, useAxiosPost} from "../../Api/Axios/useFetch.js";
+import LoginForm from "../../Components/Forms/LoginForm.jsx";
+import {routes} from "../../Api/Axios/Routes.jsx";
+import img from "../../assets/pictures/platou_trad.webp"
+import {useEffect} from "react";
+import {useNavigate} from 'react-router-dom';
+
 const Login = () => {
-    return (
-        <div className='authpage'>
+    const navigate = useNavigate();
+    const {post: loginUser, response} = useAxiosPost();
+    const login = (data) => {
+        loginUser(routes.login, data);
+        console.log(routes.login);
+    };
 
+    useEffect(() => {
+        console.log(response);
+        if (response && response.token) {
+            console.log(response.appUserDTO.id);
+            setAuthToken(response.token,response.appUserDTO.id);
+            navigate("/");
 
-            <div className='authcont'>
-                <img src='https://images.unsplash.com/photo-1495480137269-ff29bd0a695c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80'
-                    alt='login' />
-
-                <form className='authform'>
-                    <h1>Login</h1>
-                    <div className='formgroup'>
-                        <label htmlFor='email'>Email</label>
-                        <input type='email' id='email' />
-                    </div>
-
-                    <div className='formgroup'>
-                        <label htmlFor='password'>Password</label>
-                        <input type='password' id='password' />
-                    </div>
-
-                    <Link to='/forgotpassword'
-                        className='stylenone'
-                    >
-                        <p>Forgot password?</p>
-                    </Link>
-                    <Link to='/'
-                        className='stylenone'
-
-                    >
-                        <button className='btn'>Login</button>
-                    </Link>
-                    <h2 className='or'>OR</h2>
-                    <Link to='/signup'
-                        className='stylenone'
-                    >
-                        <button className='btn'>Signup</button>
-                    </Link>
-                </form>
-            </div>
-        </div>
-    )
+        }
+    }, [response]);
+    return (<LoginForm img={img} submit={login}/>)
 }
 
 export default Login

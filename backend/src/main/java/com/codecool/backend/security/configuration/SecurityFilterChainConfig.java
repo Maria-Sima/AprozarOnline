@@ -35,20 +35,19 @@ public class SecurityFilterChainConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(
                                     HttpMethod.GET,
-                                    "/api/products",
                                     "/images"
                             )
                             .permitAll();
                     auth.requestMatchers(
                                     HttpMethod.POST,
-                                    "/api/auth/register",
-                                    "/api/auth/login",
+                                    "/auth/register",
+                                    "/auth/login",
                                     "/images"
                             )
                             .permitAll();
                     auth.anyRequest().permitAll();
                 })
-                .oauth2Login(Customizer.withDefaults())
+//                .oauth2Login(Customizer.withDefaults())
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

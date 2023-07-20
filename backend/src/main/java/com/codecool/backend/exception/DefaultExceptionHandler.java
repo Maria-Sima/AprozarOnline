@@ -20,8 +20,8 @@ public class DefaultExceptionHandler {
         ApiError apiError=new ApiError(
                 request.getRequestURI(),
                 e.getMessage(),
-                HttpStatus.NOT_FOUND.value(),
-                LocalDateTime.now()
+                HttpStatus.NOT_FOUND.value()
+
         );
             return new ResponseEntity<>(apiError,HttpStatus.NOT_FOUND);
         }
@@ -32,8 +32,8 @@ public class DefaultExceptionHandler {
         ApiError apiError = new ApiError(
                 request.getRequestURI(),
                 e.getMessage(),
-                HttpStatus.FORBIDDEN.value(),
-                LocalDateTime.now()
+                HttpStatus.FORBIDDEN.value()
+
         );
 
         return new ResponseEntity<>(apiError, HttpStatus.FORBIDDEN);
@@ -45,8 +45,8 @@ public class DefaultExceptionHandler {
         ApiError apiError = new ApiError(
                 request.getRequestURI(),
                 e.getMessage(),
-                HttpStatus.UNAUTHORIZED.value(),
-                LocalDateTime.now()
+                HttpStatus.UNAUTHORIZED.value()
+
         );
 
         return new ResponseEntity<>(apiError, HttpStatus.UNAUTHORIZED);
@@ -58,8 +58,8 @@ public class DefaultExceptionHandler {
         ApiError apiError = new ApiError(
                 request.getRequestURI(),
                 e.getMessage(),
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-             LocalDateTime.now()
+                HttpStatus.INTERNAL_SERVER_ERROR.value()
+
         );
 
         return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);

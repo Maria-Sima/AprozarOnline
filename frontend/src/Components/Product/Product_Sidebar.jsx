@@ -1,5 +1,5 @@
 import React from 'react'
-import AllProduct from './AllProduct.jsx'
+import AllProduct from './AllProduct/AllProduct.jsx'
 import CategorySidebar from './CategorySidebar.jsx'
 import './Product_Sidebar.scss'
 const Product_Sidebar = () => {

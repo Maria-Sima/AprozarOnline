@@ -45,17 +45,14 @@ public class AuthenticationService {
         return new AuthenticationResponse(token, userDTO);
     }
 
-    public AuthenticationResponse registerCustomer(RegistrationRequest request) {
+    public void registerCustomer(RegistrationRequest request) {
         AppUser newUser = userService.addUser(request);
 
         AppUserDTO newUserDTO = appUserDTOMapper.apply(newUser);
 
-
-        String token = jwtService.issueToken(newUserDTO.email());
         String email = newUser.getEmail();
         String message = "Hello"+ " " + newUser.getFirstName() + " "+ "Welcome to Aprozar Online ! Thank you for registering.";
         emailService.send(email, message);
-        return new AuthenticationResponse(token, newUserDTO);
     }
 
     public void logout(HttpServletRequest request) {

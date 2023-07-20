@@ -2,6 +2,8 @@ package com.codecool.backend.users.seller;
 
 import com.codecool.backend.products.ProductDTO;
 import com.codecool.backend.products.ProductForm;
+import com.codecool.backend.products.Types.ProductType;
+import com.codecool.backend.users.repository.AppUserDTO;
 import com.codecool.backend.users.service.AppUserService;
 import com.codecool.backend.users.service.UserController;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,36 +24,56 @@ public class SellerController extends UserController {
         this.service = service;
     }
 
-    @GetMapping("/myproducts")
-    public ResponseEntity<List<ProductDTO>> getMyProducts(Long sellerId){
-        List<ProductDTO> myProducts=service.getProductList(sellerId);
+    @GetMapping("all")
+    public ResponseEntity<List<AppUserDTO>> getAllSellers() {
+        List<AppUserDTO> sellers = service.getSellers();
+        System.out.println(sellers);
+        return ResponseEntity.ok(sellers);
+    }
+
+    @GetMapping("myproducts")
+    public ResponseEntity<List<ProductDTO>> getMyProducts(Long sellerId) {
+        List<ProductDTO> myProducts = service.getProductList(sellerId);
         return ResponseEntity.ok(myProducts);
     }
 
-    @PostMapping("/addProduct")
-    public ResponseEntity<Void> addProduct(ProductForm productForm,Long userId){
-        service.addProduct(productForm,userId);
+    @PostMapping("addProduct")
+    public ResponseEntity<Void> addProduct(@RequestParam("photo") MultipartFile photos,
+                                           @RequestParam("name") String name,
+                                           @RequestParam("quantity") int quantity,
+                                           @RequestParam("price") double price,
+                                           @RequestParam("type") String type,
+                                           @RequestParam("productDescription") String productDescription,
+                                           @RequestParam("user_id") Long id) {
+        System.out.println(name +"+ "+type+"+ "+price+"+ "+id);
+        var productForm = new ProductForm(name, quantity, price, ProductType.valueOf(type), productDescription);
+        service.addProduct(productForm, id, photos);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{productId}")
-    public ResponseEntity<Void> deleteProduct(Long productId){
+    @DeleteMapping("{productId}")
+    public ResponseEntity<Void> deleteProduct(Long productId) {
         service.deleteProduct(productId);
         return ResponseEntity.noContent().build();
     }
-    @PutMapping("/{productId}/update")
-    public ResponseEntity<Void> updateProduct(@PathVariable Long productId,@RequestBody ProductForm productForm){
-       service.updateProduct(productId,productForm);
+
+    @GetMapping("products/{id}")
+    public ResponseEntity<ProductDTO> getProductById(Long productId) {
+        ProductDTO productDTO = service.getProductById(productId);
+        return ResponseEntity.ok(productDTO);
+    }
+
+    @PutMapping("{productId}/update")
+    public ResponseEntity<Void> updateProduct(@PathVariable Long productId, @RequestBody ProductForm productForm) {
+        service.updateProduct(productId, productForm);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{productId}/productImage")
-public ResponseEntity<Void> uploadImage(@PathVariable Long productId, @RequestParam("image") MultipartFile file){
-        service.uploadProductImage(productId,file);
+    @PostMapping("{productId}/productImage")
+    public ResponseEntity<Void> uploadImage(@PathVariable Long productId, @RequestParam("image") MultipartFile file) {
+        service.uploadProductImage(productId, file);
         return ResponseEntity.noContent().build();
     }
-
-
 
 
 }
