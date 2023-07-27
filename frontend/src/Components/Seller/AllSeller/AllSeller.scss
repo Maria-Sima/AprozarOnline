@@ -1,0 +1,36 @@
+.allsellers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 78%;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .sellers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 950px) {
+  .allsellers .sellers {
+    width: 60%;
+  }
+}
+
+@media (max-width: 650px) {
+  .allsellers .sellers {
+    width: 100%;
+  }
+
+  .allsellers h1 {
+    font-size: 24px;
+  }
+}

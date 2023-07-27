@@ -1,7 +1,7 @@
-import img1 from '../../assets/pictures/fruits.png'
-import img2 from '../../assets/pictures/legumecos.png'
-import img3 from '../../assets/pictures/dairy.png'
-import img4 from '../../assets/pictures/carne.png'
+import img1 from '../../../assets/pictures/fruits.png'
+import img2 from '../../../assets/pictures/legumecos.png'
+import img3 from '../../../assets/pictures/dairy.png'
+import img4 from '../../../assets/pictures/carne.png'
 import './CategorySidebar.scss'
 
 const CategorySidebar = () => {

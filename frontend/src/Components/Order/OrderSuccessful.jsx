@@ -10,9 +10,9 @@ const OrderSuccessful = ({ orderid, message, redirecto }) => {
         OrderNo: orderid,
         OrderDate: '12/12/2021',
         OrderStatus: 'Delivered',
-        CustomerName: 'Harshal Jain',
-        CustomerShipToAddress: 'B-101, Shreeji Apartment, Near Shreeji Hospital, Kalyan West, Thane, Maharashtra 421301',
-        CustomerEmail: 'virajj014@gmail.com',
+        CustomerName: 'Test',
+        CustomerShipToAddress: 'Test',
+        CustomerEmail:'test@test.come',
         OrderItems: [
             {
                 ProductName: 'Product 1',
@@ -21,14 +21,11 @@ const OrderSuccessful = ({ orderid, message, redirecto }) => {
             },
             {
                 ProductName: 'Product 2',
-                Price: 5000,
+                Price: 50,
                 Quantity: 5,
             }
         ],
-        SubTotal: 25200,
-        Tax: 100,
-        ShippingCharges: 80,
-        Total: 25380,
+        Total: 25980,
         PaymentType: 'Cash on Delivery'
     })
     return (
@@ -152,20 +149,6 @@ const OrderSuccessful = ({ orderid, message, redirecto }) => {
                 </div>
 
                 <div className='totalcont'>
-                    <div>
-                        <p>Subtotal</p>
-                        <p>$ {orderdata.SubTotal}</p>
-                    </div>
-
-                    <div>
-                        <p>Shipping</p>
-                        <p>$ {orderdata.ShippingCharges}</p>
-                    </div>
-
-                    <div>
-                        <p>Tax</p>
-                        <p>$ {orderdata.Tax}</p>
-                    </div>
 
                     <div>
                         <p>Total</p>

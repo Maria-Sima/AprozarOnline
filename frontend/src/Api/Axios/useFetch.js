@@ -53,6 +53,7 @@ export const useAxiosPost = () => {
     const [request, setRequest] = useState({
         data: null,
         url: null,
+        method: "POST"
     });
     const [response, setResponse] = useState(null);
 
@@ -60,7 +61,7 @@ export const useAxiosPost = () => {
         const postData = async () => {
             try {
                 console.log(request.data)
-                const result = await axios.post(request.url, request.data);
+                const result = await axios[request.method.toLowerCase()](request.url, request.data);
                 setResponse(result.data);
                 console.log(response)
             } catch (error) {
@@ -75,8 +76,8 @@ export const useAxiosPost = () => {
         }
     }, [request]);
 
-    const post = (url, data) => {
-        setRequest({ url, data });
+    const post = (url, data, method = "POST") => {
+        setRequest({ url, data, method });
     };
 
     return { post, response };

@@ -13,25 +13,28 @@ h1 {
   margin: 2rem 0;
 }
 
-.wrapper {
-  width: 90%; /* Adjust the width for larger screens */
-  margin: 0 auto;
-  max-width: 80rem;
-}
+//.wrapper {
+//  width: 90%; /* Adjust the width for larger screens */
+//  margin: 0 auto;
+//  max-width: 80rem;
+//}
+//
+//.cols {
+//  display: flex;
+//  flex-wrap: wrap;
+//  justify-content: center;
+//}
+//
+////.col {
+////  width: calc(30% - 2rem); /* Adjust the width for medium-sized screens */
+////  margin: 1rem;
+////  cursor: pointer;
+////}
 
-.cols {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.col {
-  width: calc(50% - 2rem); /* Adjust the width for medium-sized screens */
+.sellercontainer {
+  width: calc(30% - 2rem); /* Adjust the width for medium-sized screens */
   margin: 1rem;
   cursor: pointer;
-}
-
-.container {
   transform-style: preserve-3d;
   perspective: 1000px;
 }
@@ -53,11 +56,11 @@ h1 {
 
 .back {
   background: #cedce7;
-  background: linear-gradient(45deg, #cedce7 0%, #596a72 100%);
+  background: linear-gradient(45deg, #b5e1a7 0%, #5dea2b 100%);
 }
 
-.container:hover .front,
-.container:hover .back {
+.sellercontainer:hover .front,
+.sellercontainer:hover .back {
   transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
@@ -81,22 +84,22 @@ h1 {
   z-index: 2;
 }
 
-.container .back {
+.sellercontainer .back {
   transform: rotateY(180deg);
   transform-style: preserve-3d;
 }
 
-.container .front {
+.sellercontainer .front {
   transform: rotateY(0deg);
   transform-style: preserve-3d;
 }
 
-.container:hover .back {
+.sellercontainer:hover .back {
   transform: rotateY(0deg);
   transform-style: preserve-3d;
 }
 
-.container:hover .front {
+.sellercontainer:hover .front {
   transform: rotateY(-180deg);
   transform-style: preserve-3d;
 }
@@ -125,22 +128,40 @@ h1 {
   font-family: 'Montserrat';
   font-weight: 300;
 }
+.back .inner .btn{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size:20px;
+  font-weight: 500;
+  background-color: white;
+  color: var(--col1);
+  cursor: pointer;
+
+  &:hover {
+
+    color: white;
+    background-color: var(--col1);
+  }
+}
 
 @media screen and (min-width: 64rem) {
-  .col {
+  .sellercontainer {
     width: calc(33.333333% - 2rem);
   }
 }
 
 @media screen and (max-width: 64rem) {
-  .col {
+  .sellercontainer {
     width: calc(50% - 2rem);
   }
 }
 
 @media screen and (max-width: 48rem) {
   /* Small screens and below */
-  .col {
+  .sellercontainer {
     width: 100%;
     margin: 0 0 2rem 0;
   }

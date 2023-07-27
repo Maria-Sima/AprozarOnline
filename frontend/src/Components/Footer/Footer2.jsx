@@ -21,18 +21,6 @@ const Footer2 = () => {
             </Link>
           </div>
           <div className='f2'>
-
-            <h3>Our Information</h3>
-            <Link to='/privacypolicy' className='stylenone'>
-              <p>Privacy policy</p>
-            </Link>
-            <Link to='/termsandconditions' className='stylenone'>
-              <p>Terms & conditions</p>
-            </Link>
-            <p>Site Map</p>
-
-          </div>
-          <div className='f2'>
             <h3>Subscribe Now</h3>
             <p>Subscribe your email for newsletter and featured news based on your interest</p>
             <div className='inputcontainer'>

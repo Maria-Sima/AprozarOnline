@@ -23,7 +23,7 @@ nav .s1 {
 }
 
 nav img {
-    width: 12%;
+    width: 14%;
 }
 
 nav .searchbar {
@@ -71,12 +71,12 @@ nav .s1 .right {
     align-items: center;
 }
 
-nav .cart {
+nav .basket {
     position: relative;
     margin: 0px 20px;
 }
 
-nav .cart .qty {
+nav .basket .qty {
     background-color: var(--col1);
     color: white;
     border-radius: 50%;
@@ -125,7 +125,9 @@ nav .s3 {
         align-items: center;
         padding: 5px 20px;
     }
-
+    nav .logo {
+        width: 35%;
+    }
     nav .s1{
         display: none;
     }

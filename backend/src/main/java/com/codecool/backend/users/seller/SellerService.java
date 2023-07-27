@@ -65,6 +65,7 @@ public ProductDTO getProductById(Long productId){
     public List<AppUserDTO> getSellers(){
         return getUsersByRole(AppUserRole.SELLER);
     }
+
 }
 
 

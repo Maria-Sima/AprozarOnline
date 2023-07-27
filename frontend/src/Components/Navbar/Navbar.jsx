@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import  {useEffect, useState} from 'react'
 import './Navbar.scss'
 import logo from '../../assets/pictures/aprozarVirtual.svg'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -10,7 +10,7 @@ const Navbar = () => {
     const [cartquantity, setcartquantity] = useState(0)
     const [isLoggedIn, setIsLoggedIn] = useState(!!getAuthToken());
     const {post, response} = useAxiosPost();
-    console.log(isLoggedIn)
+    console.log(!!getAuthToken)
 
     const handleLogout = () => {
         post('auth/logout', {}); // Send the POST request to /logout endpoint with an empty object as data
@@ -23,7 +23,7 @@ const Navbar = () => {
 
             console.log('Logged out successfully');
         }
-    }, [response,isLoggedIn]);
+    }, [response,!!getAuthToken()]);
 
     const getcarttotalitems = () => {
         let cart = JSON.parse(localStorage.getItem('cart'))
@@ -62,7 +62,7 @@ const Navbar = () => {
                 </div>
 
                 <div className='right'>
-                    <div className='cart'>
+                    <div className='basket'>
 
                         <span className='qty'>{cartquantity}</span>
                         <Link to='/cart'
@@ -109,8 +109,6 @@ const Navbar = () => {
 
                     <Dropdown.Menu>
                         <Dropdown.Item href="/addProduct">AddProduct</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Fresh Fruits</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">House Cleaning</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
                 <Link to='/about'>
@@ -126,10 +124,6 @@ const Navbar = () => {
 
                     <Dropdown.Menu>
                         <Dropdown.Item href="/FAQ">FAQ</Dropdown.Item>
-                        <Dropdown.Item href="/privacypolicy">Privacy Policy</Dropdown.Item>
-                        <Dropdown.Item href="/termsandconditions">
-                            Terms & Conditions
-                        </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </div>
@@ -170,11 +164,7 @@ const Navbar = () => {
                             Categories
                         </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Fresh Vegetables</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Fresh Fruits</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">House Cleaning</Dropdown.Item>
-                        </Dropdown.Menu>
+
                     </Dropdown></li>
 
                     <li><Link to='/about' className='stylenone'>
@@ -186,7 +176,7 @@ const Navbar = () => {
                     </Link></li>
 
                     <li>
-                        <div className='cart'>
+                        <div className='basket'>
 
                             <span className='qty'>{cartquantity}</span>
                             <Link to='/cart'
@@ -213,7 +203,7 @@ const Navbar = () => {
                                 <Dropdown.Item href="/login">Login</Dropdown.Item>
                                 <Dropdown.Item href="/signup">Signup</Dropdown.Item>
                                 <Dropdown.Item href="/user/accountsettings">Profile</Dropdown.Item>
-                                <Dropdown.Item href="#">Logout</Dropdown.Item>
+                                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </li>
@@ -226,10 +216,6 @@ const Navbar = () => {
 
                             <Dropdown.Menu>
                                 <Dropdown.Item href="/FAQ">FAQ</Dropdown.Item>
-                                <Dropdown.Item href="/privacypolicy">Privacy Policy</Dropdown.Item>
-                                <Dropdown.Item href="/termsandconditions">
-                                    Terms & Conditions
-                                </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </li>

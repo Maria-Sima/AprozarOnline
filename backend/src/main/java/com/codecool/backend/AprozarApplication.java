@@ -32,7 +32,7 @@ private final SellerList sellerList;
 
 
     public void run(String... args) {
-sellerList.initDB();
+
 
     }
 

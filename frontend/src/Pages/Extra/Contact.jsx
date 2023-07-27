@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import SingleBanner from '../../Components/Banners/SingleBanner.jsx'
 import Footer1 from '../../Components/Footer/Footer1.jsx'
 import Footer2 from '../../Components/Footer/Footer2.jsx'
-import Navbar from '../../Components/Navbar/Navbar.jsx'
 import './Extrapages.scss'
 
 const Contact = () => {

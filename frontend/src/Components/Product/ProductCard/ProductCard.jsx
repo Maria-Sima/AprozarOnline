@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import img1 from '../../assets/pictures/fruits.png'
+import img1 from '../../../assets/pictures/fruits.png'
 import './ProductCard.scss'
 
 const ProductCard = ({ data }) => {
@@ -17,7 +17,7 @@ const ProductCard = ({ data }) => {
 
     if (cart) {
 
-      let itemincart = cart.find(item => item.productdata.ProductId === productdata.ProductId)
+      let itemincart = cart.find(item => item.productdata.id === productdata.id)
       if (itemincart) {
         cart = cart.map(item => {
           if (item.productdata.ProductId === productdata.ProductId) {
@@ -57,12 +57,12 @@ const ProductCard = ({ data }) => {
 
 
   }
-  let {price,name,productDescription,id,productImageId,productType,userId}=data;
-  console.log(price)
+  let {price,name,productDescription,id,photoUrl,productType,userId}=data;
+  console.log(name)
   return (
     <div className='product'>
       <div className='s1'>
-        <img src={img1} alt={'no img'} />
+        <img src={photoUrl} alt={'no img'} />
       </div>
       <div className='s2'>
         <h3>

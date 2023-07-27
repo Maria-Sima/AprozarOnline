@@ -1,6 +1,7 @@
 package com.codecool.backend.users.service;
 
 import com.codecool.backend.fileStorage.ImageService;
+import com.codecool.backend.users.PasswordRequest;
 import com.codecool.backend.users.RegistrationRequest;
 import com.codecool.backend.users.UpdateRequest;
 import com.codecool.backend.users.repository.*;
@@ -131,13 +132,18 @@ public class AppUserService {
         }
     }
 
-    public void changePassword(String newPassword,Long userId){
+    public void updatePassword(PasswordRequest passwordRequest,Long userId){
         AppUser appUser = appUserDao.getCustomerById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("Customer with id [%s] not found", userId)
                 ));
-        appUser.setPassword(newPassword);
-        appUserDao.addAppUser(appUser);
+
+        if (passwordEncoder.matches(passwordRequest.oldPassword(),appUser.getPassword())){
+            appUser.setPassword(passwordEncoder.encode(passwordRequest.newPassword()));
+            appUserDao.addAppUser(appUser);
+        }
+        else throw new RuntimeException("Passwords don't match");
+
     }
 
 }

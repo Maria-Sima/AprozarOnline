@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import SingleBanner from '../../Components/Banners/SingleBanner.jsx'
 import Footer1 from '../../Components/Footer/Footer1.jsx'
 import Footer2 from '../../Components/Footer/Footer2.jsx'
-import Navbar from '../../Components/Navbar/Navbar.jsx'
 import './Cart.scss'
 import './Progress.scss'
 import './CartContainer.scss'
@@ -12,6 +11,7 @@ import './OrderSucessfull.scss'
 import { useRecoilState } from 'recoil'
 import { orderSuccessfulProvider } from '../../Api/OrderSuccessfulProvider.jsx'
 import OrderSuccessful from '../../Components/Order/OrderSuccessful.jsx'
+import {getAuthToken} from "../../Api/Axios/useFetch.js";
 const Cart = () => {
   const [cartdata, setcartdata] = React.useState([])
   const [subtotal, setsubtotal] = React.useState(0)
@@ -30,17 +30,16 @@ const Cart = () => {
 
       let tempsubtotal = 0
       cart.forEach(item => {
-        tempsubtotal += item.productdata.SalesPrice * item.quantity
+        tempsubtotal += item.productdata.price * item.quantity
       })
       // console.log(tempsubtotal)
       setsubtotal(tempsubtotal)
-      setshipping(80)
-      settax(tempsubtotal * 0.18 + 80 * 0.10)
-      setreloadnavbar(!reloadnavbar)
+
+
     }
     else {
       console.log("Cart is empty")
-      setreloadnavbar(!reloadnavbar)
+
     }
   }
 
@@ -49,10 +48,11 @@ const Cart = () => {
   }, [])
 
   const checklogin = () => {
-    return true
+
+    return !!getAuthToken();
   }
 
-  const [reloadnavbar, setreloadnavbar] = React.useState(false)
+
   const removeitemfromcart = (index) => {
     // alert(index)
     let temp = [...cartdata]
@@ -232,13 +232,13 @@ const Cart = () => {
                             >
                               <div className='cartproduct'
                                 onClick={() => {
-                                  window.location.href = `/product/${item.productdata.ProductId}`
+                                  window.location.href = `/product/${item.productdata.id}`
                                 }}
                               >
-                                <img src={item.productdata.ProductImage[0].image}
-                                  alt={item.productdata.ProductName} />
+                                <img src={item.productdata.photoUrl}
+                                  alt={item.productdata.name} />
                                 <p>{
-                                  item.productdata.ProductName
+                                  item.productdata.name
                                 }</p>
                               </div>
                             </td>
@@ -276,14 +276,14 @@ const Cart = () => {
                               data-label="Price"
                             >
                               <p>
-                                $ {item.productdata.SalesPrice ? item.productdata.SalesPrice.toFixed(2) : 0.00}
+                                $ {item.productdata.price ? item.productdata.price.toFixed(2) : 0.00}
                               </p>
                             </td>
 
                             <td>
-                              <p>$ {
-                                (item.productdata.SalesPrice * item.quantity).toFixed(2)
-                              }</p>
+                              <p> {
+                                (item.productdata.price * item.quantity).toFixed(2)
+                              } lei</p>
                             </td>
 
                             <td
@@ -305,46 +305,16 @@ const Cart = () => {
                       })
                     }
 
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td className='totaltableleft'>Sub-Total</td>
-                      <td className='totaltableright'>
-                        $ {subtotal.toFixed(2)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td className='totaltableleft'>Shipping</td>
-                      <td className='totaltableright'>
-                        $ {shipping.toFixed(2)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td className='totaltableleft'>Total</td>
-                      <td className='totaltableright'>
-                        $ {(subtotal + shipping).toFixed(2)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td className='totaltableleft'>Tax</td>
-                      <td className='totaltableright'>
-                        $ {tax.toFixed(2)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td className='totaltableleft'>Net-Total</td>
-                      <td className='totaltableright'>
-                        $ {(tax + subtotal + shipping).toFixed(2)}
-                      </td>
-                    </tr>
+
+
+                    {/*<tr>*/}
+                    {/*  <td></td>*/}
+                    {/*  <td></td>*/}
+                    {/*  <td className='totaltableleft'>Total</td>*/}
+                    {/*  <td className='totaltableright'>*/}
+                    {/*     { (item.productdata.price * item.quantity).toFixed(2)} lei*/}
+                    {/*  </td>*/}
+                    {/*</tr>*/}
                   </tbody>
                 </table>
                 :

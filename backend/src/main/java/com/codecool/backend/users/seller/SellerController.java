@@ -3,6 +3,7 @@ package com.codecool.backend.users.seller;
 import com.codecool.backend.products.ProductDTO;
 import com.codecool.backend.products.ProductForm;
 import com.codecool.backend.products.Types.ProductType;
+import com.codecool.backend.users.repository.AppUser;
 import com.codecool.backend.users.repository.AppUserDTO;
 import com.codecool.backend.users.service.AppUserService;
 import com.codecool.backend.users.service.UserController;
@@ -14,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("seller/")
+@RequestMapping("seller")
 public class SellerController extends UserController {
 
     private final SellerService service;
@@ -24,20 +25,21 @@ public class SellerController extends UserController {
         this.service = service;
     }
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public ResponseEntity<List<AppUserDTO>> getAllSellers() {
         List<AppUserDTO> sellers = service.getSellers();
         System.out.println(sellers);
         return ResponseEntity.ok(sellers);
     }
 
-    @GetMapping("myproducts")
-    public ResponseEntity<List<ProductDTO>> getMyProducts(Long sellerId) {
+    @GetMapping("/{sellerId}/myproducts")
+    public ResponseEntity<List<ProductDTO>> getMyProducts(@PathVariable Long sellerId) {
         List<ProductDTO> myProducts = service.getProductList(sellerId);
+        System.out.println(myProducts);
         return ResponseEntity.ok(myProducts);
     }
 
-    @PostMapping("addProduct")
+    @PostMapping("/addProduct")
     public ResponseEntity<Void> addProduct(@RequestParam("photo") MultipartFile photos,
                                            @RequestParam("name") String name,
                                            @RequestParam("quantity") int quantity,
@@ -51,29 +53,40 @@ public class SellerController extends UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("{productId}")
+    @DeleteMapping("products/{productId}")
     public ResponseEntity<Void> deleteProduct(Long productId) {
         service.deleteProduct(productId);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("products/{id}")
-    public ResponseEntity<ProductDTO> getProductById(Long productId) {
+    @GetMapping("/products/{productId}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long productId) {
         ProductDTO productDTO = service.getProductById(productId);
         return ResponseEntity.ok(productDTO);
     }
+@GetMapping("/info/{id}")
+public ResponseEntity<AppUserDTO> getSellerById(@PathVariable Long id){
 
-    @PutMapping("{productId}/update")
+        AppUserDTO userDTO=service.getUser(id);
+    System.out.println(userDTO);
+        return ResponseEntity.ok(userDTO);
+}
+
+    @PutMapping("/{productId}/update")
     public ResponseEntity<Void> updateProduct(@PathVariable Long productId, @RequestBody ProductForm productForm) {
         service.updateProduct(productId, productForm);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("{productId}/productImage")
+    @PostMapping("/{productId}/productImage")
     public ResponseEntity<Void> uploadImage(@PathVariable Long productId, @RequestParam("image") MultipartFile file) {
         service.uploadProductImage(productId, file);
         return ResponseEntity.noContent().build();
     }
 
-
+@GetMapping("/products/category/{category}")
+    public ResponseEntity<List<ProductDTO>> getProductsByCategory(@PathVariable ProductType category){
+        List<ProductDTO> products=service.getProductsByCategory(category);
+        return ResponseEntity.ok(products);
+}
 }

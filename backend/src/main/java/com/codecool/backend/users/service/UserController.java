@@ -1,5 +1,6 @@
 package com.codecool.backend.users.service;
 
+import com.codecool.backend.users.PasswordRequest;
 import com.codecool.backend.users.UpdateRequest;
 import com.codecool.backend.users.repository.AppUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("/user")
 public class UserController{
 
     private final AppUserService appUserService;
@@ -30,8 +31,14 @@ public class UserController{
         return ResponseEntity.noContent().build();
     }
     @PutMapping("/{customerId}")
-    public void updateUser(@PathVariable Long id,@RequestBody UpdateRequest updateRequest){
-        appUserService.updateCustomer(id,updateRequest);
+    public ResponseEntity<Void> updateUser(@PathVariable Long customerId,@RequestBody UpdateRequest updateRequest){
+        appUserService.updateCustomer(customerId,updateRequest);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/password/{userID}")
+    public ResponseEntity<Void> updatePassword(@PathVariable Long userID, @RequestBody PasswordRequest passwordRequest){
+    appUserService.updatePassword(passwordRequest,userID);
+        return ResponseEntity.noContent().build();
     }
 
 }

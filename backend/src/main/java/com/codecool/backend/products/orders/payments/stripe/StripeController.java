@@ -30,7 +30,7 @@ public class StripeController {
         return stripeService.charge(model);
     }
 
-    @PostMapping("/cusTOmer/subscription")
+    @PostMapping("/customer/subscription")
     @ResponseBody
     public StripeSubscriptionResponse subscription(@RequestBody StripeSubscriptionDTO model) {
 

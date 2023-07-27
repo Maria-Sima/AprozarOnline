@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import './YourOrders.scss'
-import OrderSuccessful from '../Order/OrderSuccessful.jsx'
+import OrderSuccessful from '../../Order/OrderSuccessful.jsx'
 import { useRecoilState } from 'recoil'
-import { orderSuccessfulProvider } from '../../Api/OrderSuccessfulProvider.jsx'
+import { orderSuccessfulProvider } from '../../../Api/OrderSuccessfulProvider.jsx'
 
 const YourOrders = () => {
 
@@ -13,48 +13,7 @@ const YourOrders = () => {
             status: 'Delivered',
             total: 1000
         },
-        {
-            id: 112346,
-            date: '12/12/2021',
-            status: 'On the way',
-            total: 1600
-        },
-        {
-            id: 112347,
-            date: '12/12/2021',
-            status: 'Delivered',
-            total: 2000
-        },
-        {
-            id: 112348,
-            date: '12/12/2021',
-            status: 'Cancelled',
-            total: 100
-        },
-        {
-            id: 112345,
-            date: '12/12/2021',
-            status: 'Delivered',
-            total: 1000
-        },
-        {
-            id: 112346,
-            date: '12/12/2021',
-            status: 'On the way',
-            total: 1600
-        },
-        {
-            id: 112347,
-            date: '12/12/2021',
-            status: 'Delivered',
-            total: 2000
-        },
-        {
-            id: 112348,
-            date: '12/12/2021',
-            status: 'Cancelled',
-            total: 100
-        }
+
     ]
     const [selectedorderid, setselectedorderid] = useState(0)
     const [ordersuccesscont, setordersuccesscont] = useRecoilState(orderSuccessfulProvider)

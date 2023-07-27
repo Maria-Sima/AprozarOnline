@@ -62,7 +62,7 @@ const ProductForm = ({img,submit}) => {
                 <p className="error">{errors.description?.message}</p>
             </div>
             <div className='formgroup'>
-                <label htmlFor='role'>Select Category</label>
+                <label htmlFor='role'> Categoria</label>
                 <div className="select">
                     <select
                         {...register("type",{
@@ -70,6 +70,8 @@ const ProductForm = ({img,submit}) => {
                         })}>
                         <option value="Fruits"> Fructe</option>
                         <option value="Dairy">Lactate</option>
+                        <option value="Meat">Carne</option>
+                        <option value="Vegetables">Legume</option>
                     </select>
                     <p className="error">{errors.type?.message}</p>
                 </div>

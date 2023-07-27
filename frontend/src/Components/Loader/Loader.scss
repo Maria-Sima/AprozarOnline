@@ -1,0 +1,139 @@
+* {
+  border: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.preloader {
+  position: fixed; /* Use fixed positioning to keep it centered regardless of scrolling */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: 20em;
+  width: 100%;
+}
+.preloader__text {
+  position: relative;
+  height: 1.5em;
+}
+.preloader__msg {
+  animation: msg 0.3s 13.7s linear forwards;
+  position: absolute;
+  width: 100%;
+}
+.preloader__msg--last {
+  animation-direction: reverse;
+  animation-delay: 14s;
+  visibility: hidden;
+}
+.shoppingCart {
+  display: block;
+  margin: 0 auto 1.5em auto;
+  width: 8em;
+  height: 8em;
+}
+.shoppingCart__lines,
+.shoppingCart__top,
+.shoppingCart__wheel1,
+.shoppingCart__wheel2,
+.shoppingCart__wheel-stroke {
+  animation: shoppingCartLines 2s ease-in-out infinite;
+}
+.shoppingCart__lines {
+  stroke: var(--primary);
+}
+.shoppingCart__top {
+  animation-name: shoppingCartTop;
+}
+.shoppingCart__wheel1 {
+  animation-name: shoppingCartWheel1;
+  transform: rotate(-0.25turn);
+  transform-origin: 43px 111px;
+}
+.shoppingCart__wheel2 {
+  animation-name: shoppingCartWheel2;
+  transform: rotate(0.25turn);
+  transform-origin: 102px 111px;
+}
+.shoppingCart__wheel-stroke {
+  animation-name: shoppingCartWheelStroke
+}
+.shoppingCart__track {
+  stroke: hsla(var(--hue),10%,10%,0.1);
+  transition: stroke var(--trans-dur);
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: hsl(var(--hue),10%,10%);
+    --fg: hsl(var(--hue),10%,90%);
+  }
+  .shoppingCart__track {
+    stroke: hsla(var(--hue),10%,90%,0.1);
+  }
+}
+
+/* Animations */
+@keyframes msg {
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  99.9% {
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes shoppingCartLines {
+  from,
+  to {
+    opacity: 0;
+  }
+  8%,
+  92% {
+    opacity: 1;
+  }
+}
+@keyframes shoppingCartTop {
+  from {
+    stroke-dashoffset: -338;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 338;
+  }
+}
+@keyframes shoppingCartWheel1 {
+  from {
+    transform: rotate(-0.25turn);
+  }
+  to {
+    transform: rotate(2.75turn);
+  }
+}
+@keyframes shoppingCartWheel2 {
+  from {
+    transform: rotate(0.25turn);
+  }
+  to {
+    transform: rotate(3.25turn);
+  }
+}
+@keyframes shoppingCartWheelStroke {
+  from,
+  to {
+    stroke-dashoffset: 81.68;
+  }
+  50% {
+    stroke-dashoffset: 40.84;
+  }
+}

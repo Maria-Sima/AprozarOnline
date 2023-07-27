@@ -58,4 +58,5 @@ appUserRepository.save(appUser);
     public List<AppUser> findUsersByRole(AppUserRole role) {
         return appUserRepository.findAppUsersByAppUserRole(role);
     }
+
 }

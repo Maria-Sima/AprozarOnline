@@ -10,6 +10,8 @@ export const routes = {
  register: "/auth/register",
  login:"/auth/login",
  stores:"/seller/all",
- productUtil:"/seller/product",
- addProduct:"/seller/addProduct"
+ productUtil:"/seller/products/",
+ addProduct:"/seller/addProduct",
+ getSeller:"/seller/info/",
+ productsByCategory:"seller/products/category/"
 };
