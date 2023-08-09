@@ -6,11 +6,13 @@ import java.util.Optional;
 public interface AppUserDao {
 
     List<AppUser> getAllCustomers();
+
     Optional<AppUser> getCustomerById(Long appUserId);
 
     void addAppUser(AppUser appUser);
 
     boolean isAppUserWithEmail(String email);
+
 
     boolean isAppUserWithId(Long id);
 
@@ -20,6 +22,7 @@ public interface AppUserDao {
 
     Optional<AppUser> findUserByEmail(String email);
 
-    List<AppUser> findUsersByRole(AppUserRole role);
+    List<AppUser> findUsersByRole(AppUserRole appUserRole);
+
 
 }

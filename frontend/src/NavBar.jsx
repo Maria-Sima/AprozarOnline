@@ -1,14 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "./11zon_cropped.png";
+import logo from "./assets/11zon_cropped.png";
 import "./NavBar.css";
 import shoppingCartIcon from "./assets/shopping.png";
 import { useAtom } from "jotai";
 import { cartItemsAtom } from "./Atom";
 function NavBar() {
+    
+  const userRole = localStorage.getItem("Role");
+
+  const [isSeller, setIsSeller] = useState(false);
+
+ 
   const [cartItems, setCartItems] = useAtom(cartItemsAtom);
-  const cart = localStorage.getItem("cartItems");
-  console.log(cart);
+
+
+  useEffect(() => {
+    if (userRole != null && userRole === "SELLER") {
+     setIsSeller(true)
+   }
+  }, [])
+  
+
   useEffect(() => {
     // Retrieve cart items from local storage on component mount
     const storedCartItems = localStorage.getItem("cartItems");
@@ -16,6 +29,8 @@ function NavBar() {
       setCartItems(JSON.parse(storedCartItems));
     }
   }, [setCartItems]);
+
+
   return (
     <>
       <nav className="header__nav">
@@ -25,7 +40,7 @@ function NavBar() {
               <a
                 className="header__nav-link"
                 href="#"
-                style={{ color: "#20990D" }}
+                style={{ color: "green" }}
               >
                 Home
               </a>
@@ -34,26 +49,40 @@ function NavBar() {
               <a
                 className="header__nav-link"
                 href="#"
-                style={{ color: "#20990D" }}
+                style={{ color: "green" }}
               >
                 About
               </a>
             </Link>
           </li>
-          <img src={logo} alt="Logo" style={{ height: "100px" }} />
+          <Link to="/">
+            <img src={logo} alt="Logo" style={{ height: "100px" }} />
+          </Link>
           <li className="header__nav-item">
             <Link to="/products">
               <a
                 className="header__nav-link"
                 href="#"
-                style={{ color: "#20990D" }}
+                style={{ color: "green" }}
               >
-                Products
+                Market
               </a>
             </Link>
           </li>
+          { isSeller ? (
+            <li className="header__nav-item">
+              <Link to="/add">
+                <a
+                  className="header__nav-link"
+                  href="#"
+                  style={{ color: "green" }}
+                >
+                  Add Product
+                </a>
+              </Link>
+            </li>
+          ):null}
           <Link to="/shoppingCart  ">
-           
             <div className="cart-icon-container">
               <img
                 src={shoppingCartIcon}

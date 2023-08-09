@@ -34,14 +34,19 @@ public class SecurityFilterChainConfig {
                     auth.requestMatchers(
                                     HttpMethod.GET,
                                     "/api/products",
-                                    "/images"
+                                    "/images", "/resetpass", "/api/auth/resetpass"
                             )
                             .permitAll();
                     auth.requestMatchers(
                                     HttpMethod.POST,
                                     "/api/auth/register",
-                                    "/api/auth/login",
-                                    "/images"
+                                    "/api/auth/login", "seller/addProduct",
+                                    "/images", "/api/auth/reset-password"
+                            )
+                            .permitAll();
+                    auth.requestMatchers(
+                                    HttpMethod.PUT,
+                                    "/api/user/reset/password"
                             )
                             .permitAll();
                     auth.anyRequest().permitAll();

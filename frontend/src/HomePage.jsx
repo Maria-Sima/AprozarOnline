@@ -86,9 +86,14 @@ function HomePage() {
 
          if (response.ok) {
            // Clear the token from local storage
+           
            localStorage.removeItem("token");
+           localStorage.removeItem("Role");
+           localStorage.removeItem("userId");
+
            // Perform any other necessary actions upon successful logout
-            setIsLoggedIn(false);
+           setIsLoggedIn(false);
+            window.location.reload();
          } else {
           
            // Handle the logout error
@@ -121,7 +126,9 @@ function HomePage() {
             draggable="false"
             data-category="Vegetables"
           />
-          <div className="category">Fruits</div>
+          <Link to="/add">
+            <div className="category">Fruits</div>
+          </Link>
           <img
             className="image"
             src="https://foodboxhq.com/wp-content/uploads/2018/07/fruit-of-the-month-club.webp"
@@ -155,7 +162,7 @@ function HomePage() {
             draggable="false"
           />
         </div>
-        <div id="cent">
+        <div id="cent" style={{ borderColor: "beige" }}>
           {isLoggedIn ? (
             <button
               className="logout-button"

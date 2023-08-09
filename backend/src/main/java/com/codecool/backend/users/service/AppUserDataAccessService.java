@@ -4,6 +4,7 @@ import com.codecool.backend.users.repository.AppUser;
 import com.codecool.backend.users.repository.AppUserDao;
 import com.codecool.backend.users.repository.AppUserRepository;
 import com.codecool.backend.users.repository.AppUserRole;
+import com.codecool.backend.users.repository.AppUserRole;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -34,6 +35,8 @@ appUserRepository.save(appUser);
         return appUserRepository.existsAppUserByEmail(email);
     }
 
+
+
     @Override
     public boolean isAppUserWithId(Long id) {
         return appUserRepository.existsAppUserById(id);
@@ -55,7 +58,9 @@ appUserRepository.save(appUser);
     }
 
     @Override
-    public List<AppUser> findUsersByRole(AppUserRole role) {
-        return appUserRepository.findAppUsersByAppUserRole(role);
+    public List<AppUser> findUsersByRole(AppUserRole appUserRole) {
+        return appUserRepository.findAppUsersByAppUserRole(appUserRole);
     }
+
+
 }

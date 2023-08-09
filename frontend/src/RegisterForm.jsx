@@ -92,18 +92,21 @@ function RegisterForm() {
   };
   ///
 
+
   const backgroundImageUrl =
-    "https://youmatter.world/app/uploads/sites/2/2019/02/organic-farming-definition-examples-.jpg";
+    "https://w0.peakpx.com/wallpaper/929/367/HD-wallpaper-fruits-fruits-vegetables-fruit-vegetable.jpg";
   const mainDivStyle = {
     maxWidth: "800px",
     margin: "0 auto",
-    padding: "60px",
+    
+    
+    padding: "20px",
     backgroundImage: `url(${backgroundImageUrl})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     borderRadius: "32px",
     boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.1)",
-    marginBottom: "-50px",
+    marginBottom: "-110px",
    
   };
   const [formData, setFormData] = useState({
@@ -128,6 +131,7 @@ function RegisterForm() {
       setPasswordError("Passwords do not match");
       return;
     }
+    
 
     // Create the payload object
     const payload = {
@@ -137,7 +141,7 @@ function RegisterForm() {
       password: input.password,
       role: formData.role,
     };
-    console.log(payload);
+   
 
     try {
       // Send the POST request
@@ -319,8 +323,8 @@ function RegisterForm() {
           </div>
         </fieldset>
       </Form>
-      <style jsx>
-        {`
+      <style >
+       {`
           .password-strength-meter {
             height: 1.2rem;
             background-color: white;

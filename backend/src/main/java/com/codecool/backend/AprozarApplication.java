@@ -23,8 +23,7 @@ public class AprozarApplication implements CommandLineRunner {
     private AuthenticationService authenthicationService;
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ImageService imageService;
+
 
 
     public static void main(String[] args) {
@@ -33,37 +32,10 @@ public class AprozarApplication implements CommandLineRunner {
 
 
     public void run(String... args) {
-        List<Product> productList = new ArrayList<>();
-
-
-        Product bread = Product.builder()
-                .name("Bread")
-                .productType(ProductType.Meat)
-                .price(5.00)
-                .build();
-        productList.add(bread);
-        productService.addProduct(bread);
-
-        Product milk = Product.builder()
-                .name("Milk")
-                .productType(ProductType.Dairy)
-                .price(3.50)
-                .quantity(10)
-                .build();
-        productService.addProduct(milk);
-
-        Product apple = Product.builder()
-                .name("Apple")
-                .productType(ProductType.Fruits)
-                .price(1.25)
-                .quantity(15)
-                .build();
-        productService.addProduct(apple);
 
 
         RegistrationRequest newUserRequest = new RegistrationRequest("admin", "admin", "simam9520@gmail.com", "123","SELLER");
         authenthicationService.registerCustomer(newUserRequest);
-        System.out.println(authenthicationService.login(new LoginRequest("simam9520@gmail.com", "123")));
 
     }
 
