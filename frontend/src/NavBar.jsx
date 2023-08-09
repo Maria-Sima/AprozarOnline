@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "./11zon_cropped.png";
+import logo from "./assets/11zon_cropped.png";
 import "./NavBar.css";
 import shoppingCartIcon from "./assets/shopping.png";
 import { useAtom } from "jotai";

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { cartItemsAtom, selectedQuantitiesAtom } from "./Atom"; // Import Jotai atoms
 import "./ProductPage.css";
-
+import { fetchProducts,fetchSellerData } from "./data/fetchData";
 function ProductPage() {
   const [products, setProducts] = useState([]);
   const [sellerEmail, setSellerEmail] = useState("");
@@ -16,43 +16,27 @@ function ProductPage() {
 
    const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("sellerId");
-  useEffect(() => {
-    const fetchSellerData = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8080/api/user/${productId}`
-        );
-        const sellerData = await response.json();
-        setSellerEmail(sellerData.email);
-      } catch (error) {
-        console.error(error);
-      }
-    };
 
-    fetchSellerData();
-  }, [productId]);
+ 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch(
-           `http://localhost:8080/seller/product/${productId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = await response.json();
-        setProducts(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
+      const sellerData = await fetchSellerData(productId);
+      setSellerEmail(sellerData);
     };
+
     fetchData();
   }, [productId]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchProducts(productId);
+      setProducts(data);
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [productId]);
+
 
   const handleQuantityChange = (productId, quantity) => {
     if ((selectedQuantities[productId] || 0) + quantity >= 0) {
@@ -108,6 +92,7 @@ function ProductPage() {
               flexDirection: "column",
               marginTop: "90px",
               width: "600px",
+             
             }}
           >
             <img
@@ -125,7 +110,7 @@ function ProductPage() {
                 style={{
                   color: "white",
                   marginBottom: "10px",
-                  backgroundColor: "#9066D9",
+              
                   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
                   fontFamily: "Arial, sans-serif",
                   fontSize: "30px",
@@ -147,7 +132,7 @@ function ProductPage() {
                   textAlign: "center",
                 }}
               >
-                Welcome to Camara Bunicii! We are a specialty store offering a
+                Welcome to { sellerEmail }! We are a specialty store offering a
                 wide range of traditional and homemade products.
               </p>
               <p
@@ -175,7 +160,7 @@ function ProductPage() {
                 flexDirection: "column",
                 alignItems: "center",
                 border: "1px solid black",
-                backgroundColor: "#9066D9",
+                backgroundColor: "#D5DC37",
               }}
             >
               <h2
@@ -281,7 +266,10 @@ function ProductPage() {
                           name="flame-outline"
                         ></ion-icon>
                         <span>
-                          <strong>{product.price}</strong> PRICE
+                          <strong style={{ fontSize: "26px" }}>
+                            {product.price}
+                          </strong>{" "}
+                          RON
                         </span>
                       </li>
                       <li className="meal-attribute">
@@ -289,8 +277,8 @@ function ProductPage() {
                           className="meal-icon"
                           name="restaurant-outline"
                         ></ion-icon>
-                        <span>
-                          CATEGORY <strong>{product.productType}</strong>
+                        <span style={{ fontSize: "20px" }}>
+                          <strong>{product.productType}</strong>
                         </span>
                       </li>
                       <li className="meal-attribute">

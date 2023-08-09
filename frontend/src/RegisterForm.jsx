@@ -94,7 +94,7 @@ function RegisterForm() {
 
 
   const backgroundImageUrl =
-    "https://youmatter.world/app/uploads/sites/2/2019/02/organic-farming-definition-examples-.jpg";
+    "https://w0.peakpx.com/wallpaper/929/367/HD-wallpaper-fruits-fruits-vegetables-fruit-vegetable.jpg";
   const mainDivStyle = {
     maxWidth: "800px",
     margin: "0 auto",

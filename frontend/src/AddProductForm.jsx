@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./form.css";
 import Form from "react-bootstrap/Form";
@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 
 const AddProductForm = () => {
   const [name, setName] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const [quantity, setQuantity] = useState();
   const [price, setPrice] = useState("");
   const [type, setType] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -41,7 +41,9 @@ const AddProductForm = () => {
     setPhotos(files);
   };
 
- 
+  useEffect(()=>{
+   
+ },[])
 
   return (
     <div
@@ -52,7 +54,7 @@ const AddProductForm = () => {
         backgroundColor: "white",
         marginTop: "60px",
         backgroundImage: `url(
-          "https://media.istockphoto.com/id/1159947998/photo/apples-on-red-scales.jpg?s=612x612&w=0&k=20&c=dpwBgxy1JOe0mkezhZsps_ES8r4tubgVywZEI_3PUy8="
+          "https://w0.peakpx.com/wallpaper/929/367/HD-wallpaper-fruits-fruits-vegetables-fruit-vegetable.jpg"
         )`,
       }}
     >
@@ -98,29 +100,11 @@ const AddProductForm = () => {
           />
         </Form.Group>
 
-        <Form.Group>
-          <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
-            Quantity:
-          </Form.Label>
-          <Form.Control
-            type="number"
-            name="quantity"
-            placeholder="Enter quantity"
-            value={quantity}
-            onChange={handleQuantityChange}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
-           
-          </Form.Label>
-          <Form.Control
-            name="userId"
-            type="text"
-            
-            value={userID}
-           
-          />
+        <Form.Group style={{ display: "none" }}>
+          <Form.Label
+            style={{ fontFamily: "Arial, sans-serif", display: "none" }}
+          ></Form.Label>
+          <Form.Control name="userId" type="text" value={userID} />
         </Form.Group>
         <Form.Group>
           <Form.Label style={{ fontFamily: "Arial, sans-serif" }}>
@@ -128,7 +112,7 @@ const AddProductForm = () => {
           </Form.Label>
           <Form.Control
             type="text"
-            name="category"
+            name="type"
             placeholder="Enter category"
             value={type}
             onChange={handleTypeChange}
@@ -140,7 +124,7 @@ const AddProductForm = () => {
           </Form.Label>
           <Form.Control
             as="textarea"
-            name="description"
+            name="productDescription"
             rows={3}
             placeholder="Enter product description"
             value={productDescription}
