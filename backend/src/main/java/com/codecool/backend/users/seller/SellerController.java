@@ -3,6 +3,7 @@ package com.codecool.backend.users.seller;
 import com.codecool.backend.products.ProductDTO;
 import com.codecool.backend.products.ProductForm;
 import com.codecool.backend.products.ProductService;
+import com.codecool.backend.users.repository.AppUserDao;
 import com.codecool.backend.users.service.AppUserService;
 import com.codecool.backend.users.service.UserController;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,10 +19,12 @@ public class SellerController extends UserController {
 
     private final SellerService service;
     private final ProductService productService;
+
     public SellerController(@Qualifier("seller") AppUserService appUserService, SellerService service, ProductService productService) {
         super(appUserService);
         this.service = service;
         this.productService = productService;
+
     }
 
     @GetMapping("/myproducts")

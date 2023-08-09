@@ -6,6 +6,7 @@ import com.codecool.backend.products.ProductDTO;
 import com.codecool.backend.products.ProductForm;
 import com.codecool.backend.products.ProductService;
 import com.codecool.backend.products.Types.ProductType;
+import com.codecool.backend.security.jwt.JWTService;
 import com.codecool.backend.users.repository.AppUserDTO;
 import com.codecool.backend.users.repository.AppUserDTOMapper;
 import com.codecool.backend.users.repository.AppUserDao;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service("seller")
@@ -25,8 +25,8 @@ public class SellerService extends AppUserService {
     private final ProductService productService;
 
 
-    public SellerService(@Qualifier("jpa") AppUserDao appUserDao, AppUserDTOMapper userDTOMapper, PasswordEncoder passwordEncoder, ImageService imageService,  ProductService productService) {
-        super(appUserDao, userDTOMapper, passwordEncoder, imageService);
+    public SellerService(@Qualifier("jpa") AppUserDao appUserDao,JWTService jwtService, AppUserDTOMapper userDTOMapper, PasswordEncoder passwordEncoder, ImageService imageService,  ProductService productService) {
+        super(appUserDao, userDTOMapper, passwordEncoder, imageService, jwtService);
         this.productService = productService;
     }
 
@@ -67,6 +67,9 @@ public ProductDTO getProductById(Long productId){
     public List<AppUserDTO> getSellers(){
         return getUsersByRole(AppUserRole.SELLER);
     }
+
+
+
 }
 
 

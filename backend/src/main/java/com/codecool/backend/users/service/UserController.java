@@ -1,10 +1,13 @@
 package com.codecool.backend.users.service;
 
+import com.codecool.backend.exception.ResourceNotFoundException;
+import com.codecool.backend.security.auth.ResetPasswordRequest;
 import com.codecool.backend.users.UpdateRequest;
 import com.codecool.backend.users.repository.AppUserDTO;
 import com.codecool.backend.users.repository.AppUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +31,7 @@ public class UserController{
     }
     @GetMapping("/seller")
     public ResponseEntity<List<AppUserDTO>> getAllSellers() {
+        
         List<AppUserDTO> sellers = appUserService.getUsersByRole(AppUserRole.SELLER);
         return ResponseEntity.ok(sellers);
     }
@@ -40,5 +44,14 @@ public class UserController{
     public void updateUser(@PathVariable Long id,@RequestBody UpdateRequest updateRequest){
         appUserService.updateCustomer(id,updateRequest);
     }
+    @PutMapping("/reset/password")
+    public ResponseEntity<Void> updatePassword(@RequestParam String token, @RequestBody String newPassword) {
+        System.out.println(newPassword);
+
+            appUserService.changePassword(token, newPassword);
+            return ResponseEntity.noContent().build();
+
+    }
+
 
 }
