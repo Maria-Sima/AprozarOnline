@@ -5,7 +5,7 @@ public record AppUserDTO(
         String firstName,
         String lastName,
         String email,
-        AppUserRole role,
+        String role,
         String imageUrl,
         String address
 
