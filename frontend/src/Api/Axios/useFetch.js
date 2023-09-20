@@ -53,17 +53,18 @@ export const useAxiosPost = () => {
     const [request, setRequest] = useState({
         data: null,
         url: null,
-        method: "POST"
+        method: "POST",
+        headers: {} // Initialize headers as an empty object
     });
     const [response, setResponse] = useState(null);
 
     useEffect(() => {
         const postData = async () => {
             try {
-                console.log(request.data)
-                const result = await axios.post(request.url, request.data);
+                const result = await axios.post(request.url, request.data, {
+                    headers: request.headers // Include the custom headers
+                });
                 setResponse(result.data);
-                console.log(response)
             } catch (error) {
                 console.error(error);
             }
@@ -76,8 +77,8 @@ export const useAxiosPost = () => {
         }
     }, [request]);
 
-    const post = (url, data, method = "POST") => {
-        setRequest({ url, data, method });
+    const post = (url, data, headers = {}, method = "POST") => {
+        setRequest({ url, data, method, headers }); // Pass the custom headers
     };
 
     return { post, response };

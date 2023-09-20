@@ -16,7 +16,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double price;
-    private int quantity;
+    private double quantity;
     private ProductType productType;
 
     @OneToOne(fetch = FetchType.EAGER)

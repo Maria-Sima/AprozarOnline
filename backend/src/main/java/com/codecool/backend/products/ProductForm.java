@@ -7,7 +7,7 @@ import java.util.List;
 
 public record ProductForm(
         String name,
-        Integer quantity,
+        Double quantity,
 
         Double price,
 

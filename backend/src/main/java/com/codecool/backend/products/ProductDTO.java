@@ -7,7 +7,7 @@ import java.util.List;
 public record ProductDTO(
         Long id,
         Double price,
-        int quantity,
+        Double quantity,
         ProductType productType,
 
         String name,

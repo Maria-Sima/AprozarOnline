@@ -42,11 +42,11 @@ public class SellerController extends UserController {
     @PostMapping("/addProduct")
     public ResponseEntity<Void> addProduct(@RequestParam("photo") MultipartFile photos,
                                            @RequestParam("name") String name,
-                                           @RequestParam("quantity") int quantity,
+                                           @RequestParam("quantity") double quantity,
                                            @RequestParam("price") double price,
                                            @RequestParam("type") String type,
                                            @RequestParam("productDescription") String productDescription,
-                                           @RequestParam("user_id") Long id) {
+                                           @RequestParam("id") Long id) {
         System.out.println(name +"+ "+type+"+ "+price+"+ "+id);
         var productForm = new ProductForm(name, quantity, price, ProductType.valueOf(type), productDescription);
         service.addProduct(productForm, id, photos);
