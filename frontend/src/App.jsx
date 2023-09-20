@@ -3,7 +3,7 @@ import Home from "./Pages/HomePage/Home.jsx";
 import './App.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ProductDetails from "./Pages/Product/ProductDetails.jsx";
+
 import About from "./Pages/Extra/About.jsx";
 import Contact from "./Pages/Extra/Contact.jsx";
 import Login from "./Pages/Auth/Login.jsx";

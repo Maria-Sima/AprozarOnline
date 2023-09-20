@@ -13,7 +13,7 @@ const Home = () => {
 
 const  data=useAxiosGet(routes.stores);
     const {apiData,isLoading,serverError}=data;
-    console.log(apiData)
+    console.log(routes.stores)
   return (
     <div>
 

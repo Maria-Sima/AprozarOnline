@@ -1,12 +1,9 @@
 package com.codecool.backend.products;
 
-import com.codecool.backend.fileStorage.Image;
 import com.codecool.backend.products.Types.ProductType;
-import com.codecool.backend.products.orders.CartItem;
+import com.codecool.backend.orders.CartItem;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter

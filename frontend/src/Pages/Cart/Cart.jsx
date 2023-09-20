@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState} from 'react'
 import SingleBanner from '../../Components/Banners/SingleBanner.jsx'
 import Footer1 from '../../Components/Footer/Footer1.jsx'
 import Footer2 from '../../Components/Footer/Footer2.jsx'
@@ -12,73 +12,34 @@ import { useRecoilState } from 'recoil'
 import { orderSuccessfulProvider } from '../../Api/OrderSuccessfulProvider.jsx'
 import OrderSuccessful from '../../Components/Order/OrderSuccessful.jsx'
 import {getAuthToken} from "../../Api/Axios/useFetch.js";
+import {useNavigate} from "react-router-dom";
+import OrderAddress from "../../Components/OrderAddress/OrderAddress.jsx";
+
 const Cart = () => {
-  const [cartdata, setcartdata] = React.useState([])
-  const [subtotal, setsubtotal] = React.useState(0)
-  const [shipping, setshipping] = React.useState(0)
-  const [active, setactive] = React.useState(1)
-  const [tax, settax] = React.useState(0)
-  const [deliverydate, setdeliverydate] = React.useState(
-    new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-  )
 
-  const getcartitemsfromlocalstorage = () => {
-    let cart = JSON.parse(localStorage.getItem('cart'))
-    if (cart) {
-      console.log(cart)
-      setcartdata(cart)
+  const [active, setactive] = useState(1)
 
-      let tempsubtotal = 0
-      cart.forEach(item => {
-        tempsubtotal += item.productdata.price * item.quantity
-      })
-      // console.log(tempsubtotal)
-      setsubtotal(tempsubtotal)
+  const navigate = useNavigate();
+    const [subtotal, setsubtotal] = useState(0)
+    const [cartdata, setcartdata] = useState([])
 
 
-    }
-    else {
-      console.log("Cart is empty")
-
-    }
-  }
-
-  React.useEffect(() => {
-    getcartitemsfromlocalstorage()
-  }, [])
 
   const checklogin = () => {
 
     return !!getAuthToken();
   }
 
-
-  const removeitemfromcart = (index) => {
-    // alert(index)
-    let temp = [...cartdata]
-    temp.splice(index, 1)
-    setcartdata(temp)
-    localStorage.setItem('cart', JSON.stringify(temp))
-    getcartitemsfromlocalstorage()
-  }
-
-  const savedaddress = [
-    {
-      AddressLine1: "Address Line 1",
-      AddressLine2: "Address Line 2",
-      AddressLine3: "Address Line 3",
-      postalcode: "123456"
-    },
-    {
-      AddressLine1: "Address Line 1",
-      AddressLine2: "Address Line 2",
-      AddressLine3: "Address Line 3",
-      postalcode: "123456"
-    }
-  ]
+ const goNextTo=(int)=>{
+   cartdata.length > 0
+       ? checklogin()
+           ? setactive(int)
+           : navigate('/login') // Use navigate to redirect to the login page
+       : null;
+ }
 
 
-  const [selectedorderid, setselectedorderid] = useState(0)
+ const [selectedorderid, setselectedorderid] = useState(0)
   const [ordersuccesscont, setordersuccesscont] = useRecoilState(orderSuccessfulProvider)
   return (
     <div>
@@ -96,7 +57,7 @@ const Cart = () => {
             active == 1 ?
               <div className='c11'
                 onClick={() => {
-                  cartdata.length > 0 && checklogin() && setactive(1)
+                  goNextTo(1)
                 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -108,7 +69,7 @@ const Cart = () => {
               :
               <div className='c1'
                 onClick={() => {
-                  cartdata.length > 0 && checklogin() && setactive(1)
+                 goNextTo(1)
                 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -123,7 +84,7 @@ const Cart = () => {
             active == 2 ?
               <div className='c11'
                 onClick={() => {
-                  cartdata.length > 0 && checklogin() && setactive(2)
+                goNextTo(2)
                 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -137,7 +98,7 @@ const Cart = () => {
               :
               <div className='c1'
                 onClick={() => {
-                  cartdata.length > 0 && checklogin() && setactive(2)
+                 goNextTo(2)
                 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -150,10 +111,10 @@ const Cart = () => {
           }
 
           {
-            active == 3 ?
+            active === 3 ?
               <div className='c11'
                 onClick={() => {
-                  cartdata.length > 0 && checklogin() && setactive(3)
+                goNextTo(3)
                 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -167,7 +128,7 @@ const Cart = () => {
               :
               <div className='c1'
                 onClick={() => {
-                  cartdata.length > 0 && checklogin() && setactive(3)
+                 goNextTo(3)
                 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -181,7 +142,7 @@ const Cart = () => {
             active == 4 ?
               <div className='c11'
                 onClick={() => {
-                  cartdata.length > 0 && checklogin() && setactive(4)
+                 goNextTo(4)
                 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -194,7 +155,7 @@ const Cart = () => {
               :
               <div className='c1'
                 onClick={() => {
-                  cartdata.length > 0 && checklogin() && setactive(4)
+                 goNextTo(4)
                 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -208,173 +169,13 @@ const Cart = () => {
         </div>
 
         {
-          active == 1 &&
-          <div className='cartcont'>
-            {/* <p>Cart cont</p> */}
-            {
-              cartdata.length > 0 ?
-                <table className='carttable'>
-                  <thead>
-                    <tr>
-                      <th>Product</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>Total</th>
-                      <th>Remove</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      cartdata.map((item, index) => {
-                        return (
-                          <tr key={index} className="cartitemrow">
-                            <td data-label="Product"
-                            >
-                              <div className='cartproduct'
-                                onClick={() => {
-                                  window.location.href = `/product/${item.productdata.id}`
-                                }}
-                              >
-                                <img src={item.productdata.photoUrl}
-                                  alt={item.productdata.name} />
-                                <p>{
-                                  item.productdata.name
-                                }</p>
-                              </div>
-                            </td>
+          active === 1 && <Cart navigate={navigate} setsubtotal={setsubtotal} cartdata={cartdata} setcartdata={setcartdata}/>
 
-                            <td
-                              data-label="Quantity"
-                            >
-                              <div className='quantity'>
-                                <button className='minus'
-                                  onClick={() => {
-                                    let newcartdata = [...cartdata]
-
-                                    if (newcartdata[index].quantity > 1) {
-                                      newcartdata[index].quantity -= 1
-                                      setcartdata(newcartdata)
-                                      localStorage.setItem('cart', JSON.stringify(newcartdata))
-                                      getcartitemsfromlocalstorage()
-                                    }
-                                  }}
-                                >-</button>
-                                <span>{item.quantity}</span>
-                                <button className='plus'
-                                  onClick={() => {
-                                    let newcartdata = [...cartdata]
-                                    newcartdata[index].quantity += 1
-                                    setcartdata(newcartdata)
-                                    localStorage.setItem('cart', JSON.stringify(newcartdata))
-                                    getcartitemsfromlocalstorage()
-                                  }}
-                                >+</button>
-                              </div>
-                            </td>
-
-                            <td
-                              data-label="Price"
-                            >
-                              <p>
-                                $ {item.productdata.price ? item.productdata.price.toFixed(2) : 0.00}
-                              </p>
-                            </td>
-
-                            <td>
-                              <p> {
-                                (item.productdata.price * item.quantity).toFixed(2)
-                              } lei</p>
-                            </td>
-
-                            <td
-                              data-label="Remove"
-                            >
-                              <div className='delbtn'
-                                onClick={() => {
-                                  removeitemfromcart(index)
-                                }}
-                              >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                              </div>
-                            </td>
-                          </tr>
-                        )
-                      })
-                    }
-
-
-
-                    {/*<tr>*/}
-                    {/*  <td></td>*/}
-                    {/*  <td></td>*/}
-                    {/*  <td className='totaltableleft'>Total</td>*/}
-                    {/*  <td className='totaltableright'>*/}
-                    {/*     { (item.productdata.price * item.quantity).toFixed(2)} lei*/}
-                    {/*  </td>*/}
-                    {/*</tr>*/}
-                  </tbody>
-                </table>
-                :
-                <div className='emptycart'>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                  </svg>
-
-                  <p>Your cart is empty</p>
-                </div>
-            }
-          </div>
-        }
+                }
 
         {
-          active == 2 &&
-          <div className='shippingcont'>
-            <div className='selectdate'>
-              <h2 className='mainhead1'>Select Delivery Date</h2>
-              <input
-                min={new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
-                type='date'
-                value={deliverydate}
-                onChange={(e) => {
-                  setdeliverydate(e.target.value)
-                }}
-              />
-            </div>
-            <div className='previous'>
-              <h2 className='mainhead1'>Previous Saved Address</h2>
-              {
-                savedaddress.length > 0 ?
-                  savedaddress.map((item, index) => {
-                    return (
-                      <div className='radio' key={index}>
-                        <input type='radio' name='address' id={index} />
-                        <span>
-                          {
-                            item.AddressLine1 + ', ' + item.AddressLine2 + ', ' + item.AddressLine3 + ', ' + item.postalcode
-                          }
-                        </span>
-                      </div>
-                    )
-                  })
-                  :
-                  <div className='emptyaddress'>
-                    <p>No address Found</p>
-                  </div>
-              }
-            </div>
-            <h3>OR</h3>
-            <div className='shippingadd'>
-              <input type='text' placeholder='Address Line 1' />
-              <input type='text' placeholder='Address Line 2' />
-              <input type='text' placeholder='Address Line 3' />
-              <input type='text' placeholder='Postal Code' />
-              <button>Save</button>
-            </div>
+          active == 2 && <OrderAddress/>
 
-          </div>
         }
         {
           active == 3 &&
@@ -411,7 +212,7 @@ const Cart = () => {
             <div className='c2'>
               <span>Net Total</span>
               &nbsp;&nbsp;
-              <span>$ {(subtotal + tax + shipping).toFixed(2)}</span>
+              <span>$ {(subtotal ).toFixed(2)}</span>
             </div>
           </div>
         }
@@ -431,13 +232,13 @@ const Cart = () => {
 
 
 
-        {/* CART BUTTONS */}
+
         {
           active == 1 && cartdata.length > 0 &&
           <div className='btns'>
             <button className='nextbtn'
               onClick={() => {
-                checklogin() && setactive(2)
+          goNextTo(2)
               }}
             >Next</button>
           </div>
@@ -453,7 +254,7 @@ const Cart = () => {
             >Back</button>
             <button className='nextbtn'
               onClick={() => {
-                checklogin() && setactive(3)
+               goNextTo(3)
               }}
             >Next</button>
           </div>
@@ -464,12 +265,12 @@ const Cart = () => {
           <div className='btns'>
             <button className='backbtn'
               onClick={() => {
-                checklogin() && setactive(2)
+                goNextTo(2)
               }}
             >Back</button>
             <button className='nextbtn'
               onClick={() => {
-                checklogin() && setactive(4)
+               goNextTo(4)
               }}
             >Next</button>
           </div>
@@ -477,11 +278,11 @@ const Cart = () => {
         {
           active == 4 &&
           <div className='btns'>
-            {/* <button className='backbtn'
+           <button className='backbtn'
               onClick={() => {
-                checklogin() && setactive(3)
+               goNextTo(3)
               }}
-            >Back</button> */}
+            >Back</button>
             <button className='nextbtn'
               onClick={() => {
                 setselectedorderid(12345)

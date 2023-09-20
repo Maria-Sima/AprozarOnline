@@ -1,10 +1,10 @@
 package com.codecool.backend;
 
-import com.codecool.backend.products.orders.OrderDTO;
-import com.codecool.backend.products.orders.OrderResponseDTO;
-import com.codecool.backend.products.orders.payments.paypal.AccessTokenResponseDTO;
-import com.codecool.backend.products.orders.payments.paypal.PayPalHttpClient;
-import com.codecool.backend.products.orders.payments.paypal.PaypalConfiguration;
+import com.codecool.backend.orders.OrderDTO;
+import com.codecool.backend.orders.OrderResponseDTO;
+import com.codecool.backend.orders.payments.paypal.AccessTokenResponseDTO;
+import com.codecool.backend.orders.payments.paypal.PayPalHttpClient;
+import com.codecool.backend.orders.payments.paypal.PaypalConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

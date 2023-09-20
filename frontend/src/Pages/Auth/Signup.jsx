@@ -3,7 +3,7 @@ import './AuthPage.scss'
 import { useAxiosPost} from "../../Api/Axios/useFetch.js";
 import {routes} from "../../Api/Axios/Routes.jsx";
 import AuthForm from "../../Components/Forms/AuthForm.jsx";
-import {useEffect} from "react";
+
 
 const Signup = () => {
 

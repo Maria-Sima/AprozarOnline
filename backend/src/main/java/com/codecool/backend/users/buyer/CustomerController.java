@@ -1,7 +1,7 @@
 package com.codecool.backend.users.buyer;
 
-import com.codecool.backend.products.orders.OrderDTO;
-import com.codecool.backend.products.orders.OrderForm;
+import com.codecool.backend.orders.OrderDTO;
+import com.codecool.backend.orders.OrderForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,5 +1,6 @@
 package com.codecool.backend.users.service;
 
+import com.codecool.backend.exception.EmailFailureException;
 import com.codecool.backend.fileStorage.ImageService;
 import com.codecool.backend.users.PasswordRequest;
 import com.codecool.backend.users.RegistrationRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service("appUser")
@@ -145,5 +147,17 @@ public class AppUserService {
         else throw new RuntimeException("Passwords don't match");
 
     }
+public void resetPassword(String email,String newPassword){
+    Optional<AppUser> opUser = appUserDao.findUserByEmail(email);
+    if (opUser.isPresent()) {
+        AppUser user = opUser.get();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        appUserDao.addAppUser(user);
+    }
+}
+
+public Optional<AppUser> getUserByEmail(String email){
+       return  appUserDao.findUserByEmail(email);
+}
 
 }

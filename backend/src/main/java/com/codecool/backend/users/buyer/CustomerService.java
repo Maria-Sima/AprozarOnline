@@ -1,10 +1,10 @@
 package com.codecool.backend.users.buyer;
 
 import com.codecool.backend.fileStorage.ImageService;
-import com.codecool.backend.products.orders.OrderRequest;
-import com.codecool.backend.products.orders.OrderDAO;
-import com.codecool.backend.products.orders.OrderDTO;
-import com.codecool.backend.products.orders.OrderForm;
+import com.codecool.backend.orders.OrderRequest;
+import com.codecool.backend.orders.OrderDAO;
+import com.codecool.backend.orders.OrderDTO;
+import com.codecool.backend.orders.OrderForm;
 import com.codecool.backend.users.repository.AppUserDTOMapper;
 import com.codecool.backend.users.repository.AppUserDao;
 import com.codecool.backend.users.service.AppUserService;

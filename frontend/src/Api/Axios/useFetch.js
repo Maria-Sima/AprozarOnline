@@ -61,7 +61,7 @@ export const useAxiosPost = () => {
         const postData = async () => {
             try {
                 console.log(request.data)
-                const result = await axios[request.method.toLowerCase()](request.url, request.data);
+                const result = await axios.post(request.url, request.data);
                 setResponse(result.data);
                 console.log(response)
             } catch (error) {
