@@ -1,7 +1,6 @@
 package com.codecool.backend.products;
 
-import com.codecool.backend.fileStorage.Image;
-import com.codecool.backend.products.Types.ProductType;
+import com.codecool.backend.products.types.ProductType;
 
 import java.util.List;
 import java.util.Optional;

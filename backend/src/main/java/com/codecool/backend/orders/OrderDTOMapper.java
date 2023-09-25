@@ -10,9 +10,10 @@ public class OrderDTOMapper implements Function<OrderRequest,OrderDTO> {
         return new OrderDTO(
                 order.getOrderId(),
                 order.getCartItems(),
-                order.getAddress(),
+                order.getAddressToShipTo(),
                 order.getUserId(),
-                order.getPaymentMethod().name()
+                order.getPaymentMethod().name(),
+                order.getPaymentId()
         );
     }
 }

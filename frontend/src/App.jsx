@@ -16,9 +16,13 @@ import Navbar from "./Components/Navbar/Navbar.jsx";
 import AddProduct from "./Pages/Product/AddProduct.jsx";
 import SellerPage from "./Pages/Seller/SellerPage.jsx";
 import ErrorPage from "./Components/Error/ErrorPage.jsx";
+import ProductFilter from "./Pages/Product/ProductFilter.jsx";
+import ResetPassword from "./Pages/Auth/ResetPassword.jsx";
+import EmailVerified from "./Pages/Auth/EmailVerified.jsx";
 
 
 const App = () => {
+
     return (
 
         <BrowserRouter>
@@ -31,16 +35,18 @@ const App = () => {
                 {/*           <ProductDetails/>*/}
                 {/*       }*/}
                 {/*/>*/}
-                <Route path="/products" element={<div>not yet</div>}/>
                 <Route path="/about" element={<About/>} />
                 <Route path="/contact" element={<Contact/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup" element={<Signup/>} />
+                <Route path="/verify/*" element={<EmailVerified/>} />
+                <Route path="/reset/*" element={<ResetPassword/>} />
                 <Route path="/forgotpassword" element={<ForgotPassword/>} />
                 <Route path="/cart" element={<Cart/>} />
                 <Route path='/user/:activepage' element={<UserProfile/>} />
                 <Route path="/FAQ" element={<FAQ/>} />
                 <Route path="/addProduct" element={<AddProduct/>} />
+                <Route path="/categories/:category" element={<ProductFilter/>} />
                 <Route path="/seller/:sellerId" element={<SellerPage/>} />
 
 

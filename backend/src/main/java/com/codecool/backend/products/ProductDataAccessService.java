@@ -1,6 +1,6 @@
 package com.codecool.backend.products;
 
-import com.codecool.backend.products.Types.ProductType;
+import com.codecool.backend.products.types.ProductType;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

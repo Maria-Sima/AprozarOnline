@@ -1,9 +1,11 @@
 package com.codecool.backend.products;
 
-import com.codecool.backend.products.Types.ProductType;
+import com.codecool.backend.products.types.ProductType;
 import com.codecool.backend.orders.CartItem;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,8 +21,8 @@ public class Product {
     private double quantity;
     private ProductType productType;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private CartItem cartItem;
+    @OneToMany(fetch = FetchType.EAGER,mappedBy ="product",orphanRemoval = true )
+    private List<CartItem> cartItem;
     private  String name;
     private Long userId;
 

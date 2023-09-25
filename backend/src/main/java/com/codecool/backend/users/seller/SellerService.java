@@ -5,7 +5,7 @@ import com.codecool.backend.products.Product;
 import com.codecool.backend.products.ProductDTO;
 import com.codecool.backend.products.ProductForm;
 import com.codecool.backend.products.ProductService;
-import com.codecool.backend.products.Types.ProductType;
+import com.codecool.backend.products.types.ProductType;
 import com.codecool.backend.users.repository.AppUserDTO;
 import com.codecool.backend.users.repository.AppUserDTOMapper;
 import com.codecool.backend.users.repository.AppUserDao;
@@ -14,7 +14,6 @@ import com.codecool.backend.users.service.AppUserService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

@@ -14,47 +14,47 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AppUserDataAccessService implements AppUserDao {
     private final AppUserRepository appUserRepository;
-    @Override
-    public List<AppUser> getAllCustomers() {
+
+
+    public List<AppUser> getAllAppUsers() {
         return appUserRepository.findAll();
     }
 
-    @Override
-    public Optional<AppUser> getCustomerById(Long appUserId) {
+
+    public Optional<AppUser> getAppUserById(Long appUserId) {
         return appUserRepository.findById(appUserId);
     }
 
-    @Override
+
     public void addAppUser(AppUser appUser) {
-appUserRepository.save(appUser);
+        appUserRepository.save(appUser);
     }
 
-    @Override
+
     public boolean isAppUserWithEmail(String email) {
         return appUserRepository.existsAppUserByEmail(email);
     }
 
-    @Override
+
     public boolean isAppUserWithId(Long id) {
         return appUserRepository.existsAppUserById(id);
     }
 
-    @Override
+
     public void deleteAppUserById(Long Id) {
-appUserRepository.deleteById(Id);
+        appUserRepository.deleteById(Id);
     }
 
-    @Override
     public void updateAppUser(AppUser appUser) {
-appUserRepository.save(appUser);
+        appUserRepository.save(appUser);
     }
 
-    @Override
+
     public Optional<AppUser> findUserByEmail(String email) {
         return appUserRepository.findAppUserByEmail(email);
     }
 
-    @Override
+
     public List<AppUser> findUsersByRole(AppUserRole role) {
         return appUserRepository.findAppUsersByAppUserRole(role);
     }

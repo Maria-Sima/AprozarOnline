@@ -2,7 +2,7 @@ package com.codecool.backend.products;
 
 import com.codecool.backend.exception.ResourceNotFoundException;
 import com.codecool.backend.fileStorage.ImageService;
-import com.codecool.backend.products.Types.ProductType;
+import com.codecool.backend.products.types.ProductType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

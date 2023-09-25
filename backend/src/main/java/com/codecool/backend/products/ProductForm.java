@@ -1,9 +1,6 @@
 package com.codecool.backend.products;
 
-import com.codecool.backend.products.Types.ProductType;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
+import com.codecool.backend.products.types.ProductType;
 
 public record ProductForm(
         String name,

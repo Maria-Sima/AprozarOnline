@@ -28,10 +28,10 @@ public class CustomerController {
         return ResponseEntity.ok(orders);
     }
 
-    @PostMapping("/{userId}/makeOrder")
-    public ResponseEntity<OrderDTO> addProductToCart(@PathVariable Long userId, @RequestBody OrderForm orderRequest){
-        customerService.makeOrder(orderRequest,userId);
-        return ResponseEntity.noContent().build();
-    }
+//    @PostMapping("/{userId}/makeOrder")
+//    public ResponseEntity<OrderDTO> addProductToCart(@PathVariable Long userId, @RequestBody OrderForm orderRequest){
+//        customerService.makeOrder(orderRequest,userId);
+//        return ResponseEntity.noContent().build();
+//    }
 
 }

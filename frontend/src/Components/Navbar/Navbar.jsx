@@ -104,11 +104,14 @@ const Navbar = () => {
                 </Link>
                 <Dropdown>
                     <Dropdown.Toggle variant="" id="dropdown-basic">
-                        Product
+                       Categories
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item href="/addProduct">AddProduct</Dropdown.Item>
+                     <Dropdown.Item href="/categories/Meat">Carne</Dropdown.Item>
+                        <Dropdown.Item href="/categories/Meat" >Lactate</Dropdown.Item>
+                        <Dropdown.Item href="/categories/Meat">Fructe</Dropdown.Item>
+                        <Dropdown.Item>Legume</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
                 <Link to='/about'>
@@ -124,6 +127,7 @@ const Navbar = () => {
 
                     <Dropdown.Menu>
                         <Dropdown.Item href="/FAQ">FAQ</Dropdown.Item>
+                        <Dropdown.Item href="/addProduct">AddProduct</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </div>

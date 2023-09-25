@@ -13,5 +13,8 @@ export const routes = {
  productUtil:"/seller/products/",
  addProduct:"/seller/addProduct",
  getSeller:"/seller/info/",
- productsByCategory:"seller/products/category/"
+ productsByCategory:"seller/products/category/",
+ forgotPassword:"/auth/forgot",
+ resetPassword:"/auth/reset",
+ verifyEmail:"auth/verify"
 };

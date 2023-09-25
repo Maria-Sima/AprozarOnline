@@ -2,8 +2,7 @@ package com.codecool.backend.users.seller;
 
 import com.codecool.backend.products.ProductDTO;
 import com.codecool.backend.products.ProductForm;
-import com.codecool.backend.products.Types.ProductType;
-import com.codecool.backend.users.repository.AppUser;
+import com.codecool.backend.products.types.ProductType;
 import com.codecool.backend.users.repository.AppUserDTO;
 import com.codecool.backend.users.service.AppUserService;
 import com.codecool.backend.users.service.UserController;
@@ -32,7 +31,7 @@ public class SellerController extends UserController {
         return ResponseEntity.ok(sellers);
     }
 
-    @GetMapping("/{sellerId}/myproducts")
+    @GetMapping("/{sellerId}/products")
     public ResponseEntity<List<ProductDTO>> getMyProducts(@PathVariable Long sellerId) {
         List<ProductDTO> myProducts = service.getProductList(sellerId);
         System.out.println(myProducts);

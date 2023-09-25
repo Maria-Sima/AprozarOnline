@@ -1,8 +1,6 @@
 package com.codecool.backend.products;
 
-import com.codecool.backend.products.Types.ProductType;
-
-import java.util.List;
+import com.codecool.backend.products.types.ProductType;
 
 public record ProductDTO(
         Long id,

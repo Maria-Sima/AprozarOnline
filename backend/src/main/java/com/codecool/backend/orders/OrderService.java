@@ -33,11 +33,6 @@ public class OrderService implements OrderDAO {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public OrderRequest findByPaypalId(Long paypalId) {
-        return orderRepository.findByPaypalOrderId(paypalId).orElseThrow(() ->
-                new ResourceNotFoundException("user with id [%s] hasn't placed any orders ".formatted(id)));
-    }
 
 
     private void TakeProductsOutOfStock(List<CartItem> items) {

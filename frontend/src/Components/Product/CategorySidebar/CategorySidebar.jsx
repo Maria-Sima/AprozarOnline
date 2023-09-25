@@ -4,27 +4,31 @@ import img3 from '../../../assets/pictures/dairy.png'
 import img4 from '../../../assets/pictures/carne.png'
 import './CategorySidebar.scss'
 
-const CategorySidebar = () => {
+const CategorySidebar = ({setCategory}) => {
     const data = [
         {
             id: 1,
             categoryimage: img1,
-            categoryname: 'Fructe'
+            categoryname: 'Fructe',
+            category:'Fruits'
         },
         {
             id: 2,
             categoryimage: img2,
-            categoryname: 'Legume'
+            categoryname: 'Legume',
+            category:'Vegetables'
         },
         {
             id: 3,
             categoryimage: img3,
-            categoryname: 'Lactate'
+            categoryname: 'Lactate',
+            category:'Meat'
         },
         {
             id: 4,
             categoryimage: img4,
-            categoryname: 'Carne'
+            categoryname: 'Carne',
+            category:'Meat'
         },
 
     ]
@@ -33,7 +37,9 @@ const CategorySidebar = () => {
             {
                 data.map((item) => {
                     return (
-                        <div className='category'>
+                        <div className='category' onClick={()=>{
+                            setCategory(item.category)
+                        }}>
                             <img src={item.categoryimage} alt='categoryimage' />
                             <h3>{item.categoryname}</h3>
                         </div>

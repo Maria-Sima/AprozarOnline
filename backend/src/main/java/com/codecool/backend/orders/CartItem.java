@@ -12,7 +12,8 @@ public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "cartItem", orphanRemoval = true)
+    @ManyToOne()
+    @JoinColumn()
     private Product product;
     private Integer quantity = 1;
     @ManyToOne()

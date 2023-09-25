@@ -1,4 +1,4 @@
-package com.codecool.backend.orders.payments.stripe;
+package com.codecool.backend.orders.payments;
 
 import lombok.Data;
 

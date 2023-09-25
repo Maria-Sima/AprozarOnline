@@ -1,5 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {toast} from "react-toastify";
+import Swal from 'sweetalert2'
 
 export const getAuthToken = () => {
     return window.localStorage.getItem('auth_token');
@@ -57,6 +59,10 @@ export const useAxiosPost = () => {
         headers: {} // Initialize headers as an empty object
     });
     const [response, setResponse] = useState(null);
+    const [error,setError]=useState({
+        mesage:"",
+        statusCode:""
+    });
 
     useEffect(() => {
         const postData = async () => {
@@ -65,8 +71,21 @@ export const useAxiosPost = () => {
                     headers: request.headers // Include the custom headers
                 });
                 setResponse(result.data);
+
             } catch (error) {
                 console.error(error);
+
+
+                Swal.fire({
+                    title: `(${error.response.data.statusCode}) error has occured`,
+                    text:`${error.response.data.message} (${error.response.data.statusCode})`,
+                    icon: "error",
+                    buttons: {
+                        cancel: "Cancel",
+                        confirm: "Okay"
+                    },
+                    closeOnClickOutside: false
+                });
             }
         };
 
@@ -78,8 +97,8 @@ export const useAxiosPost = () => {
     }, [request]);
 
     const post = (url, data, headers = {}, method = "POST") => {
-        setRequest({ url, data, method, headers }); // Pass the custom headers
+        setRequest({ url, data, method, headers });
     };
 
-    return { post, response };
+    return { post, response,error };
 };

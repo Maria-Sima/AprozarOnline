@@ -2,6 +2,9 @@ package com.codecool.backend.users.repository;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,33 +24,44 @@ import java.util.Collections;
 )
 public class AppUser implements UserDetails {
 
-    @SequenceGenerator(
-            name = "appuser_sequence",
-            sequenceName = "appuser_sequence",
-            allocationSize = 1
-    )
     @Id
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "appuser_sequence"
+            strategy = GenerationType.IDENTITY
     )
+    @Column(name = "id", nullable = false)
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    @Column(
-            nullable = true
-    )
-    private String address;
 
+
+    @Column(nullable = false)
+    private String firstName;
+
+
+    @Column(nullable = false)
+    private String lastName;
+
+
+    @Column(name = "email", nullable = false, unique = true, length = 320)
+    private String email;
+
+
+
+    @Column(name = "password", nullable = false, length = 1000)
+    private String password;
+
+
+    @Column(nullable = true)
+    private String address;
 
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
+    @Column(
+            nullable = true
+    )
     private String profileImage;
 
-
+    @Column(name = "email_verified")
+    private Boolean emailVerified;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -60,6 +74,15 @@ public class AppUser implements UserDetails {
     @Override
     public String getPassword() {
         return password;
+    }
+
+    public Boolean isEmailVerified() {
+        return emailVerified;
+    }
+
+
+    public void setEmailVerified(Boolean emailVerified) {
+        this.emailVerified = emailVerified;
     }
 
     @Override

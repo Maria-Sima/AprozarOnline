@@ -13,7 +13,7 @@ $pix20: 20px;
 $formGroupGap: 5px;
 $formGroupRowGap: 10px;
 $authContWidth: 80%;
-$authContHeight: 80vh;
+$authContHeight: 80%;
 $authContMargin: 10%;
 $halfSize: 50%;
 $fullSize: 100%;
@@ -168,7 +168,6 @@ $authFormMargin: 10px 0px;
     width: $authContWidth;
     margin: $authContMargin 0;
     align-self: center;
-    overflow: scroll;
     gap: 0;
 
     img {

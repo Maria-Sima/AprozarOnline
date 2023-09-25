@@ -7,6 +7,5 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderRequest,Long> {
-Optional<OrderRequest> findByPaypalOrderId(Long id);
     Optional<List<OrderRequest>> findAllByUserId(Long aLong);
 }

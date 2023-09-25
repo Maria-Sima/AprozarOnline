@@ -1,4 +1,4 @@
-package com.codecool.backend.orders.payments.stripe;
+package com.codecool.backend.orders.payments;
 
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
@@ -8,15 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
 @Slf4j
 
-public class StripeService {
+public class StripeService implements PaymentService{
     @Value("${stripe.key}")
     private String stripeApiKey;
 
@@ -51,11 +49,11 @@ public class StripeService {
 
     }
 
-public StripeChargeDTO charge(StripeChargeDTO chargeRequest) {
+public String charge(StripeChargeDTO chargeRequest) {
 
 
         try {
-            chargeRequest.setSuccess(false);
+
             Map<String, Object> chargeParams = new HashMap<>();
             chargeParams.put("amount", (int) (chargeRequest.getAmount() * 100));
             chargeParams.put("currency", "USD");
@@ -73,7 +71,7 @@ public StripeChargeDTO charge(StripeChargeDTO chargeRequest) {
                 chargeRequest.setSuccess(true);
 
             }
-            return chargeRequest;
+            return charge.getId();
         } catch (StripeException e) {
             log.error("StripeService (charge)", e);
             throw new RuntimeException(e.getMessage());
@@ -81,26 +79,7 @@ public StripeChargeDTO charge(StripeChargeDTO chargeRequest) {
 
     }
 
-    public StripeSubscriptionResponse createSubscription(StripeSubscriptionDTO subscriptionDto){
 
-
-        PaymentMethod paymentMethod = createPaymentMethod(subscriptionDto);
-        Customer customer = createCustomer(paymentMethod, subscriptionDto);
-        paymentMethod = attachCustomerToPaymentMethod(customer, paymentMethod);
-        Subscription subscription = createSubscription(subscriptionDto, paymentMethod, customer);
-
-        return createResponse(subscriptionDto,paymentMethod,customer,subscription);
-    }
-
-    private StripeSubscriptionResponse createResponse(StripeSubscriptionDTO subscriptionDto, PaymentMethod paymentMethod, Customer customer, Subscription subscription) {
-
-
-
-        return new StripeSubscriptionResponse(customer.getId(),
-                paymentMethod.getId(),
-                paymentMethod.getId(),subscriptionDto.username());
-
-    }
 
     private PaymentMethod createPaymentMethod(StripeSubscriptionDTO subscriptionDto){
 
@@ -161,43 +140,6 @@ public StripeChargeDTO charge(StripeChargeDTO chargeRequest) {
 
     }
 
-    private Subscription createSubscription(StripeSubscriptionDTO subscriptionDto, PaymentMethod paymentMethod, Customer customer){
-
-        try {
-
-            List<Object> items = new ArrayList<>();
-            Map<String, Object> item1 = new HashMap<>();
-            item1.put(
-                    "price",
-                    subscriptionDto.priceId()
-            );
-            item1.put("quantity",subscriptionDto.numberOfLicense());
-            items.add(item1);
-
-            Map<String, Object> params = new HashMap<>();
-            params.put("customer", customer.getId());
-            params.put("default_payment_method", paymentMethod);
-            params.put("items", items);
-            return Subscription.create(params);
-        } catch (StripeException e) {
-            log.error("StripeService (createSubscription)", e);
-            throw new RuntimeException(e.getMessage());
-        }
-
-    }
-
-    public  Subscription cancelSubscription(String subscriptionId){
-
-        try {
-            Subscription retrieve = Subscription.retrieve(subscriptionId);
-            return retrieve.cancel();
-        } catch (StripeException e) {
-
-            log.error("StripeService (cancelSubscription)",e);
-        }
-
-        return null;
-    }
 
 }
 
