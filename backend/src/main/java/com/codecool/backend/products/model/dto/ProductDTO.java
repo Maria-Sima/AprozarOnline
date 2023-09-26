@@ -1,6 +1,6 @@
-package com.codecool.backend.products;
+package com.codecool.backend.products.model.dto;
 
-import com.codecool.backend.products.types.ProductType;
+import com.codecool.backend.products.model.types.ProductType;
 
 public record ProductDTO(
         Long id,

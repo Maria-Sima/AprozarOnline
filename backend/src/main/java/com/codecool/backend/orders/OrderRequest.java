@@ -16,7 +16,7 @@ public class OrderRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private List<CartItem> cartItems;
 
     private Double total;

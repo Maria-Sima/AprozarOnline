@@ -1,12 +1,12 @@
-package com.codecool.backend.users.service;
+package com.codecool.backend.users.controller;
 
-import com.codecool.backend.users.PasswordRequest;
-import com.codecool.backend.users.UpdateRequest;
-import com.codecool.backend.users.repository.AppUserDTO;
+import com.codecool.backend.security.clientRequests.PasswordRequest;
+import com.codecool.backend.security.clientRequests.UpdateRequest;
+import com.codecool.backend.users.model.dto.AppUserDTO;
+import com.codecool.backend.users.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

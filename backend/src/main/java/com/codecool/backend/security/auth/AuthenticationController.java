@@ -2,10 +2,12 @@ package com.codecool.backend.security.auth;
 
 import com.codecool.backend.exception.EmailFailureException;
 import com.codecool.backend.exception.EmailNotFoundException;
-import com.codecool.backend.users.RegistrationRequest;
+import com.codecool.backend.security.clientRequests.AuthenticationResponse;
+import com.codecool.backend.security.clientRequests.LoginRequest;
+import com.codecool.backend.security.clientRequests.PasswordReset;
+import com.codecool.backend.security.clientRequests.RegistrationRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,8 +36,9 @@ public class AuthenticationController {
         authenticationService.registerCustomer(request);
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/verify")
-    public ResponseEntity verifyEmail(@RequestBody String token) {
+    @GetMapping("/verify")
+    public ResponseEntity verifyEmail(@RequestParam String token) {
+        System.out.println("Token  gets here !!!"+token);
         if (authenticationService.verifyEmail(token)) {
             return ResponseEntity.ok().build();
         } else {

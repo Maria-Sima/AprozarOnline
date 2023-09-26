@@ -1,18 +1,28 @@
-import React, {useRef, useState} from 'react'
+import {useRef} from 'react'
 import { Link } from 'react-router-dom'
-
+import Swal from 'sweetalert2'
 import './AuthPage.scss'
 import {useAxiosPost} from "../../Api/Axios/useFetch.js";
 import {routes} from "../../Api/Axios/Routes.jsx";
 const ForgotPassword = () => {
+
     const inputRef=useRef();
     const {post: sendResetLink}=useAxiosPost();
     const verifyEmail=(e)=>{
         e.preventDefault();
-let formdata=new FormData()
-formdata.append("email",inputRef.current.value)
-        sendResetLink(routes.forgotPassword,formdata,{"Content-Type":" text/html"})
+        sendResetLink(routes.forgotPassword,inputRef.current.value,{"Content-Type":" text/html"})
         console.log(routes.forgotPassword)
+        Swal.fire({
+            title: "Email Sent",
+            text:
+                "The reset email has been sent! Use it to rest your password",
+            icon: "warning",
+            buttons: {
+                cancel: "Cancel",
+                confirm: "Okay"
+            },
+            closeOnClickOutside: false
+        });
 
     }
     return (

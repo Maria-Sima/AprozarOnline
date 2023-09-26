@@ -1,6 +1,7 @@
-package com.codecool.backend.products;
+package com.codecool.backend.products.repository;
 
-import com.codecool.backend.products.types.ProductType;
+import com.codecool.backend.products.model.Product;
+import com.codecool.backend.products.model.types.ProductType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

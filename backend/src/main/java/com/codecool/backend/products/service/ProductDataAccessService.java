@@ -1,6 +1,9 @@
-package com.codecool.backend.products;
+package com.codecool.backend.products.service;
 
-import com.codecool.backend.products.types.ProductType;
+import com.codecool.backend.products.model.Product;
+import com.codecool.backend.products.repository.ProductDAO;
+import com.codecool.backend.products.repository.ProductRepository;
+import com.codecool.backend.products.model.types.ProductType;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

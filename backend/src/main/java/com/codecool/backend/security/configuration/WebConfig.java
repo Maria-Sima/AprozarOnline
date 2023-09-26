@@ -1,4 +1,4 @@
-package com.codecool.backend.config;
+package com.codecool.backend.security.configuration;
 
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

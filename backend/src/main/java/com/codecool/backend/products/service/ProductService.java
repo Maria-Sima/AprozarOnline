@@ -1,8 +1,13 @@
-package com.codecool.backend.products;
+package com.codecool.backend.products.service;
 
 import com.codecool.backend.exception.ResourceNotFoundException;
 import com.codecool.backend.fileStorage.ImageService;
-import com.codecool.backend.products.types.ProductType;
+import com.codecool.backend.products.model.Product;
+import com.codecool.backend.products.model.ProductForm;
+import com.codecool.backend.products.model.dto.ProductDTO;
+import com.codecool.backend.products.model.dto.ProductDTOMapper;
+import com.codecool.backend.products.repository.ProductDAO;
+import com.codecool.backend.products.model.types.ProductType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +30,7 @@ public class ProductService {
         return productDAO.getAllProducts().stream().map(productDTOMapper).collect(Collectors.toList());
     }
 
-    public void addProduct(Product product,MultipartFile file) {
+    public void addProduct(Product product, MultipartFile file) {
 
 
             try {

@@ -1,7 +1,7 @@
 package com.codecool.backend;
 
 
-import com.codecool.backend.users.seller.SellerList;
+import com.codecool.backend.users.repository.SellerDbSeed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,9 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AprozarApplication implements CommandLineRunner {
 
-private final SellerList sellerList;
+private final SellerDbSeed sellerList;
 @Autowired
-    public AprozarApplication(SellerList sellerList) {
+    public AprozarApplication(SellerDbSeed sellerList) {
         this.sellerList = sellerList;
     }
 
@@ -22,8 +22,8 @@ private final SellerList sellerList;
 
 
     public void run(String... args) {
-//
-//sellerList.initDB();
+
+sellerList.initDB();
     }
 
 }

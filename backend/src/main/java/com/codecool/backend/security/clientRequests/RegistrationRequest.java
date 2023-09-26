@@ -1,4 +1,4 @@
-package com.codecool.backend.users;
+package com.codecool.backend.security.clientRequests;
 
 import org.springframework.web.multipart.MultipartFile;
 

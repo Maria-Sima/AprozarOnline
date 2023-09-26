@@ -1,4 +1,4 @@
-package com.codecool.backend.security.auth;
+package com.codecool.backend.security.clientRequests;
 
 public record AuthentificationRequest (String token){
 }

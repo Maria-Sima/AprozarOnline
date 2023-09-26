@@ -1,6 +1,6 @@
-package com.codecool.backend.products;
+package com.codecool.backend.products.model;
 
-import com.codecool.backend.products.types.ProductType;
+import com.codecool.backend.products.model.types.ProductType;
 import com.codecool.backend.orders.CartItem;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,7 +21,7 @@ public class Product {
     private double quantity;
     private ProductType productType;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy ="product",orphanRemoval = true )
+    @OneToMany(fetch = FetchType.LAZY,mappedBy ="product",orphanRemoval = true )
     private List<CartItem> cartItem;
     private  String name;
     private Long userId;

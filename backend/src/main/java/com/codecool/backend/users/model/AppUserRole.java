@@ -1,4 +1,4 @@
-package com.codecool.backend.users.repository;
+package com.codecool.backend.users.model;
 
 public enum AppUserRole {
     BUYER,

@@ -1,6 +1,6 @@
-package com.codecool.backend.products;
+package com.codecool.backend.products.model;
 
-import com.codecool.backend.products.types.ProductType;
+import com.codecool.backend.products.model.types.ProductType;
 
 public record ProductForm(
         String name,

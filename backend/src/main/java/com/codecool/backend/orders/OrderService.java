@@ -1,15 +1,13 @@
 package com.codecool.backend.orders;
 
 import com.codecool.backend.exception.ResourceNotFoundException;
-import com.codecool.backend.products.Product;
-import com.codecool.backend.products.ProductDAO;
+import com.codecool.backend.products.model.Product;
+import com.codecool.backend.products.repository.ProductDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 public class OrderService implements OrderDAO {

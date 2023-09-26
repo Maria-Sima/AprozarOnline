@@ -1,3 +1,4 @@
+$pix20: 20px;
 $white: #fff;
 $black: #000;
 $bgColor: rgba(0, 0, 0, 0.798);
@@ -13,170 +14,391 @@ $pix20: 20px;
 $formGroupGap: 5px;
 $formGroupRowGap: 10px;
 $authContWidth: 80%;
-$authContHeight: 80%;
+$authContHeight: 80vh;
 $authContMargin: 10%;
 $halfSize: 50%;
 $fullSize: 100%;
 //$authFormWidth: $authContWidth;
 $authFormMargin: 10px 0px;
-//$authFormBtnHoverBgColor: $white;
-//$authFormBtnHoverColor: $col1;
-
-.authpage {
-  width: $fullSize;
+.authpage{
+  width: 100%;
   min-height: 100vh;
+  background-color: white;
   display: flex;
   flex-direction: column;
 }
 
-.authcont {
+.authcont{
   display: flex;
   align-items: center;
-  gap: $pix20;
-  width: $authContWidth;
-  height: $authContHeight;
-  box-shadow: 0 0 10px 0 $shadowColor;
+  gap: 20px;
+  width: 80%;
+  height: 80vh;
+  box-shadow:  0 0 10px 0 rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   overflow: hidden;
-  margin: $authContMargin auto;
-  background-color: $bgColor;
-
-  img {
-    width: $halfSize;
-    height: $fullSize;
-    object-fit: cover;
-  }
+  margin: 0 auto;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  background-color: rgba(0, 0, 0, 0.798);
 }
 
-.authform {
+.authcont img{
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.authform{
   display: flex;
   flex-direction: column;
-  width: $halfSize;
-  padding: $pix20;
-  gap: $formGroupGap;
-
-  h1 {
-    font-size: 200%;
-    font-weight: 500;
-    color: var(--col1);
-  }
-
-  label {
-    font-size: $fontSizeLabel;
-    font-weight: 500;
-    color: $white;
-  }
-
-  .error {
-    color: red;
-    text-align: left;
-    font-size: 1vw;
-  }
-
-  input {
-    padding: 10px;
-    border: 1px solid $white;
-    border-radius: 5px;
-    outline: none;
-    font-size: $pix20;
-    font-weight: 500;
-    color: $white;
-    background-color: $inputBgColor;
-  }
-
-  .btn {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    font-size: $pix20;
-    font-weight: 500;
-    color: $white;
-    background-color: var(--col1);
-    cursor: pointer;
-
-    &:hover {
-      background-color: $white;
-      color: var(--col1);
-    }
-  }
-
-  p {
-    font-size: $pix20;
-    font-weight: 500;
-    color: $white;
-    text-decoration: none;
-    margin: 0;
-    padding: 0;
-    text-align: right;
-
-    &:hover {
-      color: var(--col1);
-      cursor: pointer;
-    }
-  }
-
-  .or {
-    text-align: center;
-    margin: 10px 0px;
-    padding: 0px;
-    font-size: $pix20;
-    color: $white;
-  }
-
-  .formgroup {
-    display: flex;
-    flex-direction: column;
-    gap: $formGroupGap;
-    width: 100%;
-    margin: $authFormMargin;
-  }
-  .select select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid $white;
-    border-radius: 5px;
-    outline: none;
-    font-size: $pix20;
-    font-weight: 500;
-    color: $black;
-    background-color: $white;
-  }
-
-  .select select:focus {
-    border-color: var(--col1);
-  }
-  .form-group-row {
-    display: flex;
-    gap: $formGroupRowGap;
-
-    @media (max-width: 1500px) {
-      display: flex;
-      gap: $formGroupRowGap;
-      flex-wrap: wrap;
-    }
-  }
+  width: 50%;
+  padding: 20px;
+  gap: 5px;
 }
 
-@media (max-width: 1100px) {
-  .authcont {
+.authcont .formgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  margin: 10px 0px;
+}
+
+
+.authform h1{
+  font-size: 50px;
+  font-weight: 500;
+  color: var(--col1);
+}
+.authform label{
+  font-size: 17px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+}
+
+
+.authform input{
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+  outline: none;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.042);
+}
+
+
+.authform .btn{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  background-color: var(--col1);
+  cursor: pointer;
+}
+.authform .btn:hover{
+  background-color: white;
+  color: var(--col1);
+}
+.select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+  outline: none;
+  font-size: $pix20;
+  font-weight: 500;
+  color: $black;
+  background-color: $white;
+}
+
+.select select:focus {
+  border-color: var(--col1);
+}
+
+.authform p{
+  font-size: 20px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+  text-align: right;
+}
+.authform p:hover{
+  color: var(--col1);
+  cursor: pointer;
+}
+.authform .or{
+  text-align: center;
+  margin: 10px 0px;
+  padding: 0px;
+  font-size: 20px;
+  color: white;
+}
+.form-group-row{
+  display: flex;
+  gap: 10px;
+}
+@media (max-width: 1500px){
+  .form-group-row{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 1100px){
+  .authcont{
     flex-direction: column;
-    width: $authContWidth;
-    margin: $authContMargin 0;
+    /* height: 100%; */
+    width: 80%;
+    margin: 0px;
+    margin-top: 10%;
+    margin-bottom: 10%;
     align-self: center;
-    gap: 0;
-
-    img {
-      width: $fullSize;
-      height: $fullSize;
-    }
+    overflow: scroll;
+    gap: 0px;
+  }
+  .authcont img{
+    width: 100%;
+    height: 40%;
+  }
+  .authform{
+    width: 100%;
+    margin: 0px;
+    padding: 10px 20px;
+    gap: 0px;
   }
 
-  .authform {
-    width: $authContWidth;
+  .authform  label{
+    font-size: 15px;
+  }
+  .authform input{
+    font-size: 15px;
+    margin: 0px;
+  }
+  .authform .btn{
+    font-size: 18px;
+    padding: 10px;
+  }
+  .authform h1{
+    font-size: 35px;
+    text-align: center;
+  }
+
+  .authform .formgroup{
+    margin: 5px 0px;
+  }
+  .authform p, .authform .or{
+    font-size: 15px;
+    margin: 10px 0px;
+  }
+
+}
+
+
+@media (max-width: 500px){
+  .authcont{
+    flex-direction: column;
+    height: 100%;
+    width: 97%;
+    margin: 0px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    align-self: center;
+  }
+  .authcont img{
+    width: 100%;
+    height: 30%;
+  }
+  .authform{
+    width: 100%;
   }
 }
+
+
+//$white: #fff;
+//$black: #000;
+//$bgColor: rgba(0, 0, 0, 0.798);
+//$inputBgColor: rgba(255, 255, 255, 0.042);
+//$shadowColor: rgba(0, 0, 0, 0.2);
+//$fontSizeH1: 50px;
+//$fontSizeLabel: 17px;
+//$pix20: 20px;
+//$formGroupGap: 5px;
+//$formGroupRowGap: 10px;
+//$authContWidth: 80%;
+//$authContHeight: 80%;
+//$authContMargin: 10%;
+//$halfSize: 50%;
+//$fullSize: 100%;
+////$authFormWidth: $authContWidth;
+//$authFormMargin: 10px 0px;
+//
+//.authpage {
+//  min-height: 100vh;
+//  display: flex;
+//  flex-direction: column;
+//}
+//
+//.authcont {
+//  display: flex;
+//  align-items: center;
+//  gap: $pix20;
+//  width: $authContWidth;
+//  height: $authContHeight;
+//  box-shadow: 0 0 10px 0 $shadowColor;
+//  border-radius: 10px;
+//  overflow: hidden;
+//  margin: $authContMargin auto;
+//  background-color: $bgColor;
+//
+//  img {
+//    width: $halfSize;
+//    height: $fullSize;
+//    object-fit: cover;
+//  }
+//}
+//
+//.authform {
+//  display: flex;
+//  flex-direction: column;
+//  width: $halfSize;
+//  padding: $pix20;
+//  gap: $formGroupGap;
+//
+//  h1 {
+//    font-size: 200%;
+//    font-weight: 500;
+//    color: var(--col1);
+//  }
+//
+//  label {
+//    font-size: $fontSizeLabel;
+//    font-weight: 500;
+//    color: $white;
+//  }
+//
+//  .error {
+//    color: red;
+//    text-align: left;
+//    font-size: 1vw;
+//  }
+//
+//  input {
+//    padding: 10px;
+//    border: 1px solid $white;
+//    border-radius: 5px;
+//    outline: none;
+//    font-size: $pix20;
+//    font-weight: 500;
+//    color: $white;
+//    background-color: $inputBgColor;
+//  }
+//
+//  .btn {
+//    width: 100%;
+//    padding: 10px;
+//    border: none;
+//    border-radius: 5px;
+//    outline: none;
+//    font-size: $pix20;
+//    font-weight: 500;
+//    color: $white;
+//    background-color: var(--col1);
+//    cursor: pointer;
+//
+//    &:hover {
+//      background-color: $white;
+//      color: var(--col1);
+//    }
+//  }
+//
+//  p {
+//    font-size: $pix20;
+//    font-weight: 500;
+//    color: $white;
+//    text-decoration: none;
+//    margin: 0;
+//    padding: 0;
+//    text-align: right;
+//
+//    &:hover {
+//      color: var(--col1);
+//      cursor: pointer;
+//    }
+//  }
+//
+//  .or {
+//    text-align: center;
+//    margin: 10px 0px;
+//    padding: 0px;
+//    font-size: $pix20;
+//    color: $white;
+//  }
+//
+//  .formgroup {
+//    display: flex;
+//    flex-direction: column;
+//    gap: $formGroupGap;
+//    width: 100%;
+//    margin: $authFormMargin;
+//  }
+//  .select select {
+//    appearance: none;
+//    -webkit-appearance: none;
+//    -moz-appearance: none;
+//    width: 100%;
+//    padding: 10px;
+//    border: 1px solid $white;
+//    border-radius: 5px;
+//    outline: none;
+//    font-size: $pix20;
+//    font-weight: 500;
+//    color: $black;
+//    background-color: $white;
+//  }
+//
+//  .select select:focus {
+//    border-color: var(--col1);
+//  }
+//  .form-group-row {
+//    display: flex;
+//    gap: $formGroupRowGap;
+//
+//    @media (max-width: 1500px) {
+//      display: flex;
+//      gap: $formGroupRowGap;
+//      flex-wrap: wrap;
+//    }
+//  }
+//}
+//
+//@media (max-width: 1100px) {
+//  .authcont {
+//    flex-direction: column;
+//    width: $authContWidth;
+//    margin: $authContMargin 0;
+//    align-self: center;
+//    gap: 0;
+//
+//    img {
+//      width: $fullSize;
+//      height: $fullSize;
+//    }
+//  }
+//
+//  .authform {
+//    width: $authContWidth;
+//  }
+//}

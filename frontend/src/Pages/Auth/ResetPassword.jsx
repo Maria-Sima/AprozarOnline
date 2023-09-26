@@ -1,13 +1,18 @@
-import React, {useRef} from 'react';
-import {Link, useParams} from "react-router-dom";
+import  {useRef} from 'react';
+import {Link, useLocation, useParams} from "react-router-dom";
 import {useAxiosPost} from "../../Api/Axios/useFetch.js";
 import {routes} from "../../Api/Axios/Routes.jsx";
 
 const ResetPassword = () => {
-    const { '*': token }=useParams();
 
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+
+    const token = queryParams.get('token');
+    console.log(token)
     const inputRef=useRef();
-    const {post: sendResetLink, response}=useAxiosPost();
+    const {post: sendResetLink}=useAxiosPost();
     const verifyEmail=(e)=>{
         e.preventDefault();
         console.log(inputRef.current.value)
@@ -16,7 +21,7 @@ const ResetPassword = () => {
             password:inputRef.current.value
         }
         sendResetLink(routes.resetPassword,resetPasswordRequest)
-        Swal
+
 
 
     }

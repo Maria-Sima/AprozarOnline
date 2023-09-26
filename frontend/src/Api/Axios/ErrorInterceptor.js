@@ -7,7 +7,6 @@ const api = axios.create({
     baseURL: 'http://localhost:8080'
 });
 api.interceptors.request.use((config) => {
-    // You can add request headers or modify the request configuration here if needed
     return config;
 });
 

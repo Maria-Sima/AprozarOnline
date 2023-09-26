@@ -1,15 +1,15 @@
 package com.codecool.backend.users.seller;
 
 import com.codecool.backend.fileStorage.ImageService;
-import com.codecool.backend.products.Product;
-import com.codecool.backend.products.ProductDTO;
-import com.codecool.backend.products.ProductForm;
-import com.codecool.backend.products.ProductService;
-import com.codecool.backend.products.types.ProductType;
-import com.codecool.backend.users.repository.AppUserDTO;
-import com.codecool.backend.users.repository.AppUserDTOMapper;
+import com.codecool.backend.products.model.Product;
+import com.codecool.backend.products.model.dto.ProductDTO;
+import com.codecool.backend.products.model.ProductForm;
+import com.codecool.backend.products.service.ProductService;
+import com.codecool.backend.products.model.types.ProductType;
+import com.codecool.backend.users.model.dto.AppUserDTO;
+import com.codecool.backend.users.model.dto.AppUserDTOMapper;
 import com.codecool.backend.users.repository.AppUserDao;
-import com.codecool.backend.users.repository.AppUserRole;
+import com.codecool.backend.users.model.AppUserRole;
 import com.codecool.backend.users.service.AppUserService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;

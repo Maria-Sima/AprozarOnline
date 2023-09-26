@@ -1,16 +1,14 @@
-package com.codecool.backend.users.seller;
+package com.codecool.backend.users.repository;
 
-import com.codecool.backend.users.repository.AppUser;
-import com.codecool.backend.users.repository.AppUserDao;
-import com.codecool.backend.users.repository.AppUserRole;
+import com.codecool.backend.users.model.AppUser;
+import com.codecool.backend.users.model.AppUserRole;
+import com.codecool.backend.users.seller.SellerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 @Service
 @AllArgsConstructor
-public class SellerList {
+public class SellerDbSeed {
 
     private final SellerService sellerService;
 private final AppUserDao dao;

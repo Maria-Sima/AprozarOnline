@@ -1,6 +1,7 @@
-package com.codecool.backend.products;
+package com.codecool.backend.products.repository;
 
-import com.codecool.backend.products.types.ProductType;
+import com.codecool.backend.products.model.Product;
+import com.codecool.backend.products.model.types.ProductType;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,7 +1,7 @@
-package com.codecool.backend.users.repository;
+package com.codecool.backend.users.model.dto;
 
-import com.codecool.backend.users.repository.AppUser;
-import com.codecool.backend.users.repository.AppUserDTO;
+import com.codecool.backend.users.model.AppUser;
+import com.codecool.backend.users.model.dto.AppUserDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;

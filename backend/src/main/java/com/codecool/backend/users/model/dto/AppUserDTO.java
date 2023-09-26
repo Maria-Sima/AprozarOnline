@@ -1,4 +1,4 @@
-package com.codecool.backend.users.repository;
+package com.codecool.backend.users.model.dto;
 
 public record AppUserDTO(
         Long id,

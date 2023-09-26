@@ -1,11 +1,11 @@
 package com.codecool.backend.users.seller;
 
-import com.codecool.backend.products.ProductDTO;
-import com.codecool.backend.products.ProductForm;
-import com.codecool.backend.products.types.ProductType;
-import com.codecool.backend.users.repository.AppUserDTO;
+import com.codecool.backend.products.model.dto.ProductDTO;
+import com.codecool.backend.products.model.ProductForm;
+import com.codecool.backend.products.model.types.ProductType;
+import com.codecool.backend.users.model.dto.AppUserDTO;
 import com.codecool.backend.users.service.AppUserService;
-import com.codecool.backend.users.service.UserController;
+import com.codecool.backend.users.controller.UserController;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

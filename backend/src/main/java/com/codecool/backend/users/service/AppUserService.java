@@ -1,10 +1,13 @@
 package com.codecool.backend.users.service;
 
-import com.codecool.backend.exception.EmailFailureException;
 import com.codecool.backend.fileStorage.ImageService;
-import com.codecool.backend.users.PasswordRequest;
-import com.codecool.backend.users.RegistrationRequest;
-import com.codecool.backend.users.UpdateRequest;
+import com.codecool.backend.security.clientRequests.PasswordRequest;
+import com.codecool.backend.security.clientRequests.RegistrationRequest;
+import com.codecool.backend.security.clientRequests.UpdateRequest;
+import com.codecool.backend.users.model.AppUser;
+import com.codecool.backend.users.model.AppUserRole;
+import com.codecool.backend.users.model.dto.AppUserDTO;
+import com.codecool.backend.users.model.dto.AppUserDTOMapper;
 import com.codecool.backend.users.repository.*;
 import com.sun.jdi.request.DuplicateRequestException;
 import jakarta.transaction.Transactional;
@@ -17,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -156,23 +158,28 @@ public void resetPassword(String email,String newPassword){
 }
 
 public Optional<AppUser> getUserByEmail(String email){
+    System.out.println(email+ email.getClass());
     System.out.println("Does the user exist "+appUserDao.isAppUserWithEmail(email));
-    Long test = Long.valueOf(5);
-    System.out.println(appUserDao.getAppUserById(test).get().getEmail().getClass()+"=="+email.getClass());
-    System.out.println(appUserDao.getAppUserById(test).get().getEmail()+" == "+email+" ? "+Objects.equals(appUserDao.getAppUserById(test).get().getEmail(), email));
+    Long test=Long.valueOf(1);
+    var testuser=appUserDao.getAppUserById(test).get().getEmail();
+    System.out.println("Official   "+testuser);
+    System.out.println(testuser + "=" + email + "?" + testuser.equals(email));
+    System.out.println(appUserDao.findUserByEmail(email));
        return  appUserDao.findUserByEmail(email);
 }
 
     @Transactional
     public boolean verifyUser(String email) {
         Optional<AppUser> opt = getUserByEmail(email);
+        System.out.println(email+"  "+opt);
 
         if (opt.isPresent()) {
             AppUser user = opt.get();
 
             if (!user.isEmailVerified()) {
+                System.out.println(user.isEmailVerified());
                 user.setEmailVerified(true);
-                appUserDao.updateAppUser(user); // Assuming you have an update method
+                appUserDao.updateAppUser(user);
                 return true;
             }
         } else {
