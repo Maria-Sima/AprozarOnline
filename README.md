@@ -8,7 +8,7 @@ Welcome to **@Prozar**, a full-stack ecommerce platform built with Spring Boot, 
 
 - **Product Listings:** Browse a wide range of locally produced products available on @Prozar. Each product is displayed with relevant details such as name, description, price, and availability.
 
-- **Shopping Cart:** Add products to your shopping cart, review the items, and proceed to checkout. The shopping cart functionality allows users to manage their selected products before finalizing the purchase.
+- **Shopping ShoppingCart:** Add products to your shopping cart, review the items, and proceed to checkout. The shopping cart functionality allows users to manage their selected products before finalizing the purchase.
 
 - **Secure Payments:** @Prozar integrates secure payment options, ensuring the safety of customer transactions. Payment gateways such as Stripe or PayPal can be implemented to handle payment processing.
 

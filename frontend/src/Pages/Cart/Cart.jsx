@@ -15,7 +15,7 @@ import {getAuthToken} from "../../Api/Axios/useFetch.js";
 import {useNavigate} from "react-router-dom";
 import OrderAddress from "../../Components/OrderAddress/OrderAddress.jsx";
 
-const Cart = () => {
+const ShoppingCart = () => {
 
   const [active, setactive] = useState(1)
 
@@ -34,7 +34,7 @@ const Cart = () => {
    cartdata.length > 0
        ? checklogin()
            ? setactive(int)
-           : navigate('/login') // Use navigate to redirect to the login page
+           : navigate('/login')
        : null;
  }
 
@@ -48,7 +48,7 @@ const Cart = () => {
         ordersuccesscont && <OrderSuccessful orderid={selectedorderid} message={`Order Placed Successfully, Order ID: ${selectedorderid}`}  redirecto='userorders'/>
       }
       <SingleBanner
-        heading="My Cart"
+        heading="My ShoppingCart"
         bannerimage='https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
       />
       <div className='cart'>
@@ -63,7 +63,7 @@ const Cart = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                 </svg>
-                <span>My Cart</span>
+                <span>My ShoppingCart</span>
 
               </div>
               :
@@ -75,7 +75,7 @@ const Cart = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                 </svg>
-                <span>My Cart</span>
+                <span>My ShoppingCart</span>
               </div>
           }
 
@@ -169,7 +169,7 @@ const Cart = () => {
         </div>
 
         {
-          active === 1 && <Cart navigate={navigate} setsubtotal={setsubtotal} cartdata={cartdata} setcartdata={setcartdata}/>
+          // active === 1 && <ShoppingCart navigate={navigate} setsubtotal={setsubtotal} cartdata={cartdata} setcartdata={setcartdata}/>
 
                 }
 

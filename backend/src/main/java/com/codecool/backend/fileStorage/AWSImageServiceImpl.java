@@ -67,6 +67,7 @@ public class AWSImageServiceImpl implements ImageService {
             throw new AmazonServiceException("your request made it to Amazon S3, but was rejected with an error response "+ase+": "+ase.getMessage());
         } catch (SdkClientException ace) {
             throw new AmazonClientException("The client encountered an internal error while trying to communicate with S3 "+ace+": "+ace.getMessage());
+
         }
     }
 

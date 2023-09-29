@@ -103,7 +103,7 @@
 //                             </button>
 //                         </div>
 //                         <button className='addtocart' onClick={addtocart}>
-//                             Add to Cart
+//                             Add to ShoppingCart
 //                         </button>
 //                     </div>
 //                 </div>

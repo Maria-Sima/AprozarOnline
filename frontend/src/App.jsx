@@ -26,28 +26,25 @@ const App = () => {
     return (
 
         <BrowserRouter>
-            <Navbar/>
+            <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/about" element={<About/>} />
-                <Route path="/contact" element={<Contact/>} />
-                <Route path="/login" element={<Login/>} />
-                <Route path="/signup" element={<Signup/>} />
-                <Route path="/verify/*" element={<EmailVerified/>} />
-                <Route path="/reset/*" element={<ResetPassword/>} />
-                <Route path="/forgotpassword" element={<ForgotPassword/>} />
-                <Route path="/cart" element={<Cart/>} />
-                <Route path='/user/:activepage' element={<UserProfile/>} />
-                <Route path="/FAQ" element={<FAQ/>} />
-                <Route path="/addProduct" element={<AddProduct/>} />
-                <Route path="/categories/:category" element={<ProductFilter/>} />
-                <Route path="/seller/:sellerId" element={<SellerPage/>} />
-
-
-                <Route path="*" element={<ErrorPage/>}/>
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/verify/*" element={<EmailVerified />} />
+                <Route path="/reset/*" element={<ResetPassword />} />
+                <Route path="/forgotpassword" element={<ForgotPassword />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/user/:activepage" element={<UserProfile />} />
+                <Route path="/FAQ" element={<FAQ />} />
+                <Route path="/addProduct" element={<AddProduct />} />
+                <Route path="/categories/:category" element={<ProductFilter />} />
+                <Route path="/seller/:sellerId" element={<SellerPage />} />
+                <Route path="*" element={<ErrorPage />} />
             </Routes>
-
         </BrowserRouter>
 
     );

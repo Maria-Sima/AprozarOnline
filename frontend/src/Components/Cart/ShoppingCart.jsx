@@ -1,6 +1,6 @@
 import  {useEffect} from 'react';
 
-const Cart = ({navigate,setsubtotal,cartdata,setcartdata}) => {
+const ShoppingCart = ({navigate,setsubtotal,cartdata,setcartdata}) => {
 
 
     const getcartitemsfromlocalstorage = () => {
@@ -19,7 +19,7 @@ const Cart = ({navigate,setsubtotal,cartdata,setcartdata}) => {
 
         }
         else {
-            console.log("Cart is empty")
+            console.log("ShoppingCart is empty")
 
         }
     }
@@ -145,4 +145,4 @@ const Cart = ({navigate,setsubtotal,cartdata,setcartdata}) => {
     );
 };
 
-export default Cart;
+export default ShoppingCart;

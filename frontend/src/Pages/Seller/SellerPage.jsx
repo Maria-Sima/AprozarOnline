@@ -20,7 +20,7 @@ const SellerPage = () => {
     return (<div>
             {isLoading ? (<Loader/>) : (<>
                     <SingleBanner bannerimage={seller?.imageUrl} heading={seller?.firstName + " " +seller?.lastName}/>
-                    <Product_Sidebar route={`seller/${sellerId}/myproducts`}/>
+                    <Product_Sidebar route={`seller/${sellerId}/products`}/>
                 </>)}
 
             <Footer1/>

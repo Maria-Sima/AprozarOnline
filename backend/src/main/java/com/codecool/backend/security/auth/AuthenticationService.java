@@ -65,17 +65,13 @@ public class AuthenticationService {
     }
 
     public void forgotPassword(String email) throws EmailNotFoundException, EmailFailureException {
-        System.out.println(email);
         Optional<AppUser> opUser = userService.getUserByEmail(email);
-        System.out.println(opUser);
         if (opUser.isPresent()) {
             String emailUser = opUser.get().getEmail();
-            System.out.println(emailUser);
             String token = jwtService.issueToken(emailUser);
-            System.out.println(token);
             messageSender.sendPasswordResetEmail(emailUser, token);
         } else {
-            throw new EmailNotFoundException();
+            throw new EmailNotFoundException("Email "+email+" was not found");
         }
     }
 
@@ -85,9 +81,7 @@ public class AuthenticationService {
     }
 
     public boolean verifyEmail(String token) {
-        System.out.println(token);
         String email = jwtService.getSubject(token);
-        System.out.println(email);
         return userService.verifyUser(email);
     }
 

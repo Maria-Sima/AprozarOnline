@@ -21,7 +21,7 @@ public class CustomerService extends AppUserService {
     private final PaymentService paymentService;
 
     @Autowired
-    public CustomerService(@Qualifier("jpa") AppUserDao appUserDao,
+    public CustomerService( AppUserDao appUserDao,
                            AppUserDTOMapper userDTOMapper,
                            PasswordEncoder passwordEncoder,
                            ImageService imageService,

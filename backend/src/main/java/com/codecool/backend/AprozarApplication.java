@@ -23,7 +23,7 @@ private final SellerDbSeed sellerList;
 
     public void run(String... args) {
 
-sellerList.initDB();
+//sellerList.initDB();
     }
 
 }

@@ -8,7 +8,7 @@ import com.codecool.backend.users.model.AppUser;
 import com.codecool.backend.users.model.AppUserRole;
 import com.codecool.backend.users.model.dto.AppUserDTO;
 import com.codecool.backend.users.model.dto.AppUserDTOMapper;
-import com.codecool.backend.users.repository.*;
+import com.codecool.backend.users.repository.AppUserDao;
 import com.sun.jdi.request.DuplicateRequestException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class AppUserService {
 
 
     @Autowired
-    public AppUserService(@Qualifier("jpa") AppUserDao appUserDao, AppUserDTOMapper userDTOMapper, PasswordEncoder passwordEncoder, ImageService imageService ){
+    public AppUserService(@Qualifier("jpa") AppUserDao appUserDao, AppUserDTOMapper userDTOMapper, PasswordEncoder passwordEncoder, ImageService imageService) {
         this.appUserDao = appUserDao;
         this.userDTOMapper = userDTOMapper;
         this.passwordEncoder = passwordEncoder;
@@ -49,44 +49,39 @@ public class AppUserService {
     public AppUserDTO getUser(Long id) {
         return appUserDao.getAppUserById(id)
                 .map(userDTOMapper)
-                .orElseThrow(()->new ResourceNotFoundException());
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
 
     public AppUser addUser(RegistrationRequest registrationRequest) {
-            String email = registrationRequest.email();
-
-            System.out.println(registrationRequest);
-            AppUser appUser = AppUser.builder()
-                    .firstName(registrationRequest.firstName())
-                    .lastName(registrationRequest.lastName())
-                    .email(registrationRequest.email())
-                    .password(passwordEncoder.encode(registrationRequest.password()))
-                    .appUserRole(AppUserRole.valueOf(registrationRequest.role()))
-                    .emailVerified(false)
-                    .build();
-            appUserDao.addAppUser(appUser);
-
-
-            return appUser;
-
+        String email = registrationRequest.email();
+        AppUser appUser = AppUser.builder()
+                .firstName(registrationRequest.firstName())
+                .lastName(registrationRequest.lastName())
+                .email(registrationRequest.email())
+                .password(passwordEncoder.encode(registrationRequest.password()))
+                .appUserRole(AppUserRole.valueOf(registrationRequest.role()))
+                .emailVerified(false)
+                .build();
+        appUserDao.addAppUser(appUser);
+        return appUser;
     }
 
 
-    public void deleteCustomerById(Long userId){
+    public void deleteCustomerById(Long userId) {
         checkIUserExistsOrNot(userId);
         appUserDao.deleteAppUserById(userId);
     }
 
 
-    private void checkIUserExistsOrNot(Long id){
-        if(!appUserDao.isAppUserWithId(id)){
-            throw  new ResourceNotFoundException(
+    private void checkIUserExistsOrNot(Long id) {
+        if (!appUserDao.isAppUserWithId(id)) {
+            throw new ResourceNotFoundException(
                     "customer with id [%s] not found".formatted(id));
         }
     }
 
-    public void updateCustomer(Long userId, UpdateRequest updateRequest){
+    public void updateCustomer(Long userId, UpdateRequest updateRequest) {
         AppUser appUser = appUserDao.getAppUserById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("Customer with id [%s] not found", userId)
@@ -117,17 +112,17 @@ public class AppUserService {
         }
     }
 
-    public List<AppUserDTO> getUsersByRole(AppUserRole role){
+    public List<AppUserDTO> getUsersByRole(AppUserRole role) {
         return appUserDao.findUsersByRole(role).stream().map(userDTOMapper).collect(Collectors.toList());
     }
 
-    public void uploadProfileImage(Long userId, MultipartFile file){
+    public void uploadProfileImage(Long userId, MultipartFile file) {
         try {
             AppUser appUser = appUserDao.getAppUserById(userId)
                     .orElseThrow(() -> new ResourceNotFoundException(
                             String.format("Customer with id [%s] not found", userId)
                     ));
-           String url= imageService.upload(file);
+            String url = imageService.upload(file);
             appUser.setProfileImage(url);
             appUserDao.addAppUser(appUser);
         } catch (IOException e) {
@@ -135,49 +130,39 @@ public class AppUserService {
         }
     }
 
-    public void updatePassword(PasswordRequest passwordRequest,Long userId){
+    public void updatePassword(PasswordRequest passwordRequest, Long userId) {
         AppUser appUser = appUserDao.getAppUserById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         String.format("Customer with id [%s] not found", userId)
                 ));
 
-        if (passwordEncoder.matches(passwordRequest.oldPassword(),appUser.getPassword())){
+        if (passwordEncoder.matches(passwordRequest.oldPassword(), appUser.getPassword())) {
             appUser.setPassword(passwordEncoder.encode(passwordRequest.newPassword()));
             appUserDao.addAppUser(appUser);
+        } else throw new RuntimeException("Passwords don't match");
+
+    }
+
+    public void resetPassword(String email, String newPassword) {
+        Optional<AppUser> opUser = appUserDao.findUserByEmail(email);
+        if (opUser.isPresent()) {
+            AppUser user = opUser.get();
+            user.setPassword(passwordEncoder.encode(newPassword));
+            appUserDao.addAppUser(user);
         }
-        else throw new RuntimeException("Passwords don't match");
-
     }
-public void resetPassword(String email,String newPassword){
-    Optional<AppUser> opUser = appUserDao.findUserByEmail(email);
-    if (opUser.isPresent()) {
-        AppUser user = opUser.get();
-        user.setPassword(passwordEncoder.encode(newPassword));
-        appUserDao.addAppUser(user);
-    }
-}
 
-public Optional<AppUser> getUserByEmail(String email){
-    System.out.println(email+ email.getClass());
-    System.out.println("Does the user exist "+appUserDao.isAppUserWithEmail(email));
-    Long test=Long.valueOf(1);
-    var testuser=appUserDao.getAppUserById(test).get().getEmail();
-    System.out.println("Official   "+testuser);
-    System.out.println(testuser + "=" + email + "?" + testuser.equals(email));
-    System.out.println(appUserDao.findUserByEmail(email));
-       return  appUserDao.findUserByEmail(email);
-}
+    public Optional<AppUser> getUserByEmail(String email) {
+        return appUserDao.findUserByEmail(email);
+    }
 
     @Transactional
     public boolean verifyUser(String email) {
         Optional<AppUser> opt = getUserByEmail(email);
-        System.out.println(email+"  "+opt);
-
         if (opt.isPresent()) {
             AppUser user = opt.get();
 
             if (!user.isEmailVerified()) {
-                System.out.println(user.isEmailVerified());
                 user.setEmailVerified(true);
                 appUserDao.updateAppUser(user);
                 return true;

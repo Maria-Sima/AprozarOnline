@@ -19,7 +19,7 @@ public class SellerController extends UserController {
 
     private final SellerService service;
 
-    public SellerController(@Qualifier("seller") AppUserService appUserService, SellerService service) {
+    public SellerController(SellerService appUserService, SellerService service) {
         super(appUserService);
         this.service = service;
     }
