@@ -23,7 +23,7 @@ const AuthForm = ({ submit, img }) => {
                         <div className='formgroup'>
                             <label htmlFor='lname'>Last Name</label>
                             <input type='text' id='lname' {...register('lastName', { required: "LastName is required" })} />
-                            <p className="error">{errors.lastName?.message}</p>
+                            <span  className="error">{errors.lastName?.message}</span>
                         </div>
                     </div>
                     <div className='formgroup'>
@@ -39,7 +39,7 @@ const AuthForm = ({ submit, img }) => {
                                 required: "Email is required"
                             })}
                         />
-                        <p className="error">{errors.email?.message}</p>
+                        <span className="error">{errors.email?.message}</span>
                     </div>
                     <div className='form-group-row'>
                         <div className='formgroup'>
@@ -91,7 +91,7 @@ const AuthForm = ({ submit, img }) => {
                                         message:'Password should not be longer than 20 characters'
                                     }})}
                             />
-                            <p className="error">{errors.password?.message}</p>
+                            <span className="error">{errors.password?.message}</span>
                         </div>
                         <div className='formgroup'>
                             <label htmlFor='cpassword'>Confirm Password</label>
@@ -105,7 +105,7 @@ const AuthForm = ({ submit, img }) => {
                                     }
                                 })}
                             />
-                            <p className="error">{errors.cpassword?.message}</p>
+                            <span className="error">{errors.cpassword?.message}</span>
                         </div>
                         <div className='formgroup'>
                             <label htmlFor='role'>Select Role</label>
@@ -117,7 +117,7 @@ const AuthForm = ({ submit, img }) => {
                                 <option value="BUYER"> Cumpar</option>
                                 <option value="SELLER">Vand</option>
                             </select>
-                            <p className="error">{errors.role?.message}</p>
+                            <span className="error">{errors.role?.message}</span>
                         </div>
                         </div>
                     </div>
