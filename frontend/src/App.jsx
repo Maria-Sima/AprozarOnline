@@ -18,7 +18,7 @@ import SellerPage from "./Pages/Seller/SellerPage.jsx";
 import ErrorPage from "./Components/Error/ErrorPage.jsx";
 import ProductFilter from "./Pages/Product/ProductFilter.jsx";
 import ResetPassword from "./Pages/Auth/ResetPassword.jsx";
-import EmailVerified from "./Pages/Auth/EmailVerified.jsx";
+
 
 
 const App = () => {
@@ -34,7 +34,6 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/verify/*" element={<EmailVerified />} />
                 <Route path="/reset/*" element={<ResetPassword />} />
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                 <Route path="/cart" element={<Cart />} />

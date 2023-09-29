@@ -14,8 +14,9 @@ import OrderSuccessful from '../../Components/Order/OrderSuccessful.jsx'
 import {getAuthToken} from "../../Api/Axios/useFetch.js";
 import {useNavigate} from "react-router-dom";
 import OrderAddress from "../../Components/OrderAddress/OrderAddress.jsx";
+import ShoppingCart from "../../Components/Cart/ShoppingCart.jsx";
 
-const ShoppingCart = () => {
+const Cart = () => {
 
   const [active, setactive] = useState(1)
 
@@ -169,7 +170,7 @@ const ShoppingCart = () => {
         </div>
 
         {
-          // active === 1 && <ShoppingCart navigate={navigate} setsubtotal={setsubtotal} cartdata={cartdata} setcartdata={setcartdata}/>
+          active === 1 && <ShoppingCart  setsubtotal={setsubtotal} cartdata={cartdata} setcartdata={setcartdata}/>
 
                 }
 

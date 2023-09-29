@@ -28,7 +28,6 @@ const ShoppingCart = ({navigate,setsubtotal,cartdata,setcartdata}) => {
         getcartitemsfromlocalstorage()
     }, [])
     const removeitemfromcart = (index) => {
-        // alert(index)
         let temp = [...cartdata]
         temp.splice(index, 1)
         setcartdata(temp)
