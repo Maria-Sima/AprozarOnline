@@ -3,60 +3,22 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import img1 from '../../../assets/pictures/fruits.png'
 import './ProductCard.scss'
+import {addToCart} from "../../../reducers/cartReducer.js";
+import {useDispatch} from "react-redux";
 
 const ProductCard = ({ data }) => {
   const [show, setshow] = useState(false)
   const [count, setCount] = useState(1)
+  const dispatch = useDispatch();
 
 
   const addtocart = () => {
-    let cart = JSON.parse(localStorage.getItem('cart'))
-    let productdata = data
+    const productdata = data;
 
+    dispatch(addToCart({ product: productdata, quantity: count }));
 
-
-    if (cart) {
-
-      let itemincart = cart.find(item => item.productdata.id === productdata.id)
-      if (itemincart) {
-        cart = cart.map(item => {
-          if (item.productdata.ProductId === productdata.ProductId) {
-            return {
-              ...item,
-              quantity: item.quantity + count
-            }
-          }
-          else {
-            return item
-          }
-        })
-        localStorage.setItem('cart', JSON.stringify(cart))
-      }
-      else {
-        cart = [
-          ...cart,
-          {
-            productdata,
-            quantity: count
-          }
-        ]
-        localStorage.setItem('cart', JSON.stringify(cart))
-      }
-    }
-    else {
-      cart = [{
-        productdata,
-        quantity: count
-      }]
-
-
-      localStorage.setItem('cart', JSON.stringify(cart))
     }
 
-    window.location.reload()
-
-
-  }
   let {price,name,productDescription,id,photoUrl,productType,userId}=data;
   console.log(name)
   return (

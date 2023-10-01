@@ -1,7 +1,7 @@
 
 import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import signup from "../../Pages/Auth/Signup.jsx";
+
 
 const LoginForm = ({img,submit}) => {
     const {register,handleSubmit,control,formState:{errors},watch}=useForm({

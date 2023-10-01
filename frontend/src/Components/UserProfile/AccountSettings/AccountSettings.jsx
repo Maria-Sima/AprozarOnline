@@ -1,20 +1,19 @@
-import React from 'react'
 import './AccountSettings.scss'
 import {useForm} from "react-hook-form";
 import {DevTool} from "@hookform/devtools";
-import {getUserId, useAxiosPost} from "../../../Api/Axios/useFetch.js";
-import {routes} from "../../../Api/Axios/Routes.jsx";
+import { useAxiosPost} from "../../../Api/Axios/useFetch.js";
+import {useSelector} from "react-redux";
 
 const AccountSettings = () => {
     const {register, handleSubmit, control, formState: {errors}, watch} = useForm({
         mode: 'onChange'
     });
   const {post: update, response}=useAxiosPost();
-  const updateUser=(data)=> {
-const customerId=getUserId();
-    update(`/user/${customerId}`, data,"PUT");
+    const customerId = useSelector(state => state.auth.user_id);
 
-  }
+    const updateUser = (data) => {
+        update(`/user/${customerId}`, data, "PUT");
+    };
     return (<div className='accountsettings'>
             <h1 className='mainhead1'>Personal Information</h1>
 

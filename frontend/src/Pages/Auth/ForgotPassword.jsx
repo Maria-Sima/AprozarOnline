@@ -10,7 +10,7 @@ const ForgotPassword = () => {
     const {post: sendResetLink}=useAxiosPost();
     const verifyEmail=(e)=>{
         e.preventDefault();
-        sendResetLink(routes.forgotPassword,inputRef.current.value,{"Content-Type":" text/html"})
+        sendResetLink(routes.forgotPassword,inputRef.current.value,"POST",{"Content-Type":" text/html"})
         console.log(routes.forgotPassword)
         Swal.fire({
             title: "Email Sent",

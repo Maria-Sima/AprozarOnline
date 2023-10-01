@@ -103,13 +103,13 @@
 }
 @keyframes shoppingCartTop {
   from {
-    stroke-dashoffset: -338;
+
   }
   50% {
-    stroke-dashoffset: 0;
+;
   }
   to {
-    stroke-dashoffset: 338;
+
   }
 }
 @keyframes shoppingCartWheel1 {
@@ -131,9 +131,9 @@
 @keyframes shoppingCartWheelStroke {
   from,
   to {
-    stroke-dashoffset: 81.68;
+
   }
   50% {
-    stroke-dashoffset: 40.84;
+
   }
 }

@@ -13,7 +13,6 @@ const UserProfile = () => {
     const {activepage} = useParams()
 
 
-    // alert(activepage)
     return (<div className='userprofile'>
             <SingleBanner
                 heading={`My Profile`}
@@ -27,7 +26,6 @@ const UserProfile = () => {
                 <div className='right'>
                     {activepage === 'accountsettings' && <AccountSettings/>}
                     {activepage === 'changepassword' && <ChangePassword/>}
-                    {activepage === 'yourorders' && <YourOrders/>}
                 </div>
             </div>
             <Footer1/>

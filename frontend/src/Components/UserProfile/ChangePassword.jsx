@@ -1,7 +1,8 @@
-import React from 'react'
+
 import {useForm} from "react-hook-form";
-import {getUserId, useAxiosPost} from "../../Api/Axios/useFetch.js";
+import {useAxiosPost} from "../../Api/Axios/useFetch.js";
 import {DevTool} from "@hookform/devtools";
+import {useSelector} from "react-redux";
 
 
 const ChangePassword = () => {
@@ -10,7 +11,7 @@ const ChangePassword = () => {
     });
     const {post: updatePassword, response}=useAxiosPost();
     const changePassword=(data)=> {
-        const userId=getUserId();
+        const customerId=useSelector(state => state.auth.user_id)
         updatePassword(`/user/password/${userId}`, data,"PUT");
 
     }

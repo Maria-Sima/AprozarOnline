@@ -35,15 +35,15 @@ const CategorySidebar = ({setCategory}) => {
     return (
         <div className='categorysidebar'>
             {
-                data.map((item) => {
+                data.map((item, index) => {
                     return (
-                        <div className='category' onClick={()=>{
-                            setCategory(item.category)
+                        <div key={index} className='category' onClick={() => {
+                            setCategory(item.category);
                         }}>
                             <img src={item.categoryimage} alt='categoryimage' />
                             <h3>{item.categoryname}</h3>
                         </div>
-                    )
+                    );
                 })
             }
         </div>

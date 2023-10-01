@@ -3,44 +3,39 @@ import './Navbar.scss'
 import logo from '../../assets/pictures/aprozarVirtual.svg'
 import Dropdown from 'react-bootstrap/Dropdown'
 import {Link} from 'react-router-dom'
-import {getAuthToken, removeAuthToken, useAxiosPost} from "../../Api/Axios/useFetch.js";
+import { useAxiosPost} from "../../Api/Axios/useFetch.js";
+import {useDispatch, useSelector} from "react-redux";
+import {removeAuth} from "../../reducers/authReducer.js";
 
 const Navbar = () => {
-
+const dispatch=useDispatch()
     const [cartquantity, setcartquantity] = useState(0)
-    const [isLoggedIn, setIsLoggedIn] = useState(!!getAuthToken());
     const {post, response} = useAxiosPost();
-    console.log(!!getAuthToken)
-
+    const cartData = useSelector((state) => state.cart.cartData);
+    const token=useSelector((state)=> state.auth.auth_token)
+    const isLoggedIn=!!token;
+    console.log(isLoggedIn)
+    console.log(token)
     const handleLogout = () => {
-        post('auth/logout', {}); // Send the POST request to /logout endpoint with an empty object as data
+        post('auth/logout', {});
     };
 
     useEffect(() => {
         if (response !== null) {
-            removeAuthToken();
-            setIsLoggedIn(!!getAuthToken());
-
-            console.log('Logged out successfully');
+            dispatch(removeAuth());
         }
-    }, [response,!!getAuthToken()]);
+    }, [response,dispatch]);
 
-    const getcarttotalitems = () => {
-        let cart = JSON.parse(localStorage.getItem('cart'))
-        if (cart) {
-            let total = 0
-            cart.forEach(item => {
-                total += item.quantity
-            })
-            setcartquantity(total)
-        } else {
-            setcartquantity(0)
-        }
-    }
+
 
     useEffect(() => {
-        getcarttotalitems()
-    }, [])
+        let total = 0;
+        if(cartData.length>0){
+        cartData.forEach((item) => {
+            total += item.quantity;
+        });}
+        setcartquantity(total);
+    }, [cartData]);
 
 
     const [shows3, setshows3] = useState(false)
@@ -204,10 +199,13 @@ const Navbar = () => {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item href="/login">Login</Dropdown.Item>
-                                <Dropdown.Item href="/signup">Signup</Dropdown.Item>
-                                <Dropdown.Item href="/user/accountsettings">Profile</Dropdown.Item>
-                                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                                {isLoggedIn ? (<>
+                                    <Dropdown.Item href="/user/accountsettings">Profile</Dropdown.Item>
+                                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                                </>) : (<>
+                                    <Dropdown.Item href="/login">Login</Dropdown.Item>
+                                    <Dropdown.Item href="/signup">Signup</Dropdown.Item>
+                                </>)}
                             </Dropdown.Menu>
                         </Dropdown>
                     </li>

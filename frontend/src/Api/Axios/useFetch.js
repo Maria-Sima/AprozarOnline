@@ -1,29 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {toast} from "react-toastify";
 import Swal from 'sweetalert2'
 
-export const getAuthToken = () => {
-    return window.localStorage.getItem('auth_token');
-};
-export const getUser=()=>{
-    return localStorage.getItem('user');
-}
-export const getUserId=()=>{
-    return localStorage.getItem('user_id');
-}
-
-
-export const setAuthToken = (token,id) => {
-    window.localStorage.setItem('auth_token', token);
-    console.log(id);
-    return window.localStorage.setItem("user_id",id);
-
-};
-export const removeAuthToken = () => {
-    window.localStorage.removeItem('auth_token');
-    window.localStorage.removeItem('user');
-};
 
 export const useAxiosGet = (url) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -56,7 +34,7 @@ export const useAxiosPost = () => {
         data: null,
         url: null,
         method: "POST",
-        headers: {} // Initialize headers as an empty object
+        headers: {}
     });
     const [response, setResponse] = useState(null);
     const [error,setError]=useState({
@@ -67,8 +45,11 @@ export const useAxiosPost = () => {
     useEffect(() => {
         const postData = async () => {
             try {
-                const result = await axios.post(request.url, request.data, {
-                    headers: request.headers // Include the custom headers
+                const result = await axios({
+                    method: request.method,
+                    url: request.url,
+                    data: request.data,
+                    headers: request.headers
                 });
                 setResponse(result.data);
 
@@ -82,7 +63,6 @@ export const useAxiosPost = () => {
                     icon: "error",
                     buttons: {
                         cancel: "Cancel",
-                        confirm: "Okay"
                     },
                     closeOnClickOutside: false
                 });
@@ -96,7 +76,7 @@ export const useAxiosPost = () => {
         }
     }, [request]);
 
-    const post = (url, data, headers = {}, method = "POST") => {
+    const post = (url, data, method = "POST",headers = {}) => {
         setRequest({ url, data, method, headers });
     };
 
