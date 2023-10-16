@@ -1,5 +1,4 @@
 package com.codecool.backend.security.auth;
-
 import com.codecool.backend.exception.EmailFailureException;
 import com.codecool.backend.exception.EmailNotFoundException;
 import com.codecool.backend.security.clientRequests.AuthenticationResponse;
@@ -38,7 +37,6 @@ public class AuthenticationController {
     }
     @GetMapping("/verify")
     public ResponseEntity verifyEmail(@RequestParam String token) {
-        System.out.println("Token  gets here !!!"+token);
         if (authenticationService.verifyEmail(token)) {
             return ResponseEntity.ok().build();
         } else {
