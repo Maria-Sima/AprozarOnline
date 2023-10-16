@@ -2,23 +2,21 @@ import {useRef} from 'react'
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import './AuthPage.scss'
-import {useAxiosPost} from "../../Api/Axios/useFetch.js";
 import {routes} from "../../Api/Axios/Routes.jsx";
+import {useForgotPasswordMutation} from "../../reducers/aprozarApi.js";
 const ForgotPassword = () => {
 
     const inputRef=useRef();
-    const {post: sendResetLink}=useAxiosPost();
-    const verifyEmail=(e)=>{
+    const [forgotPassword]=useForgotPasswordMutation()
+    const verifyEmail=async (e)=>{
         e.preventDefault();
-        sendResetLink(routes.forgotPassword,inputRef.current.value,"POST",{"Content-Type":" text/html"})
-        console.log(routes.forgotPassword)
+     await forgotPassword(inputRef.current.value)
         Swal.fire({
             title: "Email Sent",
             text:
-                "The reset email has been sent! Use it to rest your password",
+                "The reset email has been sent! Use it to reset your password",
             icon: "warning",
             buttons: {
-                cancel: "Cancel",
                 confirm: "Okay"
             },
             closeOnClickOutside: false

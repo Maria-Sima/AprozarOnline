@@ -1,40 +1,37 @@
-import img1 from "../../assets/pictures/moreVeges.jpg";
-import './AuthPage.scss'
-import { useAxiosPost} from "../../Api/Axios/useFetch.js";
-import {routes} from "../../Api/Axios/Routes.jsx";
-import AuthForm from "../../Components/Forms/AuthForm.jsx";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import img1 from '../../assets/pictures/moreVeges.jpg';
+import AuthForm from '../../Components/Forms/AuthForm.jsx';
+import { useRegisterUserMutation } from '../../reducers/aprozarApi.js';
+import './AuthPage.scss';
 
-
-const Signup = () => {
-
-const {post: registerUser, response}=useAxiosPost();
-
-const signUp=(data)=> {
-
-    registerUser(routes.register, data);
-    Swal.fire({
-        title: "Success",
-        text:
-            "An email has been sent to your inbox. Check it and come back",
-        icon: "success",
+function Signup() {
+  const [registerUser, { isSuccess }] = useRegisterUserMutation();
+  const signUp = async (data) => {
+    await registerUser(data);
+    if (isSuccess) {
+      Swal.fire({
+        title: 'Success',
+        text: 'An email has been sent to your inbox. Check it and come back',
+        icon: 'success',
         buttons: {
-            cancel: "Cancel",
-            confirm: "Okay"
+          confirm: 'Okay',
         },
-        closeOnClickOutside: false
-    });
+        closeOnClickOutside: false,
+      });
+    } else {
+      Swal.fire({
+        title: 'Error',
+        text: 'An error has occured',
+        icon: 'error',
+        buttons: {
+          confirm: 'Okay',
+        },
+        closeOnClickOutside: false,
+      });
+    }
+  };
 
-
-
-
+  return <AuthForm submit={signUp} img={img1} />;
 }
 
-return (
-<AuthForm submit={signUp} img={img1}/>
-
-
-    )
-}
-
-export default Signup
+export default Signup;

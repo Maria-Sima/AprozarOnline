@@ -18,9 +18,7 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
-    const cartdata = useSelector((state) =>{
-        console.log(state)
-        state.cartData});
+    const cartdata = useSelector((state) =>state.cartData);
 const authToken=useSelector((state)=>{state.auth.auth_token})
   const checklogin = () => {
 

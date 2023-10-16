@@ -16,5 +16,4 @@ export const routes = {
  productsByCategory:"seller/products/category/",
  forgotPassword:"/auth/forgot",
  resetPassword:"/auth/reset",
- verifyEmail:"auth/verify"
 };

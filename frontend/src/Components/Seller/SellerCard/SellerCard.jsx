@@ -3,8 +3,8 @@ import {Link} from "react-router-dom";
 
 const SellerCard = ({item}) => {
     let {id, email, imageUrl, firstName, lastName, address} = item;
-    console.log(address)
-    return (// <div className="col" onTouchStart={() => this.className.toggle('hover')}>
+
+    return (
         <div className="sellercontainer" onTouchStart={() => this.className.toggle('hover')}>
             <div
                 className="front"

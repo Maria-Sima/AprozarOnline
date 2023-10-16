@@ -1,20 +1,20 @@
 import ProductCard from '../ProductCard/ProductCard.jsx'
-import {routes} from "../../../Api/Axios/Routes.jsx"
 import './AllProduct.scss'
-import {useAxiosGet} from "../../../Api/Axios/useFetch.js";
+import {useGetProductsBySellerQuery} from "../../../reducers/aprozarApi.js";
+import {useEffect} from "react";
 
-const AllProduct = ({route}) => {
-    const products =  useAxiosGet(route)
-    console.log(route)
-    const {apiData,isLoading,serverError}= products;
-    console.log(apiData);
+
+const AllProduct = ({sellerId}) => {
+
+    const {data:apiData,isLoading,serverError}= useGetProductsBySellerQuery(sellerId);
+
+
     return (
         <div className='allproducts'>
             <h1>All Products</h1>
             <div className='products'>
                 {
                     apiData?.map((item,index) => {
-                        console.log(item)
                         return (
                             <ProductCard data={item} key={index}/>
                         )

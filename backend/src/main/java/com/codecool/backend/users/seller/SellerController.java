@@ -7,6 +7,7 @@ import com.codecool.backend.users.model.dto.AppUserDTO;
 import com.codecool.backend.users.service.AppUserService;
 import com.codecool.backend.users.controller.UserController;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +28,6 @@ public class SellerController extends UserController {
     @GetMapping("/all")
     public ResponseEntity<List<AppUserDTO>> getAllSellers() {
         List<AppUserDTO> sellers = service.getSellers();
-        System.out.println(sellers);
         return ResponseEntity.ok(sellers);
     }
 
@@ -46,10 +46,15 @@ public class SellerController extends UserController {
                                            @RequestParam("type") String type,
                                            @RequestParam("productDescription") String productDescription,
                                            @RequestParam("id") Long id) {
-        System.out.println(name +"+ "+type+"+ "+price+"+ "+id);
-        var productForm = new ProductForm(name, quantity, price, ProductType.valueOf(type), productDescription);
-        service.addProduct(productForm, id, photos);
-        return ResponseEntity.noContent().build();
+        try {
+            System.out.println(name + " " + photos + " " + quantity + " " + price + " " + type);
+            var productForm = new ProductForm(name, quantity, price, ProductType.valueOf(type), productDescription);
+            service.addProduct(productForm, id, photos);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @DeleteMapping("products/{productId}")

@@ -4,11 +4,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import './ProductsSlider.scss'
-import {useAxiosGet} from "../../../Api/Axios/useFetch.js";
-const ProductsSlider = ({ url,categoryname }) => {
+const ProductsSlider = () => {
 
-    const productFetch=useAxiosGet(url);
-    const {apiData:products,isLoading,serverError}=productFetch;
     const responsive = {
         display6: {
             breakpoint: { max: 2000, min: 1700 },
@@ -40,7 +37,7 @@ const ProductsSlider = ({ url,categoryname }) => {
 
     return (
         <div className='productsliderout' >
-            <h1>{categoryname}</h1>
+            <h1>More Products</h1>
 
             <Carousel responsive={responsive} 
             autoPlay={true}
@@ -48,7 +45,7 @@ const ProductsSlider = ({ url,categoryname }) => {
             swipeable={true}
             draggable={true}
             >
-                {products?.map((item,index)=>{
+                {responsive?.map((item,index)=>{
                     return (
                         <ProductCard data={item} key={index} />
                     )

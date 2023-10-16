@@ -41,40 +41,8 @@ const FAQ = () => {
         heading="FAQs"
         bannerimage='https://images.unsplash.com/photo-1665789318391-6057c533005e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80'
       />
-      {/* <p>faq</p> */}
 
       <div className='faqcontainer'>
-        {/* {
-          activesection == 1 ?
-            <div className='faq'>
-              <div className='faqhead'>
-                <h1>What is Lorem Ipsum?</h1>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"
-                  onClick={() => setactivesection(0)}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-              <div className='faqbody'>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </p>
-              </div>
-            </div>
-            :
-            <div className='faq'>
-              <div className='faqhead'>
-                <h1>What is Lorem Ipsum?</h1>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"
-                  onClick={() => setactivesection(1)}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                </svg>
-
-              </div>
-            </div>
-        } */}
-
 
         {
           faq.map((item, index) => {

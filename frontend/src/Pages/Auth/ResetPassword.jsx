@@ -1,29 +1,21 @@
 import  {useRef} from 'react';
 import {Link, useLocation, useParams} from "react-router-dom";
-import {useAxiosPost} from "../../Api/Axios/useFetch.js";
-import {routes} from "../../Api/Axios/Routes.jsx";
+import {useResetPasswordMutation} from "../../reducers/aprozarApi.js";
 
 const ResetPassword = () => {
 
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-
-
     const token = queryParams.get('token');
-    console.log(token)
     const inputRef=useRef();
-    const {post: sendResetLink}=useAxiosPost();
+ const [resetPassword]=useResetPasswordMutation();
     const verifyEmail=(e)=>{
         e.preventDefault();
-        console.log(inputRef.current.value)
         const resetPasswordRequest={
             token:token,
             password:inputRef.current.value
         }
-        sendResetLink(routes.resetPassword,resetPasswordRequest)
-
-
-
+        resetPassword(resetPasswordRequest)
     }
     return (
         <div className='authpage'>

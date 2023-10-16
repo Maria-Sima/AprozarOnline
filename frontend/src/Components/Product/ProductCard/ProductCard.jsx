@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import img1 from '../../../assets/pictures/fruits.png'
 import './ProductCard.scss'
-import {addToCart} from "../../../reducers/cartReducer.js";
+import {addToCart} from "../../../reducers/cartSlice.js";
 import {useDispatch} from "react-redux";
 
 const ProductCard = ({ data }) => {
@@ -20,7 +20,6 @@ const ProductCard = ({ data }) => {
     }
 
   let {price,name,productDescription,id,photoUrl,productType,userId}=data;
-  console.log(name)
   return (
     <div className='product'>
       <div className='s1'>

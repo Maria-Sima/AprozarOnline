@@ -3,28 +3,30 @@ import './Navbar.scss'
 import logo from '../../assets/pictures/aprozarVirtual.svg'
 import Dropdown from 'react-bootstrap/Dropdown'
 import {Link} from 'react-router-dom'
-import { useAxiosPost} from "../../Api/Axios/useFetch.js";
 import {useDispatch, useSelector} from "react-redux";
-import {removeAuth} from "../../reducers/authReducer.js";
+import {removeAuth} from "../../reducers/authSlice.js";
+import {useLogoutMutation} from "../../reducers/aprozarApi.js";
 
 const Navbar = () => {
 const dispatch=useDispatch()
     const [cartquantity, setcartquantity] = useState(0)
-    const {post, response} = useAxiosPost();
+    const [logout,{error,data}]=useLogoutMutation()
     const cartData = useSelector((state) => state.cart.cartData);
     const token=useSelector((state)=> state.auth.auth_token)
     const isLoggedIn=!!token;
-    console.log(isLoggedIn)
-    console.log(token)
-    const handleLogout = () => {
-        post('auth/logout', {});
+    console.log(data)
+    const handleLogout = async () => {
+       await logout({})
     };
 
     useEffect(() => {
-        if (response !== null) {
+        if (data) {
             dispatch(removeAuth());
+        }else{
+            console.error(error)
         }
-    }, [response,dispatch]);
+
+    }, [data]);
 
 
 

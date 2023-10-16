@@ -1,13 +1,16 @@
-import {useAxiosGet} from "../../../Api/Axios/useFetch.js";
-import {routes} from "../../../Api/Axios/Routes.jsx"
+
 import SellerCard from "../SellerCard/SellerCard.jsx";
 import "./AllSeller.scss"
+import {useGetAllSellersQuery} from "../../../reducers/aprozarApi.js";
+
 
 const AllSeller = () => {
-    const stores =  useAxiosGet(routes.stores)
-
-    const {apiData,isLoading,serverError}= stores;
-
+    const {
+        data: apiData,
+        error,
+        isError,
+        isLoading,
+    } = useGetAllSellersQuery();
     return (
         <div className='allsellers'>
             <h1>Our Sellers</h1>

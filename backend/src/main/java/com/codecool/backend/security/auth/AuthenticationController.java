@@ -49,7 +49,6 @@ public class AuthenticationController {
     @PostMapping("/forgot")
     public ResponseEntity forgotPassword(@RequestBody String email) {
         try {
-
             System.out.println(email);
             authenticationService.forgotPassword(email);
             return ResponseEntity.ok().build();

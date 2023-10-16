@@ -16,7 +16,6 @@ import Navbar from "./Components/Navbar/Navbar.jsx";
 import AddProduct from "./Pages/Product/AddProduct.jsx";
 import SellerPage from "./Pages/Seller/SellerPage.jsx";
 import ErrorPage from "./Components/Error/ErrorPage.jsx";
-import ProductFilter from "./Pages/Product/ProductFilter.jsx";
 import ResetPassword from "./Pages/Auth/ResetPassword.jsx";
 
 
@@ -40,7 +39,6 @@ const App = () => {
                 <Route path="/user/:activepage" element={<UserProfile />} />
                 <Route path="/FAQ" element={<FAQ />} />
                 <Route path="/addProduct" element={<AddProduct />} />
-                <Route path="/categories/:category" element={<ProductFilter />} />
                 <Route path="/seller/:sellerId" element={<SellerPage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
