@@ -1,9 +1,9 @@
 package com.codecool.backend.users.service;
 
 import com.codecool.backend.fileStorage.ImageService;
-import com.codecool.backend.security.clientRequests.PasswordRequest;
-import com.codecool.backend.security.clientRequests.RegistrationRequest;
-import com.codecool.backend.security.clientRequests.UpdateRequest;
+import com.codecool.backend.security.requestModels.PasswordRequest;
+import com.codecool.backend.security.requestModels.RegistrationRequest;
+import com.codecool.backend.security.requestModels.UpdateRequest;
 import com.codecool.backend.users.model.AppUser;
 import com.codecool.backend.users.model.AppUserRole;
 import com.codecool.backend.users.model.dto.AppUserDTO;
@@ -12,7 +12,6 @@ import com.codecool.backend.users.repository.AppUserDao;
 import com.sun.jdi.request.DuplicateRequestException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class AppUserService {
 
 
     @Autowired
-    public AppUserService( AppUserDao appUserDao, AppUserDTOMapper userDTOMapper, PasswordEncoder passwordEncoder, ImageService imageService) {
+    public AppUserService(AppUserDao appUserDao, AppUserDTOMapper userDTOMapper, PasswordEncoder passwordEncoder, ImageService imageService) {
         this.appUserDao = appUserDao;
         this.userDTOMapper = userDTOMapper;
         this.passwordEncoder = passwordEncoder;

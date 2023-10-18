@@ -2,9 +2,11 @@ package com.codecool.backend.orders.payments;
 
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
-import com.stripe.model.*;
+import com.stripe.model.Charge;
+import com.stripe.model.Customer;
+import com.stripe.model.PaymentMethod;
+import com.stripe.model.Token;
 import jakarta.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +14,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@Slf4j
-
-public class StripeService implements PaymentService{
+public class StripeService implements PaymentService {
     @Value("${stripe.key}")
     private String stripeApiKey;
 
 
     @PostConstruct
-    public void init(){
+    public void init() {
 
         Stripe.apiKey = stripeApiKey;
     }
@@ -43,13 +43,13 @@ public class StripeService implements PaymentService{
             }
             return model;
         } catch (StripeException e) {
-            log.error("StripeService (createCardToken)", e);
+            System.out.println("StripeService (createCardToken)"+ e);
             throw new RuntimeException(e.getMessage());
         }
 
     }
 
-public String charge(StripeChargeDTO chargeRequest) {
+    public String charge(StripeChargeDTO chargeRequest) {
 
 
         try {
@@ -73,15 +73,14 @@ public String charge(StripeChargeDTO chargeRequest) {
             }
             return charge.getId();
         } catch (StripeException e) {
-            log.error("StripeService (charge)", e);
+            System.out.println("StripeService (charge)" + e);
             throw new RuntimeException(e.getMessage());
         }
 
     }
 
 
-
-    private PaymentMethod createPaymentMethod(StripeSubscriptionDTO subscriptionDto){
+    private PaymentMethod createPaymentMethod(StripeSubscriptionDTO subscriptionDto) {
 
         try {
 
@@ -99,12 +98,12 @@ public String charge(StripeChargeDTO chargeRequest) {
             return PaymentMethod.create(params);
 
         } catch (StripeException e) {
-            log.error("StripeService (createPaymentMethod)", e);
+            System.out.println("StripeService (createPaymentMethod)"+ e);
             throw new RuntimeException(e.getMessage());
         }
     }
 
-    private Customer createCustomer(PaymentMethod paymentMethod,StripeSubscriptionDTO subscriptionDto){
+    private Customer createCustomer(PaymentMethod paymentMethod, StripeSubscriptionDTO subscriptionDto) {
 
         try {
 
@@ -115,13 +114,13 @@ public String charge(StripeChargeDTO chargeRequest) {
 
             return Customer.create(customerMap);
         } catch (StripeException e) {
-            log.error("StripeService (createCustomer)", e);
+            System.out.println("StripeService (createCustomer)"+ e);
             throw new RuntimeException(e.getMessage());
         }
 
     }
 
-    private PaymentMethod attachCustomerToPaymentMethod(Customer customer,PaymentMethod paymentMethod){
+    private PaymentMethod attachCustomerToPaymentMethod(Customer customer, PaymentMethod paymentMethod) {
 
         try {
 
@@ -134,7 +133,7 @@ public String charge(StripeChargeDTO chargeRequest) {
 
 
         } catch (StripeException e) {
-            log.error("StripeService (attachCustomerToPaymentMethod)", e);
+            System.out.println("StripeService (attachCustomerToPaymentMethod)"+ e);
             throw new RuntimeException(e.getMessage());
         }
 

@@ -1,6 +1,4 @@
-package com.codecool.backend.security.clientRequests;
-
-import org.springframework.web.multipart.MultipartFile;
+package com.codecool.backend.security.requestModels;
 
 public record RegistrationRequest(
          String firstName,

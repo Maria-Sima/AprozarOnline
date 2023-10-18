@@ -1,27 +1,31 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {routes} from "../Api/Axios/Routes.jsx";
 
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/', headers: { 'Content-Type': ' application/json' } }),
   endpoints: (builder) => ({
     getAllSellers: builder.query({
-      query: () => 'seller/all',
+      query: () => routes.users.getSellers,
     }),
     registerUser: builder.mutation({
-      mutation: (reqisterRequest) => ({
-        url: 'auth/register',
+      query: (reqisterRequest) => ({
+        url: routes.auth.register,
         method: 'POST',
         body: reqisterRequest,
       }),
     }),
     getSellerInfo: builder.query({
-      query: (sellerId) => `seller/info/${sellerId}`,
+      query: (sellerId) => `${routes.users.user}${sellerId}`,
+    }),
+    logoutUser: builder.query({
+      query: () => `auth/logout`,
     }),
     getProductsBySeller: builder.query({
-      query: (sellerId) => `seller/${sellerId}/products`,
+      query: (sellerId) => `${routes.products.getProductsBySeller}${sellerId}`,
     }),
     loginUser: builder.mutation({
-      mutation: (loginRequest) => ({
+      query: (loginRequest) => ({
         url: 'auth/login',
         method: 'POST',
         body: loginRequest,
@@ -42,19 +46,12 @@ export const apiSlice = createApi({
       }),
     }),
     addProduct: builder.mutation({
-      mutation: (addProductRequest) => ({
+      query: (addProductRequest) => ({
         url: 'seller/addProduct',
         method: 'POST',
         body: addProductRequest,
         headers: { 'Content-Type': 'multipart/form-data' },
         formData: true,
-      }),
-    }),
-    logout: builder.mutation({
-      query: (_logout) => ({
-        url: 'auth/logout',
-        method: 'POST',
-        body: {},
       }),
     }),
   }),
@@ -64,7 +61,7 @@ export const {
   useGetAllSellersQuery,
   useRegisterUserMutation,
   useLoginUserMutation,
-  useLogoutMutation,
+  useLogoutUserQuery,
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useAddProductMutation,

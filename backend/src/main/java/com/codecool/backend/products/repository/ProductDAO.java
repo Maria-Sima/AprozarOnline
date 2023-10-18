@@ -1,7 +1,7 @@
 package com.codecool.backend.products.repository;
 
 import com.codecool.backend.products.model.Product;
-import com.codecool.backend.products.model.types.ProductType;
+import com.codecool.backend.products.model.types.ProductCategory;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +18,7 @@ public interface ProductDAO {
 
     Optional<Product> findProductById(Long Id);
 
-    List<Product> getProductsByCategory(ProductType productType);
+    List<Product> getProductsByCategory(ProductCategory productCategory);
 
 
     void deleteProductById(Long productId);

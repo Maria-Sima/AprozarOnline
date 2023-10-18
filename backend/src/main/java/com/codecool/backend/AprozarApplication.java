@@ -8,22 +8,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AprozarApplication implements CommandLineRunner {
+public class AprozarApplication {
 
-private final SellerDbSeed sellerList;
-@Autowired
-    public AprozarApplication(SellerDbSeed sellerList) {
-        this.sellerList = sellerList;
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(AprozarApplication.class, args);
     }
 
 
-    public void run(String... args) {
 
-//sellerList.initDB();
-    }
 
 }

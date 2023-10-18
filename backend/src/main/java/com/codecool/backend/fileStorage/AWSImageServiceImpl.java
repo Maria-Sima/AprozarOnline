@@ -4,9 +4,6 @@ import com.codecool.backend.exception.AmazonClientException;
 import com.codecool.backend.exception.AmazonServiceException;
 import com.codecool.backend.exception.NullRequestException;
 import com.codecool.backend.exception.ResourceNotFoundException;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,7 +24,6 @@ import java.util.UUID;
 @Service
 public class AWSImageServiceImpl implements ImageService {
     private final S3Client s3Client;
-    private static final Logger logger = LoggerFactory.getLogger(AWSImageServiceImpl.class);
     private final ImageRepository imageRepository;
     @Value("${aws.bucket.name}")
     private String bucketName;

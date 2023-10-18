@@ -7,10 +7,9 @@ import {useGetAllSellersQuery} from "../../../reducers/aprozarApi.js";
 const AllSeller = () => {
     const {
         data: apiData,
-        error,
-        isError,
-        isLoading,
     } = useGetAllSellersQuery();
+
+
     return (
         <div className='allsellers'>
             <h1>Our Sellers</h1>

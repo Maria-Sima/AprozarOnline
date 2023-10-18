@@ -1,4 +1,4 @@
-package com.codecool.backend.security.clientRequests;
+package com.codecool.backend.security.requestModels;
 
 import com.codecool.backend.users.model.dto.AppUserDTO;
 

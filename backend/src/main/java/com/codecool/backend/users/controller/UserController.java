@@ -1,7 +1,8 @@
 package com.codecool.backend.users.controller;
 
-import com.codecool.backend.security.clientRequests.PasswordRequest;
-import com.codecool.backend.security.clientRequests.UpdateRequest;
+import com.codecool.backend.security.requestModels.PasswordRequest;
+import com.codecool.backend.security.requestModels.UpdateRequest;
+import com.codecool.backend.users.model.AppUserRole;
 import com.codecool.backend.users.model.dto.AppUserDTO;
 import com.codecool.backend.users.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController{
 
     private final AppUserService appUserService;
@@ -20,13 +23,17 @@ public class UserController{
     }
 
     @GetMapping("/{userID}")
-    public ResponseEntity<AppUserDTO> getUserById(@PathVariable Long id){
-    AppUserDTO user=appUserService.getUser(id);
+    public ResponseEntity<AppUserDTO> getUserById(@PathVariable Long userID){
+    AppUserDTO user=appUserService.getUser(userID);
     return ResponseEntity.ok(user);
     }
-
+@GetMapping("/queryByRole/{role}")
+public ResponseEntity<List<AppUserDTO>> getUsersByRole(@PathVariable AppUserRole role){
+    List<AppUserDTO> usersByRole=appUserService.getUsersByRole(role);
+    return ResponseEntity.ok(usersByRole);
+}
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id){
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
     appUserService.deleteCustomerById(id);
         return ResponseEntity.noContent().build();
     }

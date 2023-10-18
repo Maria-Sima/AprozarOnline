@@ -1,10 +1,10 @@
 package com.codecool.backend.security.auth;
 import com.codecool.backend.exception.EmailFailureException;
 import com.codecool.backend.exception.EmailNotFoundException;
-import com.codecool.backend.security.clientRequests.AuthenticationResponse;
-import com.codecool.backend.security.clientRequests.LoginRequest;
-import com.codecool.backend.security.clientRequests.PasswordReset;
-import com.codecool.backend.security.clientRequests.RegistrationRequest;
+import com.codecool.backend.security.requestModels.AuthenticationResponse;
+import com.codecool.backend.security.requestModels.LoginRequest;
+import com.codecool.backend.security.requestModels.PasswordReset;
+import com.codecool.backend.security.requestModels.RegistrationRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -62,7 +62,7 @@ public class AuthenticationController {
         authenticationService.resetPassword(reset);
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request) {
         authenticationService.logout(request);
         return ResponseEntity.ok("Logged out successfully");

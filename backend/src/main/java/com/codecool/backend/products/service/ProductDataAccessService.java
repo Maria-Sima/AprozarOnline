@@ -3,7 +3,7 @@ package com.codecool.backend.products.service;
 import com.codecool.backend.products.model.Product;
 import com.codecool.backend.products.repository.ProductDAO;
 import com.codecool.backend.products.repository.ProductRepository;
-import com.codecool.backend.products.model.types.ProductType;
+import com.codecool.backend.products.model.types.ProductCategory;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +45,8 @@ public class ProductDataAccessService implements ProductDAO {
         return productRepository.findById(Id);
     }
 
-    public List<Product> getProductsByCategory(ProductType productType) {
-        return productRepository.findProductsByProductType(productType);
+    public List<Product> getProductsByCategory(ProductCategory productCategory) {
+        return productRepository.findProductsByProductCategory(productCategory);
     }
 
     public void deleteProductById(Long productId) {

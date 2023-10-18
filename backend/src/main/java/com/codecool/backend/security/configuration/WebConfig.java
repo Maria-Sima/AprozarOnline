@@ -36,8 +36,7 @@ public class WebConfig {
                 HttpMethod.DELETE.name()));
         config.setMaxAge(MAX_AGE);
         source.registerCorsConfiguration("/**", config);
-        CorsFilter bean = new CorsFilter(source);
 
-        return bean;
+        return new CorsFilter(source);
     }
 }

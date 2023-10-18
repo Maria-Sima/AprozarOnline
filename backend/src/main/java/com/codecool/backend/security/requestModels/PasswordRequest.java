@@ -1,4 +1,4 @@
-package com.codecool.backend.security.clientRequests;
+package com.codecool.backend.security.requestModels;
 
 public record PasswordRequest(
         String oldPassword,

@@ -1,5 +1,5 @@
 package com.codecool.backend.products.model.types;
 
-public enum ProductType {
+public enum ProductCategory {
     Dairy,Meat,Vegetables,Fruits
 }

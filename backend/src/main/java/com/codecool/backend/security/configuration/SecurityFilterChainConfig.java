@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -35,17 +34,20 @@ public class SecurityFilterChainConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(
                                     HttpMethod.GET,
-                                    "/images"
+                            "products/**",
+                            "users/**",
+                            "auth/logout"
                             )
                             .permitAll();
                     auth.requestMatchers(
                                     HttpMethod.POST,
-                                    "/auth/register",
-                                    "/auth/login",
-                                    "/images"
+                                    "/auth/**"
                             )
                             .permitAll();
-                    auth.anyRequest().permitAll();
+                    auth.requestMatchers(
+                            HttpMethod.POST,
+                            "/products/**"
+                    ).hasRole("Seller");
                 })
 //                .oauth2Login(Customizer.withDefaults())
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
