@@ -5,7 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux";
 import {removeAuth} from "../../reducers/authSlice.js";
-import {useLogoutUserQuery} from "../../reducers/aprozarApi.js";
+import {useLogoutUserQuery} from "../../reducers/apiSlice.js";
 
 const Navbar = () => {
     const dispatch = useDispatch()

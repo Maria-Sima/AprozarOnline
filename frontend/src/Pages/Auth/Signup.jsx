@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import img1 from '../../assets/pictures/moreVeges.jpg';
 import AuthForm from '../../Components/Forms/AuthForm.jsx';
-import { useRegisterUserMutation } from '../../reducers/aprozarApi.js';
+import { useRegisterUserMutation } from '../../reducers/apiSlice.js';
 import './AuthPage.scss';
 
 function Signup() {

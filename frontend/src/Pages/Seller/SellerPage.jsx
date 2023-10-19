@@ -4,7 +4,7 @@ import Footer1 from "../../Components/Footer/Footer1.jsx";
 import Footer2 from "../../Components/Footer/Footer2.jsx";
 import Loader from "../../Components/Loader/Loader.jsx";
 import Product_Sidebar from "../../Components/Product/ProductSidebar/Product_Sidebar.jsx";
-import { useGetSellerInfoQuery} from "../../reducers/aprozarApi.js";
+import { useGetSellerInfoQuery} from "../../reducers/apiSlice.js";
 
 const SellerPage = () => {
     const {sellerId} = useParams();

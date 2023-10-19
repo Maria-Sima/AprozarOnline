@@ -8,6 +8,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.multipart.MultipartException;
 
 @ControllerAdvice
 public class DefaultExceptionHandler {
@@ -65,6 +66,16 @@ public class DefaultExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(value = MultipartException.class)
+    public ResponseEntity<ApiError> handleFileUploadingError(Exception e,HttpServletRequest request) {
+        ApiError apiError = new ApiError(
+                request.getRequestURI(),
+                e.getMessage(),
+                HttpStatus.BAD_REQUEST.value()
 
+        );
+
+        return new  ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+    }
     }
 

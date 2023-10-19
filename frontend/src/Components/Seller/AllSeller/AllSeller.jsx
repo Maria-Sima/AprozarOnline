@@ -1,7 +1,7 @@
 
 import SellerCard from "../SellerCard/SellerCard.jsx";
 import "./AllSeller.scss"
-import {useGetAllSellersQuery} from "../../../reducers/aprozarApi.js";
+import {useGetAllSellersQuery} from "../../../reducers/apiSlice.js";
 
 
 const AllSeller = () => {

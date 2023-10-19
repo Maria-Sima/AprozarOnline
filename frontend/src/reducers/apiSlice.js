@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import {routes} from "../Api/Axios/Routes.jsx";
+import {routes} from "../middleware/Routes.jsx";
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -19,35 +19,35 @@ export const apiSlice = createApi({
       query: (sellerId) => `${routes.users.user}${sellerId}`,
     }),
     logoutUser: builder.query({
-      query: () => `auth/logout`,
+      query: () => routes.auth.logout,
     }),
     getProductsBySeller: builder.query({
       query: (sellerId) => `${routes.products.getProductsBySeller}${sellerId}`,
     }),
     loginUser: builder.mutation({
       query: (loginRequest) => ({
-        url: 'auth/login',
+        url: routes.auth.login,
         method: 'POST',
         body: loginRequest,
       }),
     }),
     forgotPassword: builder.mutation({
       query: (forgotRequest) => ({
-        url: 'auth/forgot',
+        url: routes.auth.forgotPassword,
         method: 'POST',
         body: forgotRequest,
       }),
     }),
     resetPassword: builder.mutation({
       query: (resetRequest) => ({
-        url: 'auth/reset',
+        url: routes.auth.forgotPassword,
         method: 'POST',
         body: resetRequest,
       }),
     }),
     addProduct: builder.mutation({
       query: (addProductRequest) => ({
-        url: 'seller/addProduct',
+        url: routes.products.addProduct,
         method: 'POST',
         body: addProductRequest,
         headers: { 'Content-Type': 'multipart/form-data' },

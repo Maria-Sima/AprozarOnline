@@ -2,7 +2,7 @@ import {useRef} from 'react'
 import {Link} from 'react-router-dom'
 import Swal from 'sweetalert2'
 import './AuthPage.scss'
-import {useForgotPasswordMutation} from "../../reducers/aprozarApi.js";
+import {useForgotPasswordMutation} from "../../reducers/apiSlice.js";
 
 const ForgotPassword = () => {
 

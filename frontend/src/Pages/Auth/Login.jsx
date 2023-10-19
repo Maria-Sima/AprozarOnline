@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import img from '../../assets/pictures/platou_trad.webp';
 import LoginForm from '../../Components/Forms/LoginForm.jsx';
-import { useLoginUserMutation } from '../../reducers/aprozarApi.js';
+import { useLoginUserMutation } from '../../reducers/apiSlice.js';
 import { setAuthToken } from '../../reducers/authSlice.js';
 import './AuthPage.scss';
 

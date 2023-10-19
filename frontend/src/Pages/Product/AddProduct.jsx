@@ -5,7 +5,7 @@ import SingleBanner from '../../Components/Banners/SingleBanner.jsx';
 import Footer1 from '../../Components/Footer/Footer1.jsx';
 import Footer2 from '../../Components/Footer/Footer2.jsx';
 import ProductForm from '../../Components/Product/ProductForm/ProductForm.jsx';
-import { useAddProductMutation } from '../../reducers/aprozarApi.js';
+import { useAddProductMutation } from '../../reducers/apiSlice.js';
 
 const AddProduct = () => {
   const [addProduct, { error }] = useAddProductMutation();

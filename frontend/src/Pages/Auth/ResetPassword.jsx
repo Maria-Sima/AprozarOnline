@@ -1,6 +1,6 @@
 import  {useRef} from 'react';
 import {Link, useLocation, useParams} from "react-router-dom";
-import {useResetPasswordMutation} from "../../reducers/aprozarApi.js";
+import {useResetPasswordMutation} from "../../reducers/apiSlice.js";
 
 const ResetPassword = () => {
 

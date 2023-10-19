@@ -6,7 +6,7 @@ const ShoppingCart = () => {
     const cartData = useSelector((state) => state.cart.cartData);
 
     const removeItemFromCart = (index) => {
-        console.log(index)
+
         dispatch(removeFromCart(index));
     };
     const increaseProductQuantity = (index) => {

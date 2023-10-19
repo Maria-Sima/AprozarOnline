@@ -1,5 +1,6 @@
 package com.codecool.backend.products.controller;
 
+import com.codecool.backend.exception.MultipartException;
 import com.codecool.backend.products.model.types.ProductForm;
 import com.codecool.backend.products.model.dto.ProductDTO;
 import com.codecool.backend.products.model.types.ProductCategory;
@@ -46,7 +47,7 @@ public class ProductsController {
             var productForm = new ProductForm(name, quantity, price, ProductCategory.valueOf(type), productDescription,id);
             service.addProduct(productForm, photos);
             return ResponseEntity.noContent().build();
-        } catch (Exception e) {
+        } catch (MultipartException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

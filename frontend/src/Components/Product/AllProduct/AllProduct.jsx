@@ -1,6 +1,6 @@
 import ProductCard from '../ProductCard/ProductCard.jsx'
 import './AllProduct.scss'
-import {useGetProductsBySellerQuery} from "../../../reducers/aprozarApi.js";
+import {useGetProductsBySellerQuery} from "../../../reducers/apiSlice.js";
 import {useEffect} from "react";
 
 

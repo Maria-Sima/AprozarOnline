@@ -41,13 +41,14 @@ public class SecurityFilterChainConfig {
                             .permitAll();
                     auth.requestMatchers(
                                     HttpMethod.POST,
-                                    "/auth/**"
+                                    "/auth/**",
+                            "/products/**"
                             )
                             .permitAll();
-                    auth.requestMatchers(
-                            HttpMethod.POST,
-                            "/products/**"
-                    ).hasRole("Seller");
+//                    auth.requestMatchers(
+//                            HttpMethod.POST,
+//                            "/products/**"
+//                    ).hasRole("Seller");
                 })
 //                .oauth2Login(Customizer.withDefaults())
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
