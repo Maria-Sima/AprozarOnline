@@ -63,8 +63,8 @@ public class AuthenticationController {
         return ResponseEntity.ok().build();
     }
     @GetMapping("/logout")
-    public ResponseEntity<String> logout(HttpServletRequest request) {
+    public ResponseEntity logout(HttpServletRequest request) {
         authenticationService.logout(request);
-        return ResponseEntity.ok("Logged out successfully");
+        return ResponseEntity.ok().build();
     }
 }

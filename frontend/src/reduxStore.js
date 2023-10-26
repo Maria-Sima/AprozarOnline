@@ -5,6 +5,8 @@ import { apiSlice } from "./reducers/apiSlice.js"
 import authSlice from "./reducers/authSlice.js"
 
 import cartSlice from "./reducers/cartSlice.js"
+import uiSlice from "./reducers/uiSlice.js";
+import loadingMiddleware from "./middleware/loadingMiddleware.js";
 
 const persistConfig = {
   key: "root",
@@ -14,6 +16,7 @@ const rootReducer = combineReducers({
   api: apiSlice.reducer,
   auth: authSlice,
   cart: cartSlice,
+  ui:uiSlice
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
@@ -22,7 +25,8 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(apiSlice.middleware),
+    }).concat(apiSlice.middleware,loadingMiddleware),
+  devTools:true
 })
 
 export default store

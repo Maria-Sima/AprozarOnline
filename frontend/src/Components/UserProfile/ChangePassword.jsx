@@ -1,6 +1,5 @@
 
 import {useForm} from "react-hook-form";
-import {useAxiosPost} from "../../Api/Axios/useFetch.js";
 import {DevTool} from "@hookform/devtools";
 import {useSelector} from "react-redux";
 
@@ -9,10 +8,10 @@ const ChangePassword = () => {
     const {register, handleSubmit, control, formState: {errors}, watch} = useForm({
         mode: 'onChange'
     });
-    const {post: updatePassword, response}=useAxiosPost();
+    const customerId=useSelector(state => state.auth.user_id)
     const changePassword=(data)=> {
-        const customerId=useSelector(state => state.auth.user_id)
-        updatePassword(`/user/password/${userId}`, data,"PUT");
+
+
 
     }
 

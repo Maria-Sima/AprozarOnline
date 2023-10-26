@@ -17,13 +17,19 @@ import AddProduct from "./Pages/Product/AddProduct.jsx";
 import SellerPage from "./Pages/Seller/SellerPage.jsx";
 import ErrorPage from "./Components/Error/ErrorPage.jsx";
 import ResetPassword from "./Pages/Auth/ResetPassword.jsx";
+import {useSelector} from "react-redux";
+import Loader from "./Components/Loader/Loader.jsx";
+
 
 
 
 const App = () => {
+    const loading = useSelector((state) => state.ui.loading);
+
 
     return (
-
+        <>
+        {loading && <Loader />}
         <BrowserRouter>
             <Navbar />
             <Routes>
@@ -43,6 +49,7 @@ const App = () => {
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </BrowserRouter>
+        </>
 
     );
 };

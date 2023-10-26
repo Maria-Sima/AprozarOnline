@@ -1,18 +1,17 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import './OrderSuccessful.scss'
-import { useRecoilState } from 'recoil'
-import { orderSuccessfulProvider } from '../../Api/OrderSuccessfulProvider.jsx'
 
-const OrderSuccessful = ({ orderid, message, redirecto }) => {
 
-    const [ordersuccesscont, setordersuccesscont] = useRecoilState(orderSuccessfulProvider)
+const OrderSuccessful = ({orderid, message, redirecto}) => {
+
+    const [ordersuccesscont, setordersuccesscont] = useState(false)
     const [orderdata, setorderdata] = useState({
         OrderNo: orderid,
         OrderDate: '12/12/2021',
         OrderStatus: 'Delivered',
         CustomerName: 'Test',
         CustomerShipToAddress: 'Test',
-        CustomerEmail:'test@test.come',
+        CustomerEmail: 'test@test.come',
         OrderItems: [
             {
                 ProductName: 'Product 1',
@@ -33,23 +32,26 @@ const OrderSuccessful = ({ orderid, message, redirecto }) => {
             className='OrdersSuccessful'
         >
             <button className='popup__close-btn'
-                onClick={() => {
+                    onClick={() => {
 
-                    if(redirecto == 'userorders'){
-                        window.location.href = '/user/yourorders'
-                    }
-                    setordersuccesscont(false)
-                }}
+                        if (redirecto == 'userorders') {
+                            window.location.href = '/user/yourorders'
+                        }
+                        setordersuccesscont(false)
+                    }}
             >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                     stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
             </button>
 
             <div className='confirmationcont'>
                 <div className='c1'>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                         stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round"
+                              d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/>
                     </svg>
                     <h2>{message}</h2>
                 </div>
@@ -119,31 +121,31 @@ const OrderSuccessful = ({ orderid, message, redirecto }) => {
                 <div className='c3'>
                     <table>
                         <thead>
-                            <tr>
-                                <th>Sno.</th>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total Price</th>
-                            </tr>
+                        <tr>
+                            <th>Sno.</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                        </tr>
                         </thead>
 
                         <tbody>
-                            {
-                                orderdata?.OrderItems && orderdata.OrderItems.map((item, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td>
-                                                <p>{index + 1}</p>
-                                            </td>
-                                            <td><p>{item.ProductName}</p></td>
-                                            <td><p>${item.Price}</p></td>
-                                            <td><p>{item.Quantity}</p></td>
-                                            <td><p>${item.Price * item.Quantity}</p></td>
-                                        </tr>
-                                    )
-                                })
-                            }
+                        {
+                            orderdata?.OrderItems && orderdata.OrderItems.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>
+                                            <p>{index + 1}</p>
+                                        </td>
+                                        <td><p>{item.ProductName}</p></td>
+                                        <td><p>${item.Price}</p></td>
+                                        <td><p>{item.Quantity}</p></td>
+                                        <td><p>${item.Price * item.Quantity}</p></td>
+                                    </tr>
+                                )
+                            })
+                        }
                         </tbody>
                     </table>
                 </div>
