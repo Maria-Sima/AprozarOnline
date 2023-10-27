@@ -175,7 +175,7 @@ $authFormMargin: 10px 0px;
     gap: 0px;
   }
   .authcont img{
-    width: 100%;
+   width: 100%;
     height: 40%;
   }
   .authform{
@@ -217,9 +217,7 @@ $authFormMargin: 10px 0px;
     flex-direction: column;
     height: 100%;
     width: 97%;
-    margin: 0px;
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin: 10% 0px;
     align-self: center;
   }
   .authcont img{

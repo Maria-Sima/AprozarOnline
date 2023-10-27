@@ -1,7 +1,7 @@
-import "./ErrorPage.scss"
+import "./NotFoundPage.scss"
 import {Link} from "react-router-dom";
 
-const ErrorPage = () => {
+const NotFoundPage = () => {
     return (
         <div className="container">
             <div className="row">
@@ -26,4 +26,4 @@ const ErrorPage = () => {
     );
 };
 
-export default ErrorPage;
+export default NotFoundPage;

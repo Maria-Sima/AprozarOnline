@@ -48,7 +48,21 @@ public class EmailService implements MessageSender {
     }
 
 
-
+    public void sendFeedBackEmail(String email, String text,String name) throws EmailFailureException {
+        SimpleMailMessage messageToCustomer = createMailMessage();
+        messageToCustomer.setTo(email);
+        messageToCustomer.setSubject("Salut "+name);
+        messageToCustomer.setText("Vă mulțumim pentru feedback. Un reprezentant va lua legătura cu dvs. pentru mai multe detalii.");
+        SimpleMailMessage messageFromCustomer = createMailMessage();
+        messageFromCustomer.setTo(email);
+        messageFromCustomer.setSubject("Feedback received from "+ name);
+        messageFromCustomer.setText("Subject:"+text+ "\nContact Info: "+email);
+        try {
+            javaMailSender.send(messageToCustomer);
+        } catch (MailException ex) {
+            throw new EmailFailureException("The email couldn't be send! Check the email address and try again ");
+        }
+    }
     public void sendPasswordResetEmail(String email, String token) throws EmailFailureException {
         SimpleMailMessage message = createMailMessage();
         message.setTo(email);

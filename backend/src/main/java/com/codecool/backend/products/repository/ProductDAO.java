@@ -2,23 +2,25 @@ package com.codecool.backend.products.repository;
 
 import com.codecool.backend.products.model.Product;
 import com.codecool.backend.products.model.types.ProductCategory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductDAO {
 
-    List<Product> getAllProducts();
+    Page<Product> getAllProducts(Pageable pageable);
 
     void addProducts(List<Product> products);
 
-    List<Product> getAllProductsBySeller(Long id);
+    Page<Product> getAllProductsBySeller(Long id, Pageable pageable);
 
     void addProduct(Product product);
 
     Optional<Product> findProductById(Long Id);
 
-    List<Product> getProductsByCategory(ProductCategory productCategory);
+    Page<Product> getProductsByCategory(ProductCategory productCategory,Pageable pageable);
 
 
     void deleteProductById(Long productId);

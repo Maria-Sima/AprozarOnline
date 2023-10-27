@@ -2,6 +2,8 @@ package com.codecool.backend.products.repository;
 
 import com.codecool.backend.products.model.Product;
 import com.codecool.backend.products.model.types.ProductCategory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,12 +11,12 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findProductsByProductCategory(ProductCategory category);
+    Page<Product> findProductsByProductCategory(ProductCategory category, Pageable pageable);
 
-    List<Product> findProductsByUserId(Long userId);
+    Page<Product> findProductsByUserId(Long userId,Pageable pageable);
 
 
-    List<Product> findProductsByNameContainingIgnoreCase(String name);
+    Page<Product> findProductsByNameContainingIgnoreCase(String name,Pageable pageable);
 
     boolean existsProductById(Long productId);
 

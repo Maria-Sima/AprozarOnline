@@ -5,7 +5,8 @@ import { useRegisterUserMutation } from '../../reducers/apiSlice.js';
 import './AuthPage.scss';
 
 function Signup() {
-  const [registerUser, { isSuccess }] = useRegisterUserMutation();
+  const [registerUser, { isSuccess ,serverError}] = useRegisterUserMutation();
+  console.log(serverError)
   const signUp = async (data) => {
     await registerUser(data);
     if (isSuccess) {

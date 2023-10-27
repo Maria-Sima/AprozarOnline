@@ -6,7 +6,7 @@ import fruits from "../../assets/pictures/fruits.webp"
 import fruits2 from "../../assets/pictures/1.png"
 import './BannerSlider.scss'
 
-const BannerSlider = () => {
+const BannerSlider = ({scrollToProductSidebar}) => {
     const data=[
         {
             id:1,
@@ -47,6 +47,10 @@ const BannerSlider = () => {
         slidesToScroll: 1
     };
 
+    const handleShopMoreClick = () => {
+
+        scrollToProductSidebar();
+    };
 
     return (
         <div className='bannerslider'>
@@ -59,7 +63,7 @@ const BannerSlider = () => {
                                 <div className='content'>
                                     <h1>{item.title}</h1>
                                     <span>{item.description}</span>
-                                    <button>Shop More</button>
+                                    <button onClick={handleShopMoreClick}>Shop More</button>
                                 </div>
                             </div>
                         )

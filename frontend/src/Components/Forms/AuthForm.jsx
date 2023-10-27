@@ -12,7 +12,7 @@ const AuthForm = ({ submit, img }) => {
         <div className='authpage'>
             <div className='authcont'>
                 <img src={img} alt='signup' />
-                <form className='authform'  onSubmit={handleSubmit(submit)}>
+                <form className='authform'  onSubmit={handleSubmit(submit)} autoComplete="off">
                     <h1>Signup</h1>
                     <div className='form-group-row'>
                         <div className='formgroup'>
@@ -89,7 +89,7 @@ const AuthForm = ({ submit, img }) => {
                                     maxLength:{
                                         value:20,
                                         message:'Password should not be longer than 20 characters'
-                                    }})}
+                                    }})} autoComplete="new-password"
                             />
                             <span className="error">{errors.password?.message}</span>
                         </div>
@@ -98,6 +98,7 @@ const AuthForm = ({ submit, img }) => {
                             <input
                                 type='password'
                                 id='cpassword'
+                            autoComplete="new-password"
                                 {...register("cpassword", {
                                     required: true,
                                     validate: (value) => {

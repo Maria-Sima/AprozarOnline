@@ -42,7 +42,8 @@ public class SecurityFilterChainConfig {
                     auth.requestMatchers(
                                     HttpMethod.POST,
                                     "/auth/**",
-                            "/products/**"
+                            "/products/**",
+                            "/email/**"
                             )
                             .permitAll();
 //                    auth.requestMatchers(

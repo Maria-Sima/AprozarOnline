@@ -63,7 +63,7 @@ const LoginForm = ({img,submit}) => {
                                     value: 20,
                                     message: 'Password should not be longer than 20 characters',
                                 },
-                            })}
+                            })} autoComplete="off"
                         />
                         <p className="error">{errors.password?.message}</p>
                     </div>

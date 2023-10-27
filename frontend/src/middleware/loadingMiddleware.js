@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2';
+import {isRejectedWithValue} from "@reduxjs/toolkit";
 
-const loadingMiddleware = (store) => (next) => (action) => {
+const loadingMiddleware = (api) => (next) => (action) => {
     if (action.type.startsWith('api/') && action.type.endsWith('/pending')) {
         Swal.showLoading();
     }
@@ -10,9 +11,9 @@ const loadingMiddleware = (store) => (next) => (action) => {
     }
 
 
-    if (action.type.startsWith('api/') && action.type.endsWith('/rejected')) {
-        Swal.close();
-        Swal.fire('Error', action.error.message, 'error');
+    if (isRejectedWithValue(action)) {
+        const errorDescription = action.error.data.message || 'An error occurred';
+        Swal.fire('Error', errorDescription, 'error');
     }
 
     return next(action);

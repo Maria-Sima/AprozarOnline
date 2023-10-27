@@ -16,7 +16,11 @@ users:{
 },
  products:{
   getProductsBySeller: `${productsBase}/seller/`,
-  addProduct: `${productsBase}/addProduct`
+  addProduct: `${productsBase}/addProduct`,
+  allProducts:`${productsBase}/all`
+ },
+ email:{
+  sendFeedBackEmail: "/email/sendFeedBack"
  }
 };
 

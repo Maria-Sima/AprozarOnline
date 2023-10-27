@@ -9,6 +9,8 @@ import com.codecool.backend.products.model.dto.ProductDTOMapper;
 import com.codecool.backend.products.repository.ProductDAO;
 import com.codecool.backend.products.model.types.ProductCategory;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,8 +28,8 @@ public class ProductService {
     private ProductDTOMapper productDTOMapper;
 
 
-    public List<ProductDTO> getAllProducts() {
-        return productDAO.getAllProducts().stream().map(productDTOMapper).collect(Collectors.toList());
+    public Page<ProductDTO> getAllProducts(Pageable pageable) {
+        return productDAO.getAllProducts(pageable).map(productDTOMapper);
     }
 
     public void addProduct(ProductForm productform, MultipartFile file) {
@@ -60,8 +62,8 @@ public class ProductService {
 
         }
 
-        public List<ProductDTO> getAllProductsBySeller(Long sellerId) {
-            return productDAO.getAllProductsBySeller(sellerId).stream().map(productDTOMapper).collect(Collectors.toList());
+        public Page<ProductDTO> getAllProductsBySeller(Long sellerId,Pageable pageable) {
+            return productDAO.getAllProductsBySeller(sellerId,pageable).map(productDTOMapper);
         }
 
         private void checkIfProductExists(Long productId) {
@@ -121,8 +123,8 @@ public class ProductService {
             }
         }
 
-        public List<ProductDTO> getAllProductsByCategory(ProductCategory type) {
-            return productDAO.getProductsByCategory(type).stream().map(productDTOMapper).collect(Collectors.toList());
+        public Page<ProductDTO> getAllProductsByCategory(ProductCategory type, Pageable pageable) {
+            return productDAO.getProductsByCategory(type,pageable).map(productDTOMapper);
         }
     }
 

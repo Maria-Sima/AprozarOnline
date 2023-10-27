@@ -9,7 +9,7 @@ import { useAddProductMutation } from '../../reducers/apiSlice.js';
 
 const AddProduct = () => {
   const [addProduct, { error }] = useAddProductMutation();
-  const userId = useSelector((state) => state.auth.user_id);
+  const userId = useSelector((state) => state.auth.user.id);
   const addProductData = (data) => {
     const formData = new FormData();
     formData.append('photo', data.photo[0]);
@@ -18,8 +18,11 @@ const AddProduct = () => {
     formData.append('price', data.price);
     formData.append('type', data.type);
     formData.append('productDescription', data.productDescription);
-    formData.append('id', 10);
-
+    formData.append('id', userId);
+    console.log(data.photo[0])
+    for (const [key, value] of formData.entries()) {
+      console.log(`Key: ${key}, Value: ${value}`);
+    }
     addProduct(formData);
     if (error) {
       Swal.fire({

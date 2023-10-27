@@ -15,41 +15,43 @@ import UserProfile from "./Pages/User/UserProfile.jsx";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import AddProduct from "./Pages/Product/AddProduct.jsx";
 import SellerPage from "./Pages/Seller/SellerPage.jsx";
-import ErrorPage from "./Components/Error/ErrorPage.jsx";
+import NotFoundPage from "./Components/NotFound/NotFoundPage.jsx";
 import ResetPassword from "./Pages/Auth/ResetPassword.jsx";
+import {ProtectedRoute} from "./middleware/ProtectedRoute.jsx";
 import {useSelector} from "react-redux";
-import Loader from "./Components/Loader/Loader.jsx";
-
-
+import {selectCurrentUser} from "./reducers/authSlice.js";
+import AllSeller from "./Components/Seller/AllSeller/AllSeller.jsx";
 
 
 const App = () => {
-    const loading = useSelector((state) => state.ui.loading);
-
+    const user = useSelector(selectCurrentUser)
 
     return (
-        <>
-        {loading && <Loader />}
+
         <BrowserRouter>
-            <Navbar />
+            <Navbar/>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/reset/*" element={<ResetPassword />} />
-                <Route path="/forgotpassword" element={<ForgotPassword />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/user/:activepage" element={<UserProfile />} />
-                <Route path="/FAQ" element={<FAQ />} />
-                <Route path="/addProduct" element={<AddProduct />} />
-                <Route path="/seller/:sellerId" element={<SellerPage />} />
-                <Route path="*" element={<ErrorPage />} />
+                <Route path="/" element={<Home/>}/>
+                <Route path="/home" element={<Home/>}/>
+                <Route path="/about" element={<About/>}/>
+                <Route path="/contact" element={<Contact/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/signup" element={<Signup/>}/>
+                <Route path="/reset/*" element={<ResetPassword/>}/>
+                <Route path="/forgotpassword" element={<ForgotPassword/>}/>
+                <Route path="/cart" element={<Cart/>}/>
+                <Route path="/sellers" element={<AllSeller/>}/>
+                <Route  element={<ProtectedRoute isAllowed={!!user } />}>
+                <Route path="/user/:activepage" element={<UserProfile/>}/>
+                </Route>
+                <Route path="/FAQ" element={<FAQ/>}/>
+                <Route element={<ProtectedRoute isAllowed={!!user && user.role==="SELLER"} />}>
+                    <Route element={<AddProduct/>} path="/addProduct" exact/>
+                </Route>
+                <Route path="/seller/:sellerId" element={<SellerPage/>}/>
+                <Route path="*" element={<NotFoundPage/>}/>
             </Routes>
         </BrowserRouter>
-        </>
 
     );
 };

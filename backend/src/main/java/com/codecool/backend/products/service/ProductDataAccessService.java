@@ -7,6 +7,8 @@ import com.codecool.backend.products.model.types.ProductCategory;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,16 +27,16 @@ public class ProductDataAccessService implements ProductDAO {
     }
 
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public Page<Product> getAllProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     public void addProducts(List<Product> products) {
         productRepository.saveAll(products);
     }
 
-    public List<Product> getAllProductsBySeller(Long id) {
-        return productRepository.findProductsByUserId(id);
+    public Page<Product> getAllProductsBySeller(Long id,Pageable pageable) {
+        return productRepository.findProductsByUserId(id,pageable);
     }
 
     public void addProduct(Product product) {
@@ -45,8 +47,8 @@ public class ProductDataAccessService implements ProductDAO {
         return productRepository.findById(Id);
     }
 
-    public List<Product> getProductsByCategory(ProductCategory productCategory) {
-        return productRepository.findProductsByProductCategory(productCategory);
+    public Page<Product> getProductsByCategory(ProductCategory productCategory,Pageable pageable) {
+        return productRepository.findProductsByProductCategory(productCategory,pageable);
     }
 
     public void deleteProductById(Long productId) {

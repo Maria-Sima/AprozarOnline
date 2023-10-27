@@ -4,7 +4,7 @@ import Footer1 from "../../Components/Footer/Footer1.jsx";
 import Footer2 from "../../Components/Footer/Footer2.jsx";
 import Loader from "../../Components/Loader/Loader.jsx";
 import Product_Sidebar from "../../Components/Product/ProductSidebar/Product_Sidebar.jsx";
-import { useGetSellerInfoQuery} from "../../reducers/apiSlice.js";
+import {useGetProductsBySellerQuery, useGetSellerInfoQuery} from "../../reducers/apiSlice.js";
 
 const SellerPage = () => {
     const {sellerId} = useParams();
@@ -12,11 +12,11 @@ const SellerPage = () => {
         data: seller,
         isLoading,
     } = useGetSellerInfoQuery(sellerId);
-
+const {data:products}=useGetProductsBySellerQuery(sellerId);
     return (<div>
             {isLoading ? (<Loader/>) : (<>
                     <SingleBanner bannerimage={seller?.imageUrl} heading={seller?.firstName + " " +seller?.lastName}/>
-                    <Product_Sidebar sellerId={sellerId}/>
+                    <Product_Sidebar products={products}/>
                 </>)}
 
             <Footer1/>
