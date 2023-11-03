@@ -2,13 +2,15 @@ package com.codecool.backend.users.repository;
 
 import com.codecool.backend.users.model.AppUser;
 import com.codecool.backend.users.model.AppUserRole;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface AppUserDao {
 
-    List<AppUser> getAllAppUsers();
+    Page<AppUser> getAllAppUsers(Pageable pageable);
+
     Optional<AppUser> getAppUserById(Long appUserId);
 
     void addAppUser(AppUser appUser);
@@ -23,6 +25,6 @@ public interface AppUserDao {
 
     Optional<AppUser> findUserByEmail(String email);
 
-    List<AppUser> findUsersByRole(AppUserRole role);
+    Page<AppUser> findUsersByRole(AppUserRole role, Pageable pageable);
 
 }

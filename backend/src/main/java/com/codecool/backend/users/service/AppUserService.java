@@ -12,15 +12,16 @@ import com.codecool.backend.users.repository.AppUserDao;
 import com.sun.jdi.request.DuplicateRequestException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service("appUser")
 public class AppUserService {
@@ -39,10 +40,8 @@ public class AppUserService {
         this.imageService = imageService;
     }
 
-    public List<AppUserDTO> getAllCustomers() {
-        return appUserDao.getAllAppUsers()
-                .stream().map(userDTOMapper)
-                .collect(Collectors.toList());
+    public Page<AppUserDTO> getAllCustomers(Pageable pageable) {
+        return appUserDao.getAllAppUsers(pageable).map(userDTOMapper);
     }
 
     public AppUserDTO getUser(Long id) {
@@ -88,17 +87,17 @@ public class AppUserService {
 
         boolean isModified = false;
 
-        if (updateRequest.firstname() != null) {
+        if (!Objects.equals(updateRequest.firstname(), "")) {
             appUser.setFirstName(updateRequest.firstname());
             isModified = true;
         }
 
-        if (updateRequest.lastname() != null) {
+        if (!Objects.equals(updateRequest.lastname(), "")) {
             appUser.setLastName(updateRequest.lastname());
             isModified = true;
         }
 
-        if (updateRequest.email() != null) {
+        if (!Objects.equals(updateRequest.email(), "")) {
             if (appUserDao.isAppUserWithEmail(updateRequest.email())) {
                 throw new DuplicateRequestException("Email already taken");
             }
@@ -111,8 +110,8 @@ public class AppUserService {
         }
     }
 
-    public List<AppUserDTO> getUsersByRole(AppUserRole role) {
-        return appUserDao.findUsersByRole(role).stream().map(userDTOMapper).collect(Collectors.toList());
+    public Page<AppUserDTO> getUsersByRole(AppUserRole role, Pageable pageable) {
+        return appUserDao.findUsersByRole(role, pageable).map(userDTOMapper);
     }
 
     public void uploadProfileImage(Long userId, MultipartFile file) {

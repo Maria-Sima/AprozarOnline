@@ -6,6 +6,7 @@ import authSlice from "./reducers/authSlice.js"
 
 import cartSlice from "./reducers/cartSlice.js"
 import loadingMiddleware from "./middleware/loadingMiddleware.js";
+import searchSlice from "./reducers/searchSlice.js";
 
 
 const persistedAuthReducer = persistReducer(
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
     api: apiSlice.reducer,
     auth: persistedAuthReducer,
     cart: persistedCartReducer,
+    search:searchSlice
 });
 const store = configureStore({
     reducer: rootReducer,

@@ -1,9 +1,9 @@
 package com.codecool.backend.products.controller;
 
 import com.codecool.backend.exception.MultipartException;
-import com.codecool.backend.products.model.types.ProductForm;
 import com.codecool.backend.products.model.dto.ProductDTO;
 import com.codecool.backend.products.model.types.ProductCategory;
+import com.codecool.backend.products.model.types.ProductForm;
 import com.codecool.backend.products.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("products/")
@@ -25,30 +23,25 @@ public class ProductsController {
 
         this.service = service;
     }
+
     @GetMapping("all")
-    public ResponseEntity<Page<ProductDTO>> getAllProducts(@PageableDefault(size = 10, sort = "name") Pageable pageable){
-        Page<ProductDTO> products=service.getAllProducts(pageable);
-    return ResponseEntity.ok(products);
+    public ResponseEntity<Page<ProductDTO>> getAllProducts(@PageableDefault(size = 10, sort = "productName") Pageable pageable) {
+        Page<ProductDTO> products = service.getAllProducts(pageable);
+        return ResponseEntity.ok(products);
     }
 
     @GetMapping("seller/{sellerId}")
-    public ResponseEntity<Page<ProductDTO>> getProductsBySellerId(@PathVariable Long sellerId, @PageableDefault(size = 10, sort = "name") Pageable pageable){
-        Page<ProductDTO> productsBySellerId=service.getAllProductsBySeller(sellerId,pageable);
+    public ResponseEntity<Page<ProductDTO>> getProductsBySellerId(@PathVariable Long sellerId, @PageableDefault(size = 10, sort = "productName") Pageable pageable) {
+        Page<ProductDTO> productsBySellerId = service.getAllProductsBySeller(sellerId, pageable);
         return ResponseEntity.ok(productsBySellerId);
     }
 
     @PostMapping("addProduct")
-    public ResponseEntity<Void> addProduct(@RequestParam("photo") MultipartFile photo,
-                                           @RequestParam("name") String name,
-                                           @RequestParam("quantity") double quantity,
-                                           @RequestParam("price") double price,
-                                           @RequestParam("type") String type,
-                                           @RequestParam("productDescription") String productDescription,
-                                           @RequestParam("id") Long id) {
+    public ResponseEntity<Void> addProduct(
+            @RequestBody ProductForm productForm) {
         try {
-            System.out.println(name + " " + photo + " " + quantity + " " + price + " " + type+" "+productDescription);
-            var productForm = new ProductForm(name, quantity, price, ProductCategory.valueOf(type), productDescription,id);
-            service.addProduct(productForm, photo);
+            System.out.println(productForm);
+            service.addProduct(productForm);
             return ResponseEntity.noContent().build();
         } catch (MultipartException e) {
             e.printStackTrace();
@@ -75,8 +68,8 @@ public class ProductsController {
     }
 
     @GetMapping("/products/category/{category}")
-    public ResponseEntity<Page<ProductDTO>> getProductsByCategory(@PathVariable ProductCategory category,@PageableDefault(size = 10, sort = "name") Pageable pageable){
-        Page<ProductDTO> products=service.getAllProductsByCategory(category,pageable);
+    public ResponseEntity<Page<ProductDTO>> getProductsByCategory(@PathVariable ProductCategory category, @PageableDefault(size = 10, sort = "productName") Pageable pageable) {
+        Page<ProductDTO> products = service.getAllProductsByCategory(category, pageable);
         return ResponseEntity.ok(products);
     }
 

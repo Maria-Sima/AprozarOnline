@@ -1,9 +1,10 @@
 package com.codecool.backend.products.model.types;
 
-import com.codecool.backend.products.model.types.ProductCategory;
+import org.springframework.web.multipart.MultipartFile;
 
 public record ProductForm(
-        String name,
+        MultipartFile file,
+        String productName,
         Double quantity,
 
         Double price,

@@ -5,6 +5,8 @@ import com.codecool.backend.users.repository.AppUserDao;
 import com.codecool.backend.users.repository.AppUserRepository;
 import com.codecool.backend.users.model.AppUserRole;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,8 +18,8 @@ public class AppUserDataAccessService implements AppUserDao {
     private final AppUserRepository appUserRepository;
 
 
-    public List<AppUser> getAllAppUsers() {
-        return appUserRepository.findAll();
+    public Page<AppUser> getAllAppUsers(Pageable pageable) {
+        return appUserRepository.findAll(pageable);
     }
 
 
@@ -55,8 +57,8 @@ public class AppUserDataAccessService implements AppUserDao {
     }
 
 
-    public List<AppUser> findUsersByRole(AppUserRole role) {
-        return appUserRepository.findAppUsersByAppUserRole(role);
+    public Page<AppUser> findUsersByRole(AppUserRole role,Pageable pageable) {
+        return appUserRepository.findAppUsersByAppUserRole(role,pageable);
     }
 
 }

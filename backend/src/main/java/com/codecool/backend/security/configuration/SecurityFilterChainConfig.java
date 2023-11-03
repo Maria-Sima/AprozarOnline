@@ -34,16 +34,17 @@ public class SecurityFilterChainConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(
                                     HttpMethod.GET,
-                            "products/**",
-                            "users/**",
-                            "auth/logout"
+                                    "products/**",
+                                    "users/**",
+                                    "auth/logout"
                             )
                             .permitAll();
                     auth.requestMatchers(
                                     HttpMethod.POST,
                                     "/auth/**",
-                            "/products/**",
-                            "/email/**"
+                                    "/products/**",
+                                    "/email/**",
+                                    "/users/**"
                             )
                             .permitAll();
 //                    auth.requestMatchers(
